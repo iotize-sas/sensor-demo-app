@@ -1,0 +1,12 @@
+<ion-content>
+  <ion-grid class="center-form">
+    <ion-row>
+      <ion-col>
+        <tap-connect-mqtt
+          (onProtocolSelected)="onProtocolSelected($event)"
+          (onError)="onError($event)"
+        ></tap-connect-mqtt>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

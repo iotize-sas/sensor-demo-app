@@ -1,0 +1,12 @@
+<ion-card *ngIf="step">
+  <ion-card-header>
+    <ion-card-title>{{step.title}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <section>
+      <ion-progress-bar [type]="mode" [value]="percent"></ion-progress-bar>
+    </section>
+    <p *ngIf="showProgressMessage">{{progressMessage}}</p>
+    <p *ngIf="step.subTitle">{{step.subTitle}}</p>
+  </ion-card-content>
+</ion-card>

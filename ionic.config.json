@@ -1,0 +1,7 @@
+{
+  "name": "sensor-demo-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

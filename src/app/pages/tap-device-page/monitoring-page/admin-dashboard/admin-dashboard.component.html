@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Aministration page
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="data">
+      <ion-button (click)="startMonitor()" *ngIf="!isMonitoringRunning">
+        <ion-icon name="play"></ion-icon>
+      </ion-button>
+      <ion-button (click)="stopMonitor()" *ngIf="isMonitoringRunning">
+        <ion-icon name="pause"></ion-icon>
+      </ion-button>
+      <!--<ion-button (click)="openSettings()">
+                <ion-icon name="settings"></ion-icon>
+            </ion-button>-->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="data">
+  <app-navigation-progress-bar></app-navigation-progress-bar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>Counter value</ion-label>
+          </ion-item>
+          <ion-card-content class="ion-no-padding">
+            <div style="margin: auto;">
+              <monitoring-variable-value
+                [lines]="'none'"
+                [variable]="variables['Count']"
+                [inputOptions]=""
+                slot="end"
+                [editable]="true"
+              ></monitoring-variable-value>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>LED</ion-label>
+          </ion-item>
+          <ion-card-content class="ion-no-padding">
+            <ion-toggle [checked]="LEDStatusIsChecked | async"></ion-toggle>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>Vcc</ion-label>
+          </ion-item>
+          <ion-card-content class="ion-no-padding">
+            <monitoring-gauge-card
+              [input]="variables['Voltage_V'].monitor().values()"
+              [max]="4"
+              [min]="2"
+              units="V"
+            >
+              digitsInfo="1.2-2"
+            </monitoring-gauge-card>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>Processor temperature</ion-label>
+          </ion-item>
+          <ion-card-content class="ion-no-padding">
+            <monitoring-chart-card
+              [input]="Temperature_CChartData"
+              xaxislabel="Temperature_C"
+              [showLegend]="false"
+            ></monitoring-chart-card>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>LED blink period (ms)</ion-label>
+          </ion-item>
+          <ion-card-content class="ion-no-padding">
+            <tap-variable-range
+              [editable]="true"
+              [variable]="variables['Period']"
+              pin="true"
+              snaps="true"
+              min="0"
+              max="100"
+              step="2"
+            ></tap-variable-range>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>Configure LED</ion-label>
+          </ion-item>
+          <ion-card-content class="ion-no-padding">
+            <tap-variable-buttons
+              [buttons]="LEDConfigButtons"
+              [variable]="variables['LEDConfig']"
+            >
+            </tap-variable-buttons>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-item
+    *ngIf="tapService.protocolMeta && !isMonitoringRunning"
+    lines="none"
+    [color]="'warning'"
+  >
+    <ion-icon name="alert"></ion-icon>
+    <ion-label class="ion-text-wrap">Monitoring is paused</ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="startMonitor()">
+        <ion-icon name="play"></ion-icon> Start
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <ion-item
+    *ngIf="tapService.protocolMeta && waitForSubmit"
+    lines="none"
+    [color]="'warning'"
+  >
+    <ion-icon name="alert"></ion-icon>
+    <ion-label class="ion-text-wrap"
+      >Device is not connected. Changes will be sent when device is
+      connected.</ion-label
+    >
+  </ion-item>
+  <ion-item *ngIf="!tapService.protocolMeta" lines="none" [color]="'danger'">
+    <ion-icon name="alert"></ion-icon>
+    <ion-label class="ion-text-wrap">No device selected</ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="selectDevice()">
+        <ion-icon name="wifi"></ion-icon> Select
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-footer>

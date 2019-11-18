@@ -1,0 +1,8 @@
+<ion-card *ngIf="error" color="danger">
+  <ion-card-content>
+    <p><ion-icon *ngIf="icon" [name]="icon"></ion-icon> {{ errorMessage }}</p>
+    <p *ngIf="error.code">
+      Code: {{ error.code }}
+    </p>
+  </ion-card-content>
+</ion-card>

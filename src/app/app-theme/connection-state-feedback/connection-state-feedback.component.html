@@ -1,0 +1,26 @@
+<ion-card *ngIf="show && card">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ion-card>
+<ng-container *ngIf="show && !card">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+
+<ng-template #content>
+  <ion-item color="danger">
+    <ion-icon slot="start" name="alert"></ion-icon>
+    <ion-label>{{message}}</ion-label>
+    <ion-progress-bar
+      slot="end"
+      *ngIf="loading"
+      type="indeterminate"
+    ></ion-progress-bar>
+    <ion-buttons slot="end">
+      <ion-button (click)="reconnect()" *ngIf="showReconnect"
+        >Reconnect</ion-button
+      >
+      <ion-button (click)="isClosed = true">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ng-template>
