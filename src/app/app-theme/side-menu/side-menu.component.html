@@ -1,0 +1,70 @@
+<div *ngFor="let p of pages">
+  <!-- Standard Menu Item -->
+  <ion-menu-toggle *ngIf="p.url">
+    <ion-item
+      [routerLink]="p.url"
+      lines="none"
+      routerdirection="root"
+      routerlinkactive="active"
+    >
+      <ion-icon [name]="p.icon" slot="start"></ion-icon>
+      <ion-label>
+        {{ p.title }}
+      </ion-label>
+      <ion-icon
+        *ngIf="p.notAvailable"
+        color="danger"
+        name="alert"
+        slot="end"
+      ></ion-icon>
+    </ion-item>
+  </ion-menu-toggle>
+
+  <!-- Item with Children -->
+  <ion-item
+    (click)="p.open = !p.open"
+    *ngIf="p.children?.length > 0"
+    [class.parent-active]="p.open"
+    button
+    detail="false"
+    lines="none"
+  >
+    <ion-icon
+      *ngIf="!p.open"
+      [name]="p.icon || 'arrow-dropright'"
+      slot="start"
+    ></ion-icon>
+    <ion-icon
+      *ngIf="p.open"
+      [name]="p.icon || 'arrow-dropdown'"
+      slot="start"
+    ></ion-icon>
+    <ion-label>{{ p.title }}</ion-label>
+    <ion-icon *ngIf="!p.open" [name]="'arrow-dropright'" slot="end"></ion-icon>
+    <ion-icon *ngIf="p.open" [name]="'arrow-dropdown'" slot="end"></ion-icon>
+  </ion-item>
+
+  <!-- Children List for clicked Item -->
+  <ion-list *ngIf="p.open" lines="full">
+    <ion-menu-toggle>
+      <ion-item
+        *ngFor="let sub of p.children"
+        [routerLink]="sub.url"
+        class="sub-item"
+        routerdirection="root"
+        routerlinkactive="active"
+      >
+        <ion-icon [name]="sub.icon" slot="start"></ion-icon>
+        <ion-label>
+          {{ sub.title }}
+        </ion-label>
+        <ion-icon
+          *ngIf="sub.notAvailable"
+          color="danger"
+          name="alert"
+          slot="end"
+        ></ion-icon>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-list>
+</div>

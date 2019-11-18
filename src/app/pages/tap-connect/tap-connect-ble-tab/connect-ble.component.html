@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullMin="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-progress-bar
+    type="indeterminate"
+    *ngIf="(isScanning | async)"
+  ></ion-progress-bar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <app-feedback-error [error]="error"></app-feedback-error>
+        <tap-connect-ble
+          [showScanButton]="false"
+          (onProtocolSelected)="onProtocolSelected($event)"
+          (onError)="onError($event)"
+        ></tap-connect-ble>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button *ngIf="!(isScanning | async)" (click)="startScan()">
+      <ion-icon name="search"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button *ngIf="(isScanning | async)" (click)="stopScan()">
+      <ion-icon name="pause"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

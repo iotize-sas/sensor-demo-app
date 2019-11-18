@@ -1,0 +1,213 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Supervision
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-icon name="help" slot="start"></ion-icon>
+            <ion-label>General</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <tap-config-list
+              [items]="interfaceTapConfigItems"
+              [globalRefresh]="false"
+              [itemRefresh]="true"
+              lines="full"
+            ></tap-config-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-icon name="download" slot="start"></ion-icon>
+            <ion-label>Host protocols</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <ng-container *ngFor="let section of protocolSections">
+              <ion-card>
+                <ion-item lines="full" class="card-header">
+                  <ion-label>{{section.title}}</ion-label>
+                </ion-item>
+                <ion-card-content>
+                  <tap-config-list
+                    [items]="section.items"
+                    [globalRefresh]="false"
+                    [itemRefresh]="true"
+                    lines="full"
+                  ></tap-config-list>
+                </ion-card-content>
+              </ion-card>
+            </ng-container>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-icon name="code-working" slot="start"></ion-icon>
+            <ion-label>MQTT Relay</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <tap-config-list
+              [items]="mqttRelayConfigItems"
+              [globalRefresh]="false"
+              [itemRefresh]="true"
+              lines="full"
+            ></tap-config-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-icon name="cloud" slot="start"></ion-icon>
+            <ion-label>Cloud</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <tap-config-list
+              [items]="cloudConfigItems"
+              [globalRefresh]="false"
+              [itemRefresh]="true"
+              lines="full"
+            ></tap-config-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card>
+                <ion-item lines="full" class="card-header">
+                  <ion-icon name="people" slot="start"></ion-icon>
+                  <ion-label>Users</ion-label>
+                </ion-item>
+                <ion-card-content>
+                  <ion-card>
+                    <ion-item lines="full" class="card-header">
+                      <ion-icon name="person" slot="start"></ion-icon>
+                      <ion-label>#65535 admin</ion-label>
+                    </ion-item>
+                    <ion-card-content>
+                      <tap-config-list
+                        [items]="profile_adminConfigItem"
+                        [globalRefresh]="false"
+                        [itemRefresh]="true"
+                        lines="full"
+                      ></tap-config-list>
+                    </ion-card-content>
+                  </ion-card>
+
+                  <ion-card>
+                    <ion-item lines="full" class="card-header">
+                      <ion-icon name="person" slot="start"></ion-icon>
+                      <ion-label>#65534 supervisor</ion-label>
+                    </ion-item>
+                    <ion-card-content>
+                      <tap-config-list
+                        [items]="profile_supervisorConfigItem"
+                        [globalRefresh]="false"
+                        [itemRefresh]="true"
+                        lines="full"
+                      ></tap-config-list>
+                    </ion-card-content>
+                  </ion-card>
+
+                  <ion-card>
+                    <ion-item lines="full" class="card-header">
+                      <ion-icon name="person" slot="start"></ion-icon>
+                      <ion-label>#1 tech</ion-label>
+                    </ion-item>
+                    <ion-card-content>
+                      <tap-config-list
+                        [items]="profile_techConfigItem"
+                        [globalRefresh]="false"
+                        [itemRefresh]="true"
+                        lines="full"
+                      ></tap-config-list>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+
+            <ion-col>
+              <ion-card>
+                <ion-item lines="full" class="card-header">
+                  <ion-icon name="analytics" slot="start"></ion-icon>
+                  <ion-label>Data</ion-label>
+                </ion-item>
+                <ion-card-content>
+                  <ion-card>
+                    <ion-item lines="full" class="card-header">
+                      <ion-label>#0 Count_Status</ion-label>
+                    </ion-item>
+                    <ion-card-content>
+                      <tap-config-list
+                        [items]="bundle_Count_StatusConfigItem"
+                        [globalRefresh]="false"
+                        [itemRefresh]="true"
+                        lines="full"
+                      ></tap-config-list>
+                    </ion-card-content>
+                  </ion-card>
+
+                  <ion-card>
+                    <ion-item lines="full" class="card-header">
+                      <ion-label>#1 MySensors</ion-label>
+                    </ion-item>
+                    <ion-card-content>
+                      <tap-config-list
+                        [items]="bundle_MySensorsConfigItem"
+                        [globalRefresh]="false"
+                        [itemRefresh]="true"
+                        lines="full"
+                      ></tap-config-list>
+                    </ion-card-content>
+                  </ion-card>
+
+                  <ion-card>
+                    <ion-item lines="full" class="card-header">
+                      <ion-label>#2 Count_Control</ion-label>
+                    </ion-item>
+                    <ion-card-content>
+                      <tap-config-list
+                        [items]="bundle_Count_ControlConfigItem"
+                        [globalRefresh]="false"
+                        [itemRefresh]="true"
+                        lines="full"
+                      ></tap-config-list>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

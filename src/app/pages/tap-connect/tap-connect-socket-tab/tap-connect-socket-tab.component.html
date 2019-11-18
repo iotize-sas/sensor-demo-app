@@ -1,0 +1,48 @@
+<ion-content *ngIf="!showScan">
+  <app-feedback-error [error]="error"></app-feedback-error>
+  <ion-grid class="center-form">
+    <ion-row>
+      <ion-col>
+        <tap-connect-socket
+          (onError)="onError($event)"
+          (onProtocolSelected)="onProtocolSelected($event)"
+        ></tap-connect-socket>
+      </ion-col>
+    </ion-row>
+    <ion-row></ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="showScan">
+  <ion-refresher (ionRefresh)="refreshScan($event)" pullmin="120" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-progress-bar
+    *ngIf="(scanning | async)"
+    type="indeterminate"
+  ></ion-progress-bar>
+  <app-feedback-error [error]="error"></app-feedback-error>
+  <tap-scanner-wifi-item
+    (onItemClicked)="onItemClicked($event)"
+    [devices]="allDevices | async"
+  ></tap-scanner-wifi-item>
+  <ion-fab horizontal="end" slot="fixed" vertical="bottom">
+    <ion-fab-button (click)="startScan()" *ngIf="!(scanning | async)">
+      <ion-icon name="search"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="stopScan()" *ngIf="(scanning | async)">
+      <ion-icon name="pause"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-segment>
+    <ion-segment-button (click)="showScan = true" [checked]="showScan">
+      <ion-label>Scan</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (ionSelect)="showScan = false" [checked]="!showScan">
+      <ion-label>Custom</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>

@@ -1,0 +1,1047 @@
+{
+    "version": {
+        "generator": "0.0.30"
+    },
+    "app": {
+        "id": "com.iotize.app.sensordemo",
+        "version": "v1.0.0",
+        "domain": "https://www.iotize.com",
+        "name": "Sensor demo",
+        "platforms": {
+            "android": {
+                "enabled": true
+            },
+            "browser": {
+                "enabled": true,
+                "PWA": true
+            },
+            "ios": {
+                "enabled": true
+            }
+        },
+        "menu": [
+            {
+                "title": "Device Info",
+                "icon": "information-circle",
+                "url": "/device/info"
+            },
+            {
+                "title": "Monitoring",
+                "icon": "analytics",
+                "url": "/device/monitoring"
+            }
+        ],
+        "pages": {
+            "TapDevicePage": {
+                "enabled": true,
+                "children": {
+                    "TapInfoPage": {
+                        "type": "TapInfoPage",
+                        "enabled": true,
+                        "pageTitle": "Device Info",
+                        "path": "info",
+                        "projectPath": "pages/tap-device-page/tap-info-page",
+                        "items": [
+                            {
+                                "key": "serialNumber"
+                            },
+                            {
+                                "key": "tapFirmwareVersion"
+                            },
+                            {
+                                "key": "configVersion"
+                            },
+                            {
+                                "key": "appName"
+                            }
+                        ]
+                    },
+                    "ProtocolConfigurationPage": {
+                        "enabled": false,
+                        "type": "ProtocolConfigurationPage",
+                        "path": "protocol-configuration",
+                        "pageTitle": "Target Protocol Settings",
+                        "projectPath": "pages/tap-device-page/protocol-configuration",
+                        "serialSettings": true,
+                        "modbusSettings": false,
+                        "tapnpassSettings": false
+                    },
+                    "TapConfigPage": {
+                        "enabled": false,
+                        "type": "TapConfigPage",
+                        "path": "settings",
+                        "pageTitle": "Supervision",
+                        "projectPath": "pages/tap-device-page/tap-settings-page",
+                        "authorizedProfiles": [
+                            "admin",
+                            "supervisor"
+                        ],
+                        "content": {
+                            "type": "GridLayout",
+                            "cols": 1,
+                            "elements": [
+                                {
+                                    "type": "CardLayout",
+                                    "title": "General",
+                                    "icon": "help",
+                                    "content": [
+                                        {
+                                            "type": "TapConfigList",
+                                            "variableName": "interfaceTapConfigItems",
+                                            "items": [
+                                                {
+                                                    "key": "appName",
+                                                    "editable": true
+                                                },
+                                                {
+                                                    "key": "protocolHostInactivityPeriod",
+                                                    "editable": true
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "CardLayout",
+                                    "title": "Host protocols",
+                                    "icon": "download",
+                                    "content": [
+                                        {
+                                            "type": "ForOf",
+                                            "collectionName": "protocolSections",
+                                            "variableName": "section",
+                                            "content": [
+                                                {
+                                                    "type": "CardLayout",
+                                                    "title": "{{section.title}}",
+                                                    "content": [
+                                                        {
+                                                            "type": "TapConfigList",
+                                                            "variableName": "section.items"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "CardLayout",
+                                    "title": "MQTT Relay",
+                                    "icon": "code-working",
+                                    "content": [
+                                        {
+                                            "type": "TapConfigList",
+                                            "variableName": "mqttRelayConfigItems",
+                                            "items": [
+                                                {
+                                                    "key": "MqttRelayEndpoint",
+                                                    "editable": true,
+                                                    "title": "Endpoint"
+                                                },
+                                                {
+                                                    "key": "MqttRelayPassword",
+                                                    "editable": true,
+                                                    "title": "Password"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "CardLayout",
+                                    "title": "Cloud",
+                                    "icon": "cloud",
+                                    "content": [
+                                        {
+                                            "type": "TapConfigList",
+                                            "variableName": "cloudConfigItems",
+                                            "items": [
+                                                {
+                                                    "key": "CloudEndpoint",
+                                                    "editable": true,
+                                                    "title": "Endpoint"
+                                                },
+                                                {
+                                                    "key": "CloudKey",
+                                                    "editable": true,
+                                                    "title": "Password"
+                                                },
+                                                {
+                                                    "key": "CloudUploadPeriod",
+                                                    "editable": true
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "GridLayout",
+                                    "cols": 2,
+                                    "elements": [
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Users",
+                                            "icon": "people",
+                                            "content": [
+                                                {
+                                                    "icon": "person",
+                                                    "type": "CardLayout",
+                                                    "title": "#65535 admin",
+                                                    "content": [
+                                                        {
+                                                            "type": "TapConfigList",
+                                                            "variableName": "profile_adminConfigItem",
+                                                            "items": [
+                                                                {
+                                                                    "key": "ProfileLifeTime",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "65535"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "key": "profilePassword",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "65535"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "icon": "person",
+                                                    "type": "CardLayout",
+                                                    "title": "#65534 supervisor",
+                                                    "content": [
+                                                        {
+                                                            "type": "TapConfigList",
+                                                            "variableName": "profile_supervisorConfigItem",
+                                                            "items": [
+                                                                {
+                                                                    "key": "ProfileLifeTime",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "65534"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "key": "profilePassword",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "65534"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "icon": "person",
+                                                    "type": "CardLayout",
+                                                    "title": "#1 tech",
+                                                    "content": [
+                                                        {
+                                                            "type": "TapConfigList",
+                                                            "variableName": "profile_techConfigItem",
+                                                            "items": [
+                                                                {
+                                                                    "key": "ProfileLifeTime",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "1"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "key": "profilePassword",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "1"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Data",
+                                            "icon": "analytics",
+                                            "content": [
+                                                {
+                                                    "type": "CardLayout",
+                                                    "title": "#0 Count_Status",
+                                                    "content": [
+                                                        {
+                                                            "type": "TapConfigList",
+                                                            "variableName": "bundle_Count_StatusConfigItem",
+                                                            "items": [
+                                                                {
+                                                                    "key": "BundleDatalogPeriod",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "0"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "CardLayout",
+                                                    "title": "#1 MySensors",
+                                                    "content": [
+                                                        {
+                                                            "type": "TapConfigList",
+                                                            "variableName": "bundle_MySensorsConfigItem",
+                                                            "items": [
+                                                                {
+                                                                    "key": "BundleDatalogPeriod",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "1"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "CardLayout",
+                                                    "title": "#2 Count_Control",
+                                                    "content": [
+                                                        {
+                                                            "type": "TapConfigList",
+                                                            "variableName": "bundle_Count_ControlConfigItem",
+                                                            "items": [
+                                                                {
+                                                                    "key": "BundleDatalogPeriod",
+                                                                    "editable": true,
+                                                                    "params": [
+                                                                        "2"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "TapLoginPage": {
+                        "enabled": true,
+                        "children": {},
+                        "pageTitle": "Tap login",
+                        "path": "login",
+                        "projectPath": "pages/tap-device-page/tap-login-page",
+                        "type": "TapLoginPage"
+                    },
+                    "MonitoringPage": {
+                        "type": "MonitoringPage",
+                        "enabled": true,
+                        "pageTitle": "Monitoring",
+                        "projectPath": "pages/tap-device-page/monitoring-page",
+                        "path": "monitoring",
+                        "children": [
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "pageTitle": "Control dashboard",
+                                "enabled": true,
+                                "path": "anonymous",
+                                "projectPath": "pages/tap-device-page/monitoring-page/anonymous-dashboard",
+                                "profileName": "anonymous",
+                                "moduleName": "AnonymousDashboardModule",
+                                "children": [],
+                                "content": {
+                                    "type": "GridLayout",
+                                    "cols": 2,
+                                    "elements": [
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Counter value",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableText",
+                                                    "variable": "Count",
+                                                    "inputOptions": {
+                                                        "min": 10,
+                                                        "max": 255
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableToggle",
+                                                    "variable": "LEDStatus",
+                                                    "conditionOn": "value !== 0"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Vcc",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableGauge",
+                                                    "unit": "V",
+                                                    "variable": "Voltage_V",
+                                                    "min": 2,
+                                                    "max": 4,
+                                                    "digitsInfo": "1.2-2"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Processor temperature",
+                                            "content": [
+                                                {
+                                                    "type": "VariableChart",
+                                                    "variable": "Temperature_C",
+                                                    "label": "Temperature_C",
+                                                    "options": {
+                                                        "xaxislabel": "Temperature_C",
+                                                        "[showLegend]": false
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED blink period (ms)",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableRange",
+                                                    "variable": "Period",
+                                                    "options": {
+                                                        "pin": true,
+                                                        "snaps": true,
+                                                        "min": 0,
+                                                        "max": 100,
+                                                        "step": 2
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Configure LED",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableButtons",
+                                                    "variable": "LEDConfig",
+                                                    "actions": [
+                                                        {
+                                                            "name": "OFF",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "ON",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "AUTO",
+                                                            "value": 2
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "pageTitle": "Aministration page",
+                                "enabled": true,
+                                "path": "admin",
+                                "projectPath": "pages/tap-device-page/monitoring-page/admin-dashboard",
+                                "profileName": "admin",
+                                "moduleName": "AdminDashboardModule",
+                                "children": [],
+                                "content": {
+                                    "type": "GridLayout",
+                                    "cols": 2,
+                                    "elements": [
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Counter value",
+                                            "content": [
+                                                {
+                                                    "editable": true,
+                                                    "type": "VariableText",
+                                                    "variable": "Count",
+                                                    "inputOptions": {
+                                                        "min": 10,
+                                                        "max": 255
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED",
+                                            "content": [
+                                                {
+                                                    "editable": true,
+                                                    "type": "VariableToggle",
+                                                    "variable": "LEDStatus",
+                                                    "conditionOn": "value !== 0"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Vcc",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableGauge",
+                                                    "unit": "V",
+                                                    "variable": "Voltage_V",
+                                                    "min": 2,
+                                                    "max": 4,
+                                                    "digitsInfo": "1.2-2"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Processor temperature",
+                                            "content": [
+                                                {
+                                                    "type": "VariableChart",
+                                                    "variable": "Temperature_C",
+                                                    "label": "Temperature_C",
+                                                    "options": {
+                                                        "xaxislabel": "Temperature_C",
+                                                        "[showLegend]": false
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED blink period (ms)",
+                                            "content": [
+                                                {
+                                                    "editable": true,
+                                                    "type": "VariableRange",
+                                                    "variable": "Period",
+                                                    "options": {
+                                                        "pin": true,
+                                                        "snaps": true,
+                                                        "min": 0,
+                                                        "max": 100,
+                                                        "step": 2
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Configure LED",
+                                            "content": [
+                                                {
+                                                    "editable": true,
+                                                    "type": "VariableButtons",
+                                                    "variable": "LEDConfig",
+                                                    "actions": [
+                                                        {
+                                                            "name": "OFF",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "ON",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "AUTO",
+                                                            "value": 2
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "pageTitle": "Supervisor dashboard",
+                                "enabled": true,
+                                "path": "supervisor",
+                                "projectPath": "pages/tap-device-page/monitoring-page/supervisor-dashboard",
+                                "profileName": "supervisor",
+                                "moduleName": "SupervisorDashboardModule",
+                                "children": [],
+                                "content": {
+                                    "type": "GridLayout",
+                                    "cols": 2,
+                                    "elements": [
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Counter value",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableText",
+                                                    "variable": "Count",
+                                                    "inputOptions": {
+                                                        "min": 10,
+                                                        "max": 255
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableToggle",
+                                                    "variable": "LEDStatus",
+                                                    "conditionOn": "value !== 0"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Vcc",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableGauge",
+                                                    "unit": "V",
+                                                    "variable": "Voltage_V",
+                                                    "min": 2,
+                                                    "max": 4,
+                                                    "digitsInfo": "1.2-2"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Processor temperature",
+                                            "content": [
+                                                {
+                                                    "type": "VariableChart",
+                                                    "variable": "Temperature_C",
+                                                    "label": "Temperature_C",
+                                                    "options": {
+                                                        "xaxislabel": "Temperature_C",
+                                                        "[showLegend]": false
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED blink period (ms)",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableRange",
+                                                    "variable": "Period",
+                                                    "options": {
+                                                        "pin": true,
+                                                        "snaps": true,
+                                                        "min": 0,
+                                                        "max": 100,
+                                                        "step": 2
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Configure LED",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableButtons",
+                                                    "variable": "LEDConfig",
+                                                    "actions": [
+                                                        {
+                                                            "name": "OFF",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "ON",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "AUTO",
+                                                            "value": 2
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "pageTitle": "Tech dashboard",
+                                "enabled": true,
+                                "path": "tech",
+                                "projectPath": "pages/tap-device-page/monitoring-page/tech-dashboard",
+                                "profileName": "tech",
+                                "moduleName": "TechDashboardModule",
+                                "children": [],
+                                "content": {
+                                    "type": "GridLayout",
+                                    "cols": 2,
+                                    "elements": [
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Counter value",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableText",
+                                                    "variable": "Count",
+                                                    "inputOptions": {
+                                                        "min": 10,
+                                                        "max": 255
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableToggle",
+                                                    "variable": "LEDStatus",
+                                                    "conditionOn": "value !== 0"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Vcc",
+                                            "content": [
+                                                {
+                                                    "editable": false,
+                                                    "type": "VariableGauge",
+                                                    "unit": "V",
+                                                    "variable": "Voltage_V",
+                                                    "min": 2,
+                                                    "max": 4,
+                                                    "digitsInfo": "1.2-2"
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Processor temperature",
+                                            "content": [
+                                                {
+                                                    "type": "VariableChart",
+                                                    "variable": "Temperature_C",
+                                                    "label": "Temperature_C",
+                                                    "options": {
+                                                        "xaxislabel": "Temperature_C",
+                                                        "[showLegend]": false
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "LED blink period (ms)",
+                                            "content": [
+                                                {
+                                                    "editable": true,
+                                                    "type": "VariableRange",
+                                                    "variable": "Period",
+                                                    "options": {
+                                                        "pin": true,
+                                                        "snaps": true,
+                                                        "min": 0,
+                                                        "max": 100,
+                                                        "step": 2
+                                                    }
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Configure LED",
+                                            "content": [
+                                                {
+                                                    "editable": true,
+                                                    "type": "VariableButtons",
+                                                    "variable": "LEDConfig",
+                                                    "actions": [
+                                                        {
+                                                            "name": "OFF",
+                                                            "value": 0
+                                                        },
+                                                        {
+                                                            "name": "ON",
+                                                            "value": 1
+                                                        },
+                                                        {
+                                                            "name": "AUTO",
+                                                            "value": 2
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "pageTitle": "Device",
+                "path": "device",
+                "projectPath": "pages/tap-device-page",
+                "type": "TapDevicePage",
+                "defaultPage": "monitoring"
+            },
+            "AboutPage": {
+                "type": "AboutPage",
+                "enabled": false,
+                "projectPath": "pages/about",
+                "items": [
+                    {
+                        "title": "Developer",
+                        "value": "IoTize SAS"
+                    },
+                    {
+                        "title": "About us",
+                        "value": "https://iotize.com"
+                    }
+                ],
+                "pageTitle": "About",
+                "path": "about"
+            },
+            "TapConnectionPage": {
+                "type": "TapConnectionPage",
+                "enabled": true,
+                "pageTitle": "Connection",
+                "path": "connect",
+                "projectPath": "pages/tap-connect",
+                "protocols": {
+                    "ble": {
+                        "enabled": true
+                    },
+                    "nfc": {
+                        "enabled": true
+                    },
+                    "socket": {
+                        "enabled": true
+                    },
+                    "mqtt": {
+                        "enabled": false
+                    }
+                }
+            },
+            "NotFoundPage": {
+                "type": "NotFoundPage",
+                "enabled": true,
+                "pageTitle": "Not found",
+                "path": "**",
+                "projectPath": "pages/not-found"
+            }
+        },
+        "logo": {
+            "image": ".\\resources\\icon.png"
+        },
+        "splashScreen": {
+            "image": ".\\resources\\splash.png"
+        },
+        "theme": {
+            "colors": [
+                {
+                    "name": "primary",
+                    "value": "0x80ff",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x1a8dff"
+                },
+                {
+                    "name": "secondary",
+                    "value": "0xff0042",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xff1a55"
+                },
+                {
+                    "name": "tertiary",
+                    "value": "0xffc000",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xffc61a"
+                },
+                {
+                    "name": "success",
+                    "value": "0x10dc60",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x28e070"
+                },
+                {
+                    "name": "warning",
+                    "value": "0xffce00",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xffd31a"
+                },
+                {
+                    "name": "danger",
+                    "value": "0xf04141",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xf25454"
+                },
+                {
+                    "name": "dark",
+                    "value": "0x222428",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x383a3e"
+                },
+                {
+                    "name": "medium",
+                    "value": "0x989aa2",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xa2a4ab"
+                },
+                {
+                    "name": "light",
+                    "value": "0xf4f5f8",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xf5f6f9"
+                },
+                {
+                    "name": "monitoring-background",
+                    "value": "0xeeeeee",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xf0f0f0"
+                }
+            ]
+        },
+        "defaultPage": "/connect",
+        "integration": [
+            {
+                "type": "FastlaneIntegration",
+                "android": {
+                    "enabled": true
+                },
+                "iOS": {
+                    "enabled": true,
+                    "appleId": "dev@iotize.com",
+                    "teamId": "J6Y8L9CLP8"
+                }
+            },
+            {
+                "type": "FirebaseIntegration",
+                "projectId": "sensor-demo-app-fbb73"
+            }
+        ]
+    },
+    "formMeta": {
+        "showAdvanceSettings": false
+    }
+}

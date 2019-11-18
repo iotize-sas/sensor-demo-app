@@ -1,0 +1,10 @@
+<ion-item *ngIf="message" lines="none" [color]="color">
+  <ion-icon *ngIf="icon" slot="start" [name]="icon"></ion-icon>
+  <ion-label class="ion-text-wrap">{{ message }}</ion-label>
+  <ion-buttons *ngIf="actions.length > 0" slot="end">
+    <ion-button *ngFor="let item of actions" (click)="item.action()">
+      <ion-icon *ngIf="item.icon" [name]="item.icon"></ion-icon>
+      <span *ngIf="item.text">{{item.text}}</span>
+    </ion-button>
+  </ion-buttons>
+</ion-item>
