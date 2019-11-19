@@ -79,6 +79,12 @@ export namespace SensorDemo {
        * Id: 13
        */
       LEDConfig: number; // UINT8;
+
+      /**
+       * Variable  Treshold
+       * Id: 3
+       */
+      Treshold: number; // INT32;
     }
   }
 
@@ -128,6 +134,12 @@ export namespace SensorDemo {
      * Id: 13
      */
     LEDConfig: number; // UINT8;
+
+    /**
+     * Variable  Treshold
+     * Id: 3
+     */
+    Treshold: number; // INT32;
   }
 
   export interface Bundle {

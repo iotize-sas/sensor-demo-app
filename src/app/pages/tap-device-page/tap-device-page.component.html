@@ -76,20 +76,6 @@
         Connect
       </ion-segment-button>
       <ion-segment-button
-        (click)="login()"
-        *ngIf="(tap?.isConnected() || isNFC) && (tapService.isLoggedInAs$('anonymous') | async)"
-      >
-        <ion-icon name="log-in"></ion-icon>
-        Login
-      </ion-segment-button>
-      <ion-segment-button
-        (click)="logout()"
-        *ngIf="(tap?.isConnected() || isNFC) && !(tapService.isLoggedInAs$('anonymous') | async)"
-      >
-        <ion-icon name="log-out"></ion-icon>
-        Logout
-      </ion-segment-button>
-      <ion-segment-button
         (click)="tapService.disconnect()"
         *ngIf="tap?.isConnected() && !isNFC"
         [disabled]="isDisconnecting | async"
@@ -97,6 +83,37 @@
         <ion-icon name="close-circle"></ion-icon>
         Disconnect
       </ion-segment-button>
+      <ion-segment-button
+        (click)="login()"
+        *ngIf="(tap?.isConnected() || isNFC) && (isAnonymous$ | async)"
+      >
+        <ion-icon name="log-in"></ion-icon>
+        Login
+      </ion-segment-button>
+      <app-task-manager
+        #tapLogoutTaskManager
+        *ngIf="(tap?.isConnected() || isNFC) && !(isAnonymous$ | async)"
+        [task]="tapLogoutTask"
+      >
+        <app-task-manager-action>
+          <ion-segment-button (click)="tapLogoutTaskManager.execTask()">
+            <ion-icon name="log-out"></ion-icon>
+            Logout
+          </ion-segment-button>
+        </app-task-manager-action>
+        <app-task-manager-delayed>
+          <ion-segment-button color="warning" app-task-manager-action-cancel>
+            <ion-icon name="close"></ion-icon>
+            Cancel
+          </ion-segment-button>
+        </app-task-manager-delayed>
+        <app-task-manager-running>
+          <ion-segment-button disabled>
+            <ion-icon name="log-out"></ion-icon>
+            <ion-progress-bar type="indeterminate"></ion-progress-bar>
+          </ion-segment-button>
+        </app-task-manager-running>
+      </app-task-manager>
       <ion-segment-button (click)="changeDevice()">
         <ion-icon name="arrow-back"></ion-icon>
         Scan</ion-segment-button

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <IOTizeConfiguration Version="1.2.0" Lock="8">
 <IOTizeApp Name="Sensor demo" DevIoTizeSN="IoTize00410000000D" InterfaceLock="8" Scram_Hash_It="5000" Path="$6/IoTize00410000000D/index.html" TargetProtocol="SWD" S3Pmode="0" S3PDelay="1" TargetProtocolConfDataLen="8" TargetProtocolConfData="0001000a01002580" WebLink="https://www.iotize.com" AAR="com.iotize.app.sensordemo" HostProtocol="ALL" Firmware="1.0.0" Config="1.0.0" NFCPairingMandatory="No" NFCInterruptionLock="0" NFCLogin="0" LowPowerLevel="0" LowPowerHostTimeout="30">
-<USB_Aliases />
+<USB_Aliases Alias0="0001000000" Alias1="0000002000" />
 <LoRa_Info LoRaMode="0" />
 <WIFI_Info Network="P2P" ModuleWEPKey="ABCD1234" ModuleSSID="IoTize" />
 <CloudServices CloudEnable="1" CloudSendConf="Yes" CloudMqttPeriod="60000">
@@ -49,6 +49,9 @@
 <XAppRender />
 </IOTizeVariable>
 <IOTizeVariable Id="13" Address="0x20000009" Unit="1" Quantity="1">
+<XAppRender />
+</IOTizeVariable>
+<IOTizeVariable Id="3" Address="0x20000014" Unit="3" Quantity="1">
 <XAppRender />
 </IOTizeVariable>
 <IOTizeAccessControl>

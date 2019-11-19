@@ -18,7 +18,13 @@ import {
 } from "@iotize/device-client.js/protocol/api";
 import { Dialogs } from "@ionic-native/dialogs/ngx";
 import { environment } from "src/environments/environment";
-import { MenuItem, ToastService, AppNavigationService } from "app-theme";
+import {
+  MenuItem,
+  ToastService,
+  AppNavigationService,
+  TaskManager,
+  TaskManagerService
+} from "app-theme";
 import getDebugger from "src/app/logger";
 import { filter, map } from "rxjs/operators";
 const debug = getDebugger("TapDevicePageComponent");
@@ -37,6 +43,8 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
   public isDisconnecting: Observable<boolean>;
   private connectionLostSub: Subscription;
   public askSwitchProtocolOnNFCConnectionLost: boolean = true;
+  public isAnonymous$: Observable<boolean>;
+  public tapLogoutTask: TaskManager.TaskContainer;
 
   private connectionLostDialogId?: Promise<void>;
 
@@ -69,8 +77,11 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
     public modalController: ModalController,
     public protocolFactory: ProtocolFactoryService,
     private appNav: AppNavigationService,
-    private dialogs: Dialogs
-  ) {}
+    private dialogs: Dialogs,
+    private taskManager: TaskManagerService
+  ) {
+    this.isAnonymous$ = this.tapService.isLoggedInAs$("anonymous");
+  }
 
   ngOnInit() {
     this.appName = this.tapService.getKeyValue$(TapInfo.appName);

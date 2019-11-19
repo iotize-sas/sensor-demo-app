@@ -9,12 +9,6 @@ import { ToastService } from "app-theme";
   styleUrls: ["./tap-settings-page.component.scss"]
 })
 export class TapSettingsPageComponent implements OnInit {
-  protocolSections: {
-    title: string;
-    icon?: string;
-    items: TapConfigItem[];
-  }[] = [];
-
   public interfaceTapConfigItems = [
     {
       key: "appName",
