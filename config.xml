@@ -127,4 +127,5 @@
     <plugin name="cordova-plugin-iotize-ble" spec="@iotize/cordova-plugin-iotize-ble@1.1.0-alpha.34" />
     <plugin name="cordova-plugin-iotize-device-com-socket" spec="@iotize/device-com-socket.cordova@1.0.0-alpha.1" />
     <plugin name="cordova-plugin-iotize-device-com-wifi" spec="@iotize/device-com-wifi.cordova@1.0.0-alpha.1" />
+    <engine name="android" spec="8.0.0" />
 </widget>
