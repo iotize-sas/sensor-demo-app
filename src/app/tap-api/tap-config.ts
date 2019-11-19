@@ -71,6 +71,14 @@ export const bundles = [
         type: "UINT8",
         name: "LEDConfig",
         converter: NumberConverter.uint8Instance()
+      },
+
+      {
+        id: 3,
+        length: 1,
+        type: "INT32",
+        name: "Treshold",
+        converter: NumberConverter.int32Instance()
       }
     ]
   }

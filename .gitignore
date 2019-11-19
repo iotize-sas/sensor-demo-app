@@ -38,3 +38,9 @@ fastlane/release-manager-key.json
 fastlane/report.xml
 
 .env
+
+iotizestudio/*.cloud
+iotizestudio/*.izsc
+iotizestudio/*.xml
+iotizestudio/MB_conf.h
+iotizestudio/S3P_conf.h

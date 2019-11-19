@@ -97,116 +97,112 @@
 
     <ion-row>
       <ion-col>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-card>
-                <ion-item lines="full" class="card-header">
-                  <ion-icon name="people" slot="start"></ion-icon>
-                  <ion-label>Users</ion-label>
-                </ion-item>
-                <ion-card-content>
-                  <ion-card>
-                    <ion-item lines="full" class="card-header">
-                      <ion-icon name="person" slot="start"></ion-icon>
-                      <ion-label>#65535 admin</ion-label>
-                    </ion-item>
-                    <ion-card-content>
-                      <tap-config-list
-                        [items]="profile_adminConfigItem"
-                        [globalRefresh]="false"
-                        [itemRefresh]="true"
-                        lines="full"
-                      ></tap-config-list>
-                    </ion-card-content>
-                  </ion-card>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-icon name="people" slot="start"></ion-icon>
+            <ion-label>Users</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <ion-card>
+              <ion-item lines="full" class="card-header">
+                <ion-icon name="person" slot="start"></ion-icon>
+                <ion-label>#65535 admin</ion-label>
+              </ion-item>
+              <ion-card-content>
+                <tap-config-list
+                  [items]="profile_adminConfigItem"
+                  [globalRefresh]="false"
+                  [itemRefresh]="true"
+                  lines="full"
+                ></tap-config-list>
+              </ion-card-content>
+            </ion-card>
 
-                  <ion-card>
-                    <ion-item lines="full" class="card-header">
-                      <ion-icon name="person" slot="start"></ion-icon>
-                      <ion-label>#65534 supervisor</ion-label>
-                    </ion-item>
-                    <ion-card-content>
-                      <tap-config-list
-                        [items]="profile_supervisorConfigItem"
-                        [globalRefresh]="false"
-                        [itemRefresh]="true"
-                        lines="full"
-                      ></tap-config-list>
-                    </ion-card-content>
-                  </ion-card>
+            <ion-card>
+              <ion-item lines="full" class="card-header">
+                <ion-icon name="person" slot="start"></ion-icon>
+                <ion-label>#65534 supervisor</ion-label>
+              </ion-item>
+              <ion-card-content>
+                <tap-config-list
+                  [items]="profile_supervisorConfigItem"
+                  [globalRefresh]="false"
+                  [itemRefresh]="true"
+                  lines="full"
+                ></tap-config-list>
+              </ion-card-content>
+            </ion-card>
 
-                  <ion-card>
-                    <ion-item lines="full" class="card-header">
-                      <ion-icon name="person" slot="start"></ion-icon>
-                      <ion-label>#1 tech</ion-label>
-                    </ion-item>
-                    <ion-card-content>
-                      <tap-config-list
-                        [items]="profile_techConfigItem"
-                        [globalRefresh]="false"
-                        [itemRefresh]="true"
-                        lines="full"
-                      ></tap-config-list>
-                    </ion-card-content>
-                  </ion-card>
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
+            <ion-card>
+              <ion-item lines="full" class="card-header">
+                <ion-icon name="person" slot="start"></ion-icon>
+                <ion-label>#1 tech</ion-label>
+              </ion-item>
+              <ion-card-content>
+                <tap-config-list
+                  [items]="profile_techConfigItem"
+                  [globalRefresh]="false"
+                  [itemRefresh]="true"
+                  lines="full"
+                ></tap-config-list>
+              </ion-card-content>
+            </ion-card>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
-            <ion-col>
-              <ion-card>
-                <ion-item lines="full" class="card-header">
-                  <ion-icon name="analytics" slot="start"></ion-icon>
-                  <ion-label>Data</ion-label>
-                </ion-item>
-                <ion-card-content>
-                  <ion-card>
-                    <ion-item lines="full" class="card-header">
-                      <ion-label>#0 Count_Status</ion-label>
-                    </ion-item>
-                    <ion-card-content>
-                      <tap-config-list
-                        [items]="bundle_Count_StatusConfigItem"
-                        [globalRefresh]="false"
-                        [itemRefresh]="true"
-                        lines="full"
-                      ></tap-config-list>
-                    </ion-card-content>
-                  </ion-card>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-icon name="analytics" slot="start"></ion-icon>
+            <ion-label>Data</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <ion-card>
+              <ion-item lines="full" class="card-header">
+                <ion-label>#0 Count_Status</ion-label>
+              </ion-item>
+              <ion-card-content>
+                <tap-config-list
+                  [items]="bundle_Count_StatusConfigItem"
+                  [globalRefresh]="false"
+                  [itemRefresh]="true"
+                  lines="full"
+                ></tap-config-list>
+              </ion-card-content>
+            </ion-card>
 
-                  <ion-card>
-                    <ion-item lines="full" class="card-header">
-                      <ion-label>#1 MySensors</ion-label>
-                    </ion-item>
-                    <ion-card-content>
-                      <tap-config-list
-                        [items]="bundle_MySensorsConfigItem"
-                        [globalRefresh]="false"
-                        [itemRefresh]="true"
-                        lines="full"
-                      ></tap-config-list>
-                    </ion-card-content>
-                  </ion-card>
+            <ion-card>
+              <ion-item lines="full" class="card-header">
+                <ion-label>#1 MySensors</ion-label>
+              </ion-item>
+              <ion-card-content>
+                <tap-config-list
+                  [items]="bundle_MySensorsConfigItem"
+                  [globalRefresh]="false"
+                  [itemRefresh]="true"
+                  lines="full"
+                ></tap-config-list>
+              </ion-card-content>
+            </ion-card>
 
-                  <ion-card>
-                    <ion-item lines="full" class="card-header">
-                      <ion-label>#2 Count_Control</ion-label>
-                    </ion-item>
-                    <ion-card-content>
-                      <tap-config-list
-                        [items]="bundle_Count_ControlConfigItem"
-                        [globalRefresh]="false"
-                        [itemRefresh]="true"
-                        lines="full"
-                      ></tap-config-list>
-                    </ion-card-content>
-                  </ion-card>
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+            <ion-card>
+              <ion-item lines="full" class="card-header">
+                <ion-label>#2 Count_Control</ion-label>
+              </ion-item>
+              <ion-card-content>
+                <tap-config-list
+                  [items]="bundle_Count_ControlConfigItem"
+                  [globalRefresh]="false"
+                  [itemRefresh]="true"
+                  lines="full"
+                ></tap-config-list>
+              </ion-card-content>
+            </ion-card>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

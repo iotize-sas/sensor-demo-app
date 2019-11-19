@@ -91,6 +91,13 @@
                             "length": 1,
                             "type": "UINT8",
                             "name": "LEDConfig"
+                        },
+                        {
+                            "address": "0x20000014",
+                            "id": 3,
+                            "length": 1,
+                            "type": "INT32",
+                            "name": "Treshold"
                         }
                     ],
                     "acls": {

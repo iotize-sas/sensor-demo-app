@@ -74,7 +74,6 @@
     : DisplayVerbose Count_Status
     : Post  /1028/0/65535 : 0x0
     : Goto.NOK ConfErr
-    : Put  /1028/0/4 [436F756E745F537461747573] : 0x0
     : Put  /1028/0/2 [0000003C] : 0x0
     : Goto.NOK ConfErr
     : DisplayVerbose Count
@@ -105,7 +104,6 @@
     : DisplayVerbose MySensors
     : Post  /1028/1/65535 : 0x0
     : Goto.NOK ConfErr
-    : Put  /1028/1/4 [4D7953656E736F7273202020] : 0x0
     : Put  /1028/1/2 [0000003D] : 0x0
     : Goto.NOK ConfErr
     : DisplayVerbose Voltage_V
@@ -137,7 +135,6 @@
     : DisplayVerbose Count_Control
     : Post  /1028/2/65535 : 0x0
     : Goto.NOK ConfErr
-    : Put  /1028/2/4 [436F756E745F436F6E74726F6C] : 0x0
     : DisplayVerbose Period
     : Post  /1029/0/65535 : 0x0
     : Goto.NOK ConfErr
@@ -159,6 +156,17 @@
     : Put  /1029/13/1 [01] : 0x0
     : Goto.NOK ConfErr
     : Put  /1029/13/2 [01] : 0x0
+    : Goto.NOK ConfErr
+    : DisplayVerbose Treshold
+    : Post  /1029/3/65535 : 0x0
+    : Goto.NOK ConfErr
+    : Put  /1029/3/6 [0002] : 0x0
+    : Goto.NOK ConfErr
+    : Put  /1029/3/0 [20000014] : 0x0
+    : Goto.NOK ConfErr
+    : Put  /1029/3/1 [03] : 0x0
+    : Goto.NOK ConfErr
+    : Put  /1029/3/2 [01] : 0x0
     : Goto.NOK ConfErr
     : DisplayVerbose anonymous
     : Put  /1028/2/0 [410001] : 0x0

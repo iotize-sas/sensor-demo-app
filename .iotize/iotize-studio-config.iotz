@@ -26,11 +26,11 @@
 </GUI_TapInfoPage>
 <GUI_AboutPage enabled="false" pageTitle="About" />
 <GUI_TargetProtocolConfPage enabled="false" pageTitle="Target Protocol Settings" />
-<GUI_TapSupervisionPage enabled="false" pageTitle="Supervision" />
+<GUI_TapSupervisionPage enabled="true" pageTitle="Supervision" />
 </GUI_pages>
 </GUI_XAppConfig>
 <IOTizeApp Name="Sensor demo" DevIoTizeSN="IoTize00410000000D" InterfaceLock="8" Scram_Hash_It="5000" GUI_Path="$4/com.iotize.app.sensordemo" GUI_WebSpePath="http://localhost:4210/device?protocol=webview" Path="$6/IoTize00410000000D/index.html" GUI_TargetType="0" TargetProtocol="SWD" GUI_S3Pmode="0" S3Pmode="0" S3PDelay="1" TargetProtocolConfDataLen="8" TargetProtocolConfData="0001000a01002580" WebLink="https://www.iotize.com" AAR="com.iotize.app.sensordemo" HostProtocol="ALL" Firmware="1.0.0" Config="1.0.0" NFCPairingMandatory="No" NFCInterruptionLock="0" NFCLogin="0" LowPowerLevel="0" LowPowerHostTimeout="30">
-<USB_Aliases />
+<USB_Aliases Alias0="0001000000" Alias1="0000002000" />
 <LoRa_Info LoRaMode="0" />
 <WIFI_Info Network="P2P" ModuleWEPKey="ABCD1234" ModuleSSID="IoTize" SSL_Client_Cert_filename="" />
 <GUI_Reader Name="" />
@@ -71,10 +71,10 @@
 </IOTizeProfile>
 <IOTizeBundle Id="0" GUI_Name="Count_Status" GUI_Description="" DataLogPeriod="0x0000003C" GUI_MonitoringPeriod="500">
 <IOTizeVariable Id="4" GUI_Name="Count" GUI_PhysicalAddress="0x20000000" Address="0x20000000" Unit="3" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="Counter value">
-<XAppRender GUI_renderType="Text" GUI_min="10" GUI_max="255" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="Text" GUI_min="10" GUI_max="255" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_content="" GUI_showInCard="Yes" />
 </IOTizeVariable>
 <IOTizeVariable Id="7" GUI_Name="LEDStatus" GUI_PhysicalAddress="0x20000008" Address="0x20000008" Unit="1" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="LED" GUI_unsigned="1">
-<XAppRender GUI_renderType="OnOff" GUI_min="0" GUI_max="255" GUI_textOn="on" GUI_textOff="off2" GUI_listChoices="0=OFF;1=ON;2=AUTO" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="OnOff" GUI_min="0" GUI_max="255" GUI_textOn="on" GUI_textOff="off2" GUI_listChoices="0=OFF;1=ON;2=AUTO" GUI_content="" GUI_showInCard="Yes" />
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read" />
@@ -82,10 +82,10 @@
 </IOTizeBundle>
 <IOTizeBundle Id="1" GUI_Name="MySensors" GUI_Description="" DataLogPeriod="0x0000003D" GUI_MonitoringPeriod="500">
 <IOTizeVariable Id="1" GUI_Name="Voltage_V" GUI_PhysicalAddress="0x2000001C" Address="0x2000001C" Unit="3" Quantity="1" GUI_Submit="No" GUI_Display="Yes" GUI_Alias="Vcc" GUI_DispUnit="V" GUI_float="1" GUI_htmlDigitsFloat="2">
-<XAppRender GUI_renderType="Gauge" GUI_min="2.5" GUI_max="4" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="Gauge" GUI_min="2.5" GUI_max="4" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_content="" GUI_showInCard="Yes" />
 </IOTizeVariable>
 <IOTizeVariable Id="2" GUI_Name="Temperature_C" GUI_PhysicalAddress="0x20000018" Address="0x20000018" Unit="3" Quantity="1" GUI_Submit="No" GUI_Display="Yes" GUI_Alias="Processor temperature" GUI_DispUnit="°C" GUI_float="1" GUI_htmlDigitsFloat="1">
-<XAppRender GUI_renderType="Chart" GUI_min="21" GUI_max="45" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="Chart" GUI_min="21" GUI_max="45" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_content="" GUI_showInCard="Yes" />
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read" />
@@ -94,10 +94,13 @@
 </IOTizeBundle>
 <IOTizeBundle Id="2" GUI_Name="Count_Control" GUI_Description="" DataLogPeriod="0x00000000" GUI_MonitoringPeriod="500">
 <IOTizeVariable Id="0" GUI_Name="Period" GUI_PhysicalAddress="0x2000000C" Address="0x2000000C" Unit="3" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="LED blink period (ms)" GUI_DispUnit="ms">
-<XAppRender GUI_renderType="Slider" GUI_min="0" GUI_max="100" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="0=ON;1=OFF;2=AUTO" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="Slider" GUI_min="0" GUI_max="100" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="0=ON;1=OFF;2=AUTO" GUI_content="" GUI_showInCard="Yes" />
 </IOTizeVariable>
 <IOTizeVariable Id="13" GUI_Name="LEDConfig" GUI_PhysicalAddress="0x20000009" Address="0x20000009" Unit="1" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="Configure LED" GUI_unsigned="1">
-<XAppRender GUI_renderType="Buttons" GUI_min="0" GUI_max="100" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="0=OFF;1=ON;2=AUTO;" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="Buttons" GUI_min="0" GUI_max="100" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="0=OFF;1=ON;2=AUTO;" GUI_content="" GUI_showInCard="Yes" />
+</IOTizeVariable>
+<IOTizeVariable Id="3" GUI_Name="Treshold" GUI_PhysicalAddress="0x20000014" Address="0x20000014" Unit="3" Quantity="1" GUI_Submit="No" GUI_Display="Yes">
+<XAppRender GUI_renderType="Code" GUI_min="0" GUI_max="4294967295" GUI_textOn="" GUI_textOff="" GUI_listChoices="" GUI_content="&lt;p&gt; Threshold is set to {{ ctx.value || '---' }} ! &lt;/p&gt;" GUI_showInCard="Yes" />
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read" />

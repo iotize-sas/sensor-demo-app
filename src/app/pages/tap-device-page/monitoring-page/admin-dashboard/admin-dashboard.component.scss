@@ -12,12 +12,19 @@ ion-card ion-item,
 
 ion-card {
   min-width: 200px;
-  background: white;
+  --background: var(--ion-color-monitoring-background-contrast);
+  border-radius: 0px;
 }
 
-ion-grid {
-  background: var(--ion-color-monitoring-background);
-  height: 100%;
+ion-content {
+  --background: var(--ion-color-monitoring-background);
+}
+
+ion-content ion-list > ion-card {
+  margin: 10px;
+}
+ion-content ion-grid > ion-row > ion-col > ion-card {
+  margin: 0px;
 }
 
 /*

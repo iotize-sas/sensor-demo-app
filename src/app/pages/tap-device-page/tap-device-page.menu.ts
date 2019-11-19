@@ -7,6 +7,11 @@ export var DEVICE_MENU: MenuItem[] = [
     url: "/device/info"
   },
   {
+    title: "Supervision",
+    icon: "construct",
+    url: "/device/settings"
+  },
+  {
     title: "Monitoring",
     icon: "analytics",
     url: "/device/monitoring"

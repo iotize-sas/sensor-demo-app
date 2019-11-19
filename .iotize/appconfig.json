@@ -1,6 +1,6 @@
 {
     "version": {
-        "generator": "0.0.30"
+        "generator": "0.0.32"
     },
     "app": {
         "id": "com.iotize.app.sensordemo",
@@ -24,6 +24,11 @@
                 "title": "Device Info",
                 "icon": "information-circle",
                 "url": "/device/info"
+            },
+            {
+                "title": "Supervision",
+                "icon": "construct",
+                "url": "/device/settings"
             },
             {
                 "title": "Monitoring",
@@ -67,7 +72,7 @@
                         "tapnpassSettings": false
                     },
                     "TapConfigPage": {
-                        "enabled": false,
+                        "enabled": true,
                         "type": "TapConfigPage",
                         "path": "settings",
                         "pageTitle": "Supervision",
@@ -176,91 +181,111 @@
                                     ]
                                 },
                                 {
-                                    "type": "GridLayout",
-                                    "cols": 2,
-                                    "elements": [
+                                    "type": "CardLayout",
+                                    "title": "Users",
+                                    "icon": "people",
+                                    "content": [
                                         {
+                                            "icon": "person",
                                             "type": "CardLayout",
-                                            "title": "Users",
-                                            "icon": "people",
+                                            "title": "#65535 admin",
                                             "content": [
                                                 {
-                                                    "icon": "person",
-                                                    "type": "CardLayout",
-                                                    "title": "#65535 admin",
-                                                    "content": [
+                                                    "type": "TapConfigList",
+                                                    "variableName": "profile_adminConfigItem",
+                                                    "items": [
                                                         {
-                                                            "type": "TapConfigList",
-                                                            "variableName": "profile_adminConfigItem",
-                                                            "items": [
-                                                                {
-                                                                    "key": "ProfileLifeTime",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "65535"
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "key": "profilePassword",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "65535"
-                                                                    ]
-                                                                }
+                                                            "key": "ProfileLifeTime",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "65535"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "key": "profilePassword",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "65535"
                                                             ]
                                                         }
                                                     ]
-                                                },
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "icon": "person",
+                                            "type": "CardLayout",
+                                            "title": "#65534 supervisor",
+                                            "content": [
                                                 {
-                                                    "icon": "person",
-                                                    "type": "CardLayout",
-                                                    "title": "#65534 supervisor",
-                                                    "content": [
+                                                    "type": "TapConfigList",
+                                                    "variableName": "profile_supervisorConfigItem",
+                                                    "items": [
                                                         {
-                                                            "type": "TapConfigList",
-                                                            "variableName": "profile_supervisorConfigItem",
-                                                            "items": [
-                                                                {
-                                                                    "key": "ProfileLifeTime",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "65534"
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "key": "profilePassword",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "65534"
-                                                                    ]
-                                                                }
+                                                            "key": "ProfileLifeTime",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "65534"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "key": "profilePassword",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "65534"
                                                             ]
                                                         }
                                                     ]
-                                                },
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "icon": "person",
+                                            "type": "CardLayout",
+                                            "title": "#1 tech",
+                                            "content": [
                                                 {
-                                                    "icon": "person",
-                                                    "type": "CardLayout",
-                                                    "title": "#1 tech",
-                                                    "content": [
+                                                    "type": "TapConfigList",
+                                                    "variableName": "profile_techConfigItem",
+                                                    "items": [
                                                         {
-                                                            "type": "TapConfigList",
-                                                            "variableName": "profile_techConfigItem",
-                                                            "items": [
-                                                                {
-                                                                    "key": "ProfileLifeTime",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "1"
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "key": "profilePassword",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "1"
-                                                                    ]
-                                                                }
+                                                            "key": "ProfileLifeTime",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "1"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "key": "profilePassword",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "1"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "CardLayout",
+                                    "title": "Data",
+                                    "icon": "analytics",
+                                    "content": [
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "#0 Count_Status",
+                                            "content": [
+                                                {
+                                                    "type": "TapConfigList",
+                                                    "variableName": "bundle_Count_StatusConfigItem",
+                                                    "items": [
+                                                        {
+                                                            "key": "BundleDatalogPeriod",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "0"
                                                             ]
                                                         }
                                                     ]
@@ -269,62 +294,36 @@
                                         },
                                         {
                                             "type": "CardLayout",
-                                            "title": "Data",
-                                            "icon": "analytics",
+                                            "title": "#1 MySensors",
                                             "content": [
                                                 {
-                                                    "type": "CardLayout",
-                                                    "title": "#0 Count_Status",
-                                                    "content": [
+                                                    "type": "TapConfigList",
+                                                    "variableName": "bundle_MySensorsConfigItem",
+                                                    "items": [
                                                         {
-                                                            "type": "TapConfigList",
-                                                            "variableName": "bundle_Count_StatusConfigItem",
-                                                            "items": [
-                                                                {
-                                                                    "key": "BundleDatalogPeriod",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "0"
-                                                                    ]
-                                                                }
+                                                            "key": "BundleDatalogPeriod",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "1"
                                                             ]
                                                         }
                                                     ]
-                                                },
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "#2 Count_Control",
+                                            "content": [
                                                 {
-                                                    "type": "CardLayout",
-                                                    "title": "#1 MySensors",
-                                                    "content": [
+                                                    "type": "TapConfigList",
+                                                    "variableName": "bundle_Count_ControlConfigItem",
+                                                    "items": [
                                                         {
-                                                            "type": "TapConfigList",
-                                                            "variableName": "bundle_MySensorsConfigItem",
-                                                            "items": [
-                                                                {
-                                                                    "key": "BundleDatalogPeriod",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "1"
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "CardLayout",
-                                                    "title": "#2 Count_Control",
-                                                    "content": [
-                                                        {
-                                                            "type": "TapConfigList",
-                                                            "variableName": "bundle_Count_ControlConfigItem",
-                                                            "items": [
-                                                                {
-                                                                    "key": "BundleDatalogPeriod",
-                                                                    "editable": true,
-                                                                    "params": [
-                                                                        "2"
-                                                                    ]
-                                                                }
+                                                            "key": "BundleDatalogPeriod",
+                                                            "editable": true,
+                                                            "params": [
+                                                                "2"
                                                             ]
                                                         }
                                                     ]
@@ -361,8 +360,7 @@
                                 "moduleName": "AnonymousDashboardModule",
                                 "children": [],
                                 "content": {
-                                    "type": "GridLayout",
-                                    "cols": 2,
+                                    "type": "ListLayout",
                                     "elements": [
                                         {
                                             "type": "CardLayout",
@@ -476,6 +474,20 @@
                                                             "value": 2
                                                         }
                                                     ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Treshold",
+                                            "content": [
+                                                {
+                                                    "type": "TapVariableContext",
+                                                    "variable": "Treshold",
+                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -495,8 +507,7 @@
                                 "moduleName": "AdminDashboardModule",
                                 "children": [],
                                 "content": {
-                                    "type": "GridLayout",
-                                    "cols": 2,
+                                    "type": "ListLayout",
                                     "elements": [
                                         {
                                             "type": "CardLayout",
@@ -610,6 +621,20 @@
                                                             "value": 2
                                                         }
                                                     ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Treshold",
+                                            "content": [
+                                                {
+                                                    "type": "TapVariableContext",
+                                                    "variable": "Treshold",
+                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -629,8 +654,7 @@
                                 "moduleName": "SupervisorDashboardModule",
                                 "children": [],
                                 "content": {
-                                    "type": "GridLayout",
-                                    "cols": 2,
+                                    "type": "ListLayout",
                                     "elements": [
                                         {
                                             "type": "CardLayout",
@@ -744,6 +768,20 @@
                                                             "value": 2
                                                         }
                                                     ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Treshold",
+                                            "content": [
+                                                {
+                                                    "type": "TapVariableContext",
+                                                    "variable": "Treshold",
+                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -763,8 +801,7 @@
                                 "moduleName": "TechDashboardModule",
                                 "children": [],
                                 "content": {
-                                    "type": "GridLayout",
-                                    "cols": 2,
+                                    "type": "ListLayout",
                                     "elements": [
                                         {
                                             "type": "CardLayout",
@@ -878,6 +915,20 @@
                                                             "value": 2
                                                         }
                                                     ]
+                                                }
+                                            ],
+                                            "contentOptions": {
+                                                "class": "ion-no-padding"
+                                            }
+                                        },
+                                        {
+                                            "type": "CardLayout",
+                                            "title": "Treshold",
+                                            "content": [
+                                                {
+                                                    "type": "TapVariableContext",
+                                                    "variable": "Treshold",
+                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -1022,7 +1073,6 @@
                 }
             ]
         },
-        "defaultPage": "/connect",
         "integration": [
             {
                 "type": "FastlaneIntegration",
@@ -1039,7 +1089,8 @@
                 "type": "FirebaseIntegration",
                 "projectId": "sensor-demo-app-fbb73"
             }
-        ]
+        ],
+        "defaultPage": "/connect"
     },
     "formMeta": {
         "showAdvanceSettings": false
