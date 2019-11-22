@@ -3,3 +3,5 @@ README.md
 package.json
 package-lock.json
 .iotizeskipgen
+
+fastlane/metadata/android/

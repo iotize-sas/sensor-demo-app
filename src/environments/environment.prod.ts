@@ -1,7 +1,9 @@
+import { version } from "../../package.json";
+
 export const environment = {
   production: true,
   appName: "Sensor demo",
-  version: "1.0.0",
+  version: version,
   debug: false,
   nfcMimeType: "application/com.iotize.app.sensordemo"
 };

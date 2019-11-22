@@ -25,7 +25,7 @@ platform :android do
   lane :deploy do
     cordova(
       platform: 'android',
-      cordova_prepare: false,
+      cordova_prepare: true,
       release: true
     )
     supply(apk: ENV['CORDOVA_ANDROID_RELEASE_BUILD_PATH'])

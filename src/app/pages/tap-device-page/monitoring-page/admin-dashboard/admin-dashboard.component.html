@@ -25,23 +25,6 @@
   <ion-list>
     <ion-card>
       <ion-item lines="full" class="card-header">
-        <ion-label>Counter value</ion-label>
-      </ion-item>
-      <ion-card-content class="ion-no-padding">
-        <div style="margin: auto;">
-          <monitoring-variable-value
-            [lines]="'none'"
-            [variable]="variables['Count']"
-            [inputOptions]=""
-            slot="end"
-            [editable]="true"
-          ></monitoring-variable-value>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-item lines="full" class="card-header">
         <ion-label>LED</ion-label>
       </ion-item>
       <ion-card-content class="ion-no-padding">
@@ -118,7 +101,11 @@
           *ngIf="variables['Treshold']"
           #ctx
         >
-          <p>Threshold is set to {{ ctx.value || '---' }} !</p>
+          <ion-item
+            ><ion-text ion-text-center>
+              My threshold is {{ ctx.value }}
+            </ion-text></ion-item
+          >
         </tap-variable-context>
       </ion-card-content>
     </ion-card>

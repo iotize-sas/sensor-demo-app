@@ -23,7 +23,13 @@
 </IOTizeProfile>
 <IOTizeBundle Id="0" DataLogPeriod="0x0000003C">
 <IOTizeVariable Id="4" Address="0x20000000" Unit="3" Quantity="1">
-<XAppRender />
+<XAppRender>
+<ValueMapping />
+<ValueMapping />
+<ValueMapping />
+<ValueMapping />
+<ValueMapping />
+</XAppRender>
 </IOTizeVariable>
 <IOTizeVariable Id="7" Address="0x20000008" Unit="1" Quantity="1">
 <XAppRender />
@@ -52,7 +58,12 @@
 <XAppRender />
 </IOTizeVariable>
 <IOTizeVariable Id="3" Address="0x20000014" Unit="3" Quantity="1">
-<XAppRender />
+<XAppRender>
+<ValueMapping />
+<ValueMapping />
+<ValueMapping />
+<ValueMapping />
+</XAppRender>
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read" />

@@ -24,7 +24,7 @@
 <items key="configVersion" />
 <items key="appName" />
 </GUI_TapInfoPage>
-<GUI_AboutPage enabled="false" pageTitle="About" />
+<GUI_AboutPage enabled="true" pageTitle="About" />
 <GUI_TargetProtocolConfPage enabled="false" pageTitle="Target Protocol Settings" />
 <GUI_TapSupervisionPage enabled="true" pageTitle="Supervision" />
 </GUI_pages>
@@ -71,7 +71,13 @@
 </IOTizeProfile>
 <IOTizeBundle Id="0" GUI_Name="Count_Status" GUI_Description="" DataLogPeriod="0x0000003C" GUI_MonitoringPeriod="500">
 <IOTizeVariable Id="4" GUI_Name="Count" GUI_PhysicalAddress="0x20000000" Address="0x20000000" Unit="3" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="Counter value">
-<XAppRender GUI_renderType="Text" GUI_min="10" GUI_max="255" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_content="" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="ValueMapping" GUI_min="10" GUI_max="255" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="" GUI_content="" GUI_showInCard="Yes">
+<ValueMapping GUI_bitRange="0" GUI_content="&lt;p&gt;Bit 0 ON&lt;/p&gt;" GUI_value="1" />
+<ValueMapping GUI_bitRange="1" GUI_content="&lt;p&gt;Bit 1 ON &lt;/p&gt;" GUI_value="1" />
+<ValueMapping GUI_bitRange="2" GUI_content="&lt;p&gt; Bit 3 ON &lt;/p&gt;" GUI_value="1" />
+<ValueMapping GUI_bitRange="0-31" GUI_content="&lt;p&gt;All bits are off &lt;/p&gt;" GUI_value="0" />
+<ValueMapping GUI_bitRange="" GUI_content="" GUI_value="" />
+</XAppRender>
 </IOTizeVariable>
 <IOTizeVariable Id="7" GUI_Name="LEDStatus" GUI_PhysicalAddress="0x20000008" Address="0x20000008" Unit="1" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="LED" GUI_unsigned="1">
 <XAppRender GUI_renderType="OnOff" GUI_min="0" GUI_max="255" GUI_textOn="on" GUI_textOff="off2" GUI_listChoices="0=OFF;1=ON;2=AUTO" GUI_content="" GUI_showInCard="Yes" />
@@ -100,7 +106,12 @@
 <XAppRender GUI_renderType="Buttons" GUI_min="0" GUI_max="100" GUI_textOn="on" GUI_textOff="off" GUI_listChoices="0=OFF;1=ON;2=AUTO;" GUI_content="" GUI_showInCard="Yes" />
 </IOTizeVariable>
 <IOTizeVariable Id="3" GUI_Name="Treshold" GUI_PhysicalAddress="0x20000014" Address="0x20000014" Unit="3" Quantity="1" GUI_Submit="No" GUI_Display="Yes">
-<XAppRender GUI_renderType="Code" GUI_min="0" GUI_max="4294967295" GUI_textOn="" GUI_textOff="" GUI_listChoices="" GUI_content="&lt;p&gt; Threshold is set to {{ ctx.value || '---' }} ! &lt;/p&gt;" GUI_showInCard="Yes" />
+<XAppRender GUI_renderType="Code" GUI_min="0" GUI_max="4294967295" GUI_textOn="" GUI_textOff="" GUI_listChoices="" GUI_content="&lt;ion-item&gt; &lt;ion-text class=&quot;ion-text-center&quot;&gt;Threshold is set to {{ ctx.value || '---' }} ! &lt;/ion-text&gt;&lt;/ion-item&gt;" GUI_showInCard="Yes">
+<ValueMapping GUI_bitRange="0" GUI_content="&lt;p&gt; Hello world! &lt;/p&gt;" GUI_value="1" />
+<ValueMapping GUI_bitRange="0" GUI_content="&lt;p&gt; Good idea man &lt;/p&gt;" GUI_value="0" />
+<ValueMapping GUI_bitRange="3" GUI_content="&lt;p&gt; Bit index 3 set to ON &lt;/p&gt;" GUI_value="1" />
+<ValueMapping GUI_bitRange="" GUI_content="" GUI_value="" />
+</XAppRender>
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read" />

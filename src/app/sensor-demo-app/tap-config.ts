@@ -79,6 +79,28 @@ export const bundles = [
         type: "INT32",
         name: "Treshold",
         converter: NumberConverter.int32Instance()
+      },
+
+      {
+        id: 6,
+        length: 1,
+        type: "INT32",
+        name: "CountMax",
+        converter: NumberConverter.int32Instance()
+      }
+    ]
+  },
+
+  {
+    id: 4,
+    name: "Peripheral",
+    variables: [
+      {
+        id: 5,
+        length: 1,
+        type: "INT32",
+        name: "PWR_CR",
+        converter: NumberConverter.int32Instance()
       }
     ]
   }

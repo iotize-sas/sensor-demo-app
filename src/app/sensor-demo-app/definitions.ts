@@ -36,6 +36,12 @@ export namespace SensorDemo {
      * Id: 2
      */
     countControl: DataType.CountControl;
+
+    /**
+     * Bundle  Peripheral
+     * Id: 4
+     */
+    peripheral: DataType.Peripheral;
   }
 
   export namespace DataType {
@@ -85,15 +91,31 @@ export namespace SensorDemo {
        * Id: 3
        */
       Treshold: number; // INT32;
+
+      /**
+       * Variable  CountMax
+       * Id: 6
+       */
+      CountMax: number; // INT32;
+    }
+
+    export interface Peripheral {
+      /**
+       * Variable  PWR_CR
+       * Id: 5
+       */
+      PWR_CR: number; // INT32;
     }
   }
 
   export type VariableByType = DataType.CountStatus &
     DataType.MySensors &
-    DataType.CountControl;
+    DataType.CountControl &
+    DataType.Peripheral;
   export type VariableKey = keyof DataType.CountStatus &
     DataType.MySensors &
-    DataType.CountControl;
+    DataType.CountControl &
+    DataType.Peripheral;
 
   export type BundleKey = keyof Bundles;
   export type BundleByType = Bundles;
@@ -140,6 +162,18 @@ export namespace SensorDemo {
      * Id: 3
      */
     Treshold: number; // INT32;
+
+    /**
+     * Variable  CountMax
+     * Id: 6
+     */
+    CountMax: number; // INT32;
+
+    /**
+     * Variable  PWR_CR
+     * Id: 5
+     */
+    PWR_CR: number; // INT32;
   }
 
   export interface Bundle {
@@ -148,6 +182,8 @@ export namespace SensorDemo {
     mySensors: BundleModel<SensorDemo.DataType.MySensors>;
 
     countControl: BundleModel<SensorDemo.DataType.CountControl>;
+
+    peripheral: BundleModel<SensorDemo.DataType.Peripheral>;
   }
 
   export interface Data {

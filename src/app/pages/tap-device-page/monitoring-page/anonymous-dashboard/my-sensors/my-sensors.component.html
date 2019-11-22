@@ -1,0 +1,49 @@
+<ion-content *ngIf="data">
+  <app-navigation-progress-bar></app-navigation-progress-bar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>Voltage_V</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <ion-item lines="none" style="display: flex;">
+              <div style="margin: auto;">
+                <monitoring-variable-value
+                  [lines]="'none'"
+                  [variable]="variables['Voltage_V']"
+                  [inputOptions]=""
+                  slot="end"
+                ></monitoring-variable-value>
+              </div>
+              <span class="variable-unit" slot="end">V</span>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>Temperature_C</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <ion-item lines="none" style="display: flex;">
+              <div style="margin: auto;">
+                <monitoring-variable-value
+                  [lines]="'none'"
+                  [variable]="variables['Temperature_C']"
+                  [inputOptions]=""
+                  slot="end"
+                ></monitoring-variable-value>
+              </div>
+              <span class="variable-unit" slot="end">°C</span>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
