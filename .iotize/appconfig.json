@@ -1,6 +1,6 @@
 {
     "version": {
-        "generator": "0.0.32"
+        "generator": "0.0.37"
     },
     "app": {
         "id": "com.iotize.app.sensordemo",
@@ -24,6 +24,11 @@
                 "title": "Device Info",
                 "icon": "information-circle",
                 "url": "/device/info"
+            },
+            {
+                "title": "About",
+                "icon": "help",
+                "url": "/about"
             },
             {
                 "title": "Supervision",
@@ -364,24 +369,6 @@
                                     "elements": [
                                         {
                                             "type": "CardLayout",
-                                            "title": "Counter value",
-                                            "content": [
-                                                {
-                                                    "editable": false,
-                                                    "type": "VariableText",
-                                                    "variable": "Count",
-                                                    "inputOptions": {
-                                                        "min": 10,
-                                                        "max": 255
-                                                    }
-                                                }
-                                            ],
-                                            "contentOptions": {
-                                                "class": "ion-no-padding"
-                                            }
-                                        },
-                                        {
-                                            "type": "CardLayout",
                                             "title": "LED",
                                             "content": [
                                                 {
@@ -487,7 +474,7 @@
                                                 {
                                                     "type": "TapVariableContext",
                                                     "variable": "Treshold",
-                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
+                                                    "content": "<ion-item><ion-text ion-text-center> My threshold is {{ ctx.value }} </ion-text></ion-item>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -511,24 +498,6 @@
                                     "elements": [
                                         {
                                             "type": "CardLayout",
-                                            "title": "Counter value",
-                                            "content": [
-                                                {
-                                                    "editable": true,
-                                                    "type": "VariableText",
-                                                    "variable": "Count",
-                                                    "inputOptions": {
-                                                        "min": 10,
-                                                        "max": 255
-                                                    }
-                                                }
-                                            ],
-                                            "contentOptions": {
-                                                "class": "ion-no-padding"
-                                            }
-                                        },
-                                        {
-                                            "type": "CardLayout",
                                             "title": "LED",
                                             "content": [
                                                 {
@@ -634,7 +603,7 @@
                                                 {
                                                     "type": "TapVariableContext",
                                                     "variable": "Treshold",
-                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
+                                                    "content": "<ion-item><ion-text ion-text-center> My threshold is {{ ctx.value }} </ion-text></ion-item>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -658,24 +627,6 @@
                                     "elements": [
                                         {
                                             "type": "CardLayout",
-                                            "title": "Counter value",
-                                            "content": [
-                                                {
-                                                    "editable": false,
-                                                    "type": "VariableText",
-                                                    "variable": "Count",
-                                                    "inputOptions": {
-                                                        "min": 10,
-                                                        "max": 255
-                                                    }
-                                                }
-                                            ],
-                                            "contentOptions": {
-                                                "class": "ion-no-padding"
-                                            }
-                                        },
-                                        {
-                                            "type": "CardLayout",
                                             "title": "LED",
                                             "content": [
                                                 {
@@ -781,7 +732,7 @@
                                                 {
                                                     "type": "TapVariableContext",
                                                     "variable": "Treshold",
-                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
+                                                    "content": "<ion-item><ion-text ion-text-center> My threshold is {{ ctx.value }} </ion-text></ion-item>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -805,24 +756,6 @@
                                     "elements": [
                                         {
                                             "type": "CardLayout",
-                                            "title": "Counter value",
-                                            "content": [
-                                                {
-                                                    "editable": false,
-                                                    "type": "VariableText",
-                                                    "variable": "Count",
-                                                    "inputOptions": {
-                                                        "min": 10,
-                                                        "max": 255
-                                                    }
-                                                }
-                                            ],
-                                            "contentOptions": {
-                                                "class": "ion-no-padding"
-                                            }
-                                        },
-                                        {
-                                            "type": "CardLayout",
                                             "title": "LED",
                                             "content": [
                                                 {
@@ -928,7 +861,7 @@
                                                 {
                                                     "type": "TapVariableContext",
                                                     "variable": "Treshold",
-                                                    "content": "<p> Threshold is set to {{ ctx.value || '---' }} ! </p>"
+                                                    "content": "<ion-item><ion-text ion-text-center> My threshold is {{ ctx.value }} </ion-text></ion-item>"
                                                 }
                                             ],
                                             "contentOptions": {
@@ -949,7 +882,7 @@
             },
             "AboutPage": {
                 "type": "AboutPage",
-                "enabled": false,
+                "enabled": true,
                 "projectPath": "pages/about",
                 "items": [
                     {
@@ -1073,23 +1006,6 @@
                 }
             ]
         },
-        "integration": [
-            {
-                "type": "FastlaneIntegration",
-                "android": {
-                    "enabled": true
-                },
-                "iOS": {
-                    "enabled": true,
-                    "appleId": "dev@iotize.com",
-                    "teamId": "J6Y8L9CLP8"
-                }
-            },
-            {
-                "type": "FirebaseIntegration",
-                "projectId": "sensor-demo-app-fbb73"
-            }
-        ],
         "defaultPage": "/connect"
     },
     "formMeta": {

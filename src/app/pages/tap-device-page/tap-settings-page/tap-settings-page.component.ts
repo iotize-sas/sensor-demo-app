@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { CurrentDeviceService, TapInfo, TapConfigItem } from "@iotize/ionic";
 import { ToastService } from "app-theme";
+import { HostProtocol } from "@iotize/device-client.js/device/model";
 
 @Component({
   selector: "tap-settings-page",
@@ -9,6 +10,12 @@ import { ToastService } from "app-theme";
   styleUrls: ["./tap-settings-page.component.scss"]
 })
 export class TapSettingsPageComponent implements OnInit {
+  protocolSections: {
+    title: string;
+    icon?: string;
+    items: TapConfigItem[];
+  }[] = [];
+
   public interfaceTapConfigItems = [
     {
       key: "appName",
@@ -114,9 +121,58 @@ export class TapSettingsPageComponent implements OnInit {
     private toastService: ToastService
   ) {}
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    this.tapService
+      .getKeyValue$(TapInfo.availableHostProtocols)
+      .subscribe((protocols: HostProtocol[]) => {
+        this.initHostProtocolsOptions(protocols);
+      });
+  }
 
   private onError(err: Error) {
     this.toastService.error(err);
+  }
+
+  initHostProtocolsOptions(availableHostProtocols: HostProtocol[]) {
+    this.protocolSections = [];
+    for (let protocol of availableHostProtocols) {
+      let icon: string | undefined = undefined;
+      let items: TapConfigItem[] = [
+        {
+          key: TapInfo.isHostProtocolAuthorized,
+          params: [protocol],
+          editable: true
+        }
+      ];
+      switch (protocol) {
+        case HostProtocol.BLE:
+          // icon = 'bluetooth';
+          items.push({
+            key: TapInfo.bleMacAddress
+          });
+          break;
+        case HostProtocol.WIFI:
+          // icon = 'wifi';
+          items.push(
+            {
+              key: TapInfo.wifiSSID,
+              editable: true
+            },
+            {
+              key: TapInfo.wifiPassword,
+              editable: true
+            }
+          );
+          break;
+        case HostProtocol.NFC:
+          // icon = 'src:assets/svg/nfc.svg';
+          break;
+      }
+      this.protocolSections.push({
+        title: HostProtocol[protocol].toString(),
+        items: items,
+        icon: icon
+      });
+    }
   }
 }

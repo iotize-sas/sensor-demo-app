@@ -1,0 +1,43 @@
+<ion-content *ngIf="data">
+  <app-navigation-progress-bar></app-navigation-progress-bar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>Count</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <div style="margin: auto;">
+              <monitoring-variable-value
+                [lines]="'none'"
+                [variable]="variables['Count']"
+                [inputOptions]=""
+                slot="end"
+              ></monitoring-variable-value>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header">
+            <ion-label>LEDStatus</ion-label>
+          </ion-item>
+          <ion-card-content>
+            <div style="margin: auto;">
+              <monitoring-variable-value
+                [lines]="'none'"
+                [variable]="variables['LEDStatus']"
+                [inputOptions]=""
+                slot="end"
+              ></monitoring-variable-value>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

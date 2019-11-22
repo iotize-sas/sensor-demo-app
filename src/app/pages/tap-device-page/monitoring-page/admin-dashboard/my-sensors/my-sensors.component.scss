@@ -1,0 +1,47 @@
+ion-card,
+ion-card ion-item,
+:host ::ng-deep ion-item {
+  text-align: center;
+}
+
+.variable-unit {
+  text-align: center !important;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+ion-card {
+  min-width: 200px;
+  --background: var(--ion-color-monitoring-background-contrast);
+  border-radius: 0px;
+}
+
+ion-content {
+  --background: var(--ion-color-monitoring-background);
+}
+
+ion-content ion-list > ion-card {
+  margin: 10px;
+}
+ion-content ion-grid > ion-row > ion-col > ion-card {
+  margin: 0px;
+}
+
+/*
+:host ::ng-deep ion-col.column-key ion-item .item-native, :host ::ng-deep ion-col.column-key ion-item {
+    height: 100%;
+}
+*/
+
+:host ::ng-deep ion-item ion-text {
+  width: 100%;
+}
+
+:host ::ng-deep .variable-value,
+:host ::ng-deep ion-input,
+:host ::ng-deep .variable-value ion-text,
+:host ::ng-deep ion-item ion-text {
+  font-size: 1.3em !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
