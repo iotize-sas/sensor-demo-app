@@ -161,4 +161,9 @@ export class AnonymousDashboardComponent implements OnInit, OnDestroy {
 
     return await modal.present();
   }
+
+  async changeDevice() {
+    await this.tapService.remove();
+    this.router.navigate(["/"]);
+  }
 }
