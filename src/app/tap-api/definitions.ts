@@ -69,22 +69,16 @@ export namespace SensorDemo {
 
     export interface CountControl {
       /**
-       * Variable  Period
-       * Id: 0
-       */
-      Period: number; // INT32;
-
-      /**
        * Variable  LEDConfig
        * Id: 13
        */
       LEDConfig: number; // UINT8;
 
       /**
-       * Variable  Treshold
-       * Id: 3
+       * Variable  Period
+       * Id: 0
        */
-      Treshold: number; // INT32;
+      Period: number; // INT32;
     }
   }
 
@@ -124,22 +118,16 @@ export namespace SensorDemo {
     Temperature_C: number; // FLOAT32;
 
     /**
-     * Variable  Period
-     * Id: 0
-     */
-    Period: number; // INT32;
-
-    /**
      * Variable  LEDConfig
      * Id: 13
      */
     LEDConfig: number; // UINT8;
 
     /**
-     * Variable  Treshold
-     * Id: 3
+     * Variable  Period
+     * Id: 0
      */
-    Treshold: number; // INT32;
+    Period: number; // INT32;
   }
 
   export interface Bundle {

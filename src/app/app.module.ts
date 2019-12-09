@@ -25,6 +25,7 @@ import {
   WifiScanner,
   ZeroConfScannerCordova
 } from "@iotize/device-com-wifi.cordova";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 if (environment.debug) {
   require("debug").enable(environment.debug);
@@ -41,7 +42,8 @@ if (environment.debug) {
     TapScannerNfcModule,
     TapScannerBleModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

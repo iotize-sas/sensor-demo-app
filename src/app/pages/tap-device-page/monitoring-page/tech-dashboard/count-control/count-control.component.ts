@@ -43,6 +43,29 @@ export class CountControlComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  LEDConfigButtons = [
+    {
+      label: "OFF",
+      icon: "",
+      disabled: false,
+      value: 0
+    },
+
+    {
+      label: "ON",
+      icon: "",
+      disabled: false,
+      value: 1
+    },
+
+    {
+      label: "AUTO",
+      icon: "",
+      disabled: false,
+      value: 2
+    }
+  ];
+
   async ngOnInit() {
     this.initComponents();
     this.tapService.tapChanged.subscribe((newTap: Tap) => {
@@ -91,5 +114,10 @@ export class CountControlComponent implements OnInit, OnDestroy {
 
   get isMonitoringRunning() {
     return this.data && this.data.isMonitoringRunning;
+  }
+
+  async changeDevice() {
+    await this.tapService.remove();
+    this.router.navigate(["/"]);
   }
 }

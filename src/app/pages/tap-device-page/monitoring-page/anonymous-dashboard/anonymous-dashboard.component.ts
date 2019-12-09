@@ -45,38 +45,6 @@ export class AnonymousDashboardComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  LEDStatusIsChecked?: Observable<boolean>;
-
-  Temperature_CChartData = [
-    {
-      stream: this.variables["Temperature_C"].monitor().values(),
-      label: "Temperature_C"
-    }
-  ];
-
-  LEDConfigButtons = [
-    {
-      label: "OFF",
-      icon: "",
-      disabled: true,
-      value: 0
-    },
-
-    {
-      label: "ON",
-      icon: "",
-      disabled: true,
-      value: 1
-    },
-
-    {
-      label: "AUTO",
-      icon: "",
-      disabled: true,
-      value: 2
-    }
-  ];
-
   async ngOnInit() {
     this.initComponents();
     this.tapService.tapChanged.subscribe((newTap: Tap) => {
@@ -108,16 +76,7 @@ export class AnonymousDashboardComponent implements OnInit, OnDestroy {
     this.startMonitor();
   }
 
-  public initComponents() {
-    this.LEDStatusIsChecked = this.variables["LEDStatus"]
-      .monitor()
-      .values()
-      .pipe(
-        map(value => {
-          return value !== 0;
-        })
-      );
-  }
+  public initComponents() {}
 
   ngOnDestroy() {
     this.connectionStateChangeSub.unsubscribe();

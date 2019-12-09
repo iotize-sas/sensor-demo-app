@@ -58,14 +58,6 @@ export const bundles = [
     name: "Count_Control",
     variables: [
       {
-        id: 0,
-        length: 1,
-        type: "INT32",
-        name: "Period",
-        converter: NumberConverter.int32Instance()
-      },
-
-      {
         id: 13,
         length: 1,
         type: "UINT8",
@@ -74,10 +66,10 @@ export const bundles = [
       },
 
       {
-        id: 3,
+        id: 0,
         length: 1,
         type: "INT32",
-        name: "Treshold",
+        name: "Period",
         converter: NumberConverter.int32Instance()
       }
     ]

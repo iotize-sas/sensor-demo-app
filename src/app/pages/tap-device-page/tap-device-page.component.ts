@@ -7,7 +7,9 @@ import {
   DeviceLoginComponent,
   ProtocolMeta,
   ProtocolFactoryService,
-  ChangePasswordComponent
+  ChangePasswordComponent,
+  TaskManagerService,
+  TaskManager
 } from "@iotize/ionic";
 import { Router } from "@angular/router";
 import { DEVICE_MENU } from "./tap-device-page.menu";
@@ -18,13 +20,7 @@ import {
 } from "@iotize/device-client.js/protocol/api";
 import { Dialogs } from "@ionic-native/dialogs/ngx";
 import { environment } from "src/environments/environment";
-import {
-  MenuItem,
-  ToastService,
-  AppNavigationService,
-  TaskManager,
-  TaskManagerService
-} from "app-theme";
+import { MenuItem, ToastService, AppNavigationService } from "app-theme";
 import getDebugger from "src/app/logger";
 import { filter, map } from "rxjs/operators";
 const debug = getDebugger("TapDevicePageComponent");
@@ -80,6 +76,16 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
     private dialogs: Dialogs,
     private taskManager: TaskManagerService
   ) {
+    this.tapLogoutTask = this.taskManager.createTask({
+      id: "tap-logout",
+      info: {
+        title: "Tap logout",
+        feedback: "Logout successful!"
+      },
+      exec: () => {
+        return this.tapService.logout(true);
+      }
+    });
     this.isAnonymous$ = this.tapService.isLoggedInAs$("anonymous");
   }
 
@@ -169,9 +175,9 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
   }
 
   clickProfileName() {
-    // if (this.tapService.tap.isConnected()) {
-    //   this.changePassword();
-    // }
+    if (this.tap.currentSessionState.name !== "anonymous") {
+      this.changePassword();
+    }
   }
 
   async login() {
@@ -189,7 +195,10 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
   async changePassword() {
     console.log("Show change password modal");
     const modal = await this.modalController.create({
-      component: ChangePasswordComponent
+      component: ChangePasswordComponent,
+      componentProps: {
+        askCurrentPassword: true
+      }
     });
     modal.present();
   }

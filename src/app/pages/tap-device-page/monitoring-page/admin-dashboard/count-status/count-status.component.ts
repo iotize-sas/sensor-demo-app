@@ -43,6 +43,8 @@ export class CountStatusComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  LEDStatusIsChecked?: Observable<boolean>;
+
   async ngOnInit() {
     this.initComponents();
     this.tapService.tapChanged.subscribe((newTap: Tap) => {
@@ -67,7 +69,16 @@ export class CountStatusComponent implements OnInit, OnDestroy {
     );
   }
 
-  public initComponents() {}
+  public initComponents() {
+    this.LEDStatusIsChecked = this.variables["LEDStatus"]
+      .monitor()
+      .values()
+      .pipe(
+        map(value => {
+          return value !== 0;
+        })
+      );
+  }
 
   ngOnDestroy() {
     this.connectionStateChangeSub.unsubscribe();
@@ -91,5 +102,10 @@ export class CountStatusComponent implements OnInit, OnDestroy {
 
   get isMonitoringRunning() {
     return this.data && this.data.isMonitoringRunning;
+  }
+
+  async changeDevice() {
+    await this.tapService.remove();
+    this.router.navigate(["/"]);
   }
 }

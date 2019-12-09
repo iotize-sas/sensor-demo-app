@@ -8,8 +8,6 @@ import { ConnectionStateFeedbackComponent } from "./connection-state-feedback/co
 import { NavigationProgressBarComponent } from "./navigation-progress-bar/navigation-progress-bar.component";
 import { SideMenuComponent } from "./side-menu/side-menu.component";
 import { RouterModule } from "@angular/router";
-import { TaskManagerUiModule } from "./task-manager-ui/task-manager-ui.module";
-import { TaskManagerService } from "./task-manager.service";
 
 @NgModule({
   declarations: [
@@ -28,8 +26,7 @@ import { TaskManagerService } from "./task-manager.service";
     ProgressBarStepComponent,
     ConnectionStateFeedbackComponent,
     NavigationProgressBarComponent,
-    SideMenuComponent,
-    TaskManagerUiModule
+    SideMenuComponent
   ],
   providers: [],
   imports: [CommonModule, IonicModule, RouterModule]

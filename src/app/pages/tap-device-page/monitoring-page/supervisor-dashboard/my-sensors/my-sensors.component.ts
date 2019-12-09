@@ -43,6 +43,13 @@ export class MySensorsComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  Temperature_CChartData = [
+    {
+      stream: this.variables["Temperature_C"].monitor().values(),
+      label: "Temperature_C"
+    }
+  ];
+
   async ngOnInit() {
     this.initComponents();
     this.tapService.tapChanged.subscribe((newTap: Tap) => {
@@ -91,5 +98,10 @@ export class MySensorsComponent implements OnInit, OnDestroy {
 
   get isMonitoringRunning() {
     return this.data && this.data.isMonitoringRunning;
+  }
+
+  async changeDevice() {
+    await this.tapService.remove();
+    this.router.navigate(["/"]);
   }
 }
