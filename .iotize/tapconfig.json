@@ -78,14 +78,6 @@
                     "id": 2,
                     "variables": [
                         {
-                            "address": "0x2000000c",
-                            "id": 0,
-                            "length": 1,
-                            "type": "INT32",
-                            "name": "Period",
-                            "unit": "ms"
-                        },
-                        {
                             "address": "0x20000009",
                             "id": 13,
                             "length": 1,
@@ -93,11 +85,12 @@
                             "name": "LEDConfig"
                         },
                         {
-                            "address": "0x20000014",
-                            "id": 3,
+                            "address": "0x2000000c",
+                            "id": 0,
                             "length": 1,
                             "type": "INT32",
-                            "name": "Treshold"
+                            "name": "Period",
+                            "unit": "ms"
                         }
                     ],
                     "acls": {
@@ -155,8 +148,8 @@
                 "url": "mqtt://user.cloud.iotize.com:1883"
             },
             "wifi": {
-                "mode": "PEER_TO_PEER",
-                "ssid": "IoTize",
+                "mode": "INFRASTRUCTURE_ONLY",
+                "ssid": "Sensor demo",
                 "wepKey": "ABCD1234"
             },
             "mqttRelay": {

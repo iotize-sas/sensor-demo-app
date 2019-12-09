@@ -1,43 +1,44 @@
 <ion-content *ngIf="data">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-card>
-          <ion-item lines="full" class="card-header">
-            <ion-label>Count</ion-label>
-          </ion-item>
-          <ion-card-content>
-            <div style="margin: auto;">
-              <monitoring-variable-value
-                [lines]="'none'"
-                [variable]="variables['Count']"
-                [inputOptions]=""
-                slot="end"
-              ></monitoring-variable-value>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+  <ion-list>
+    <ion-card>
+      <ion-item lines="full" class="card-header">
+        <ion-label>Counter value</ion-label>
+      </ion-item>
+      <ion-card-content class="ion-no-padding">
+        <div style="margin: auto;">
+          <monitoring-variable-value
+            [lines]="'none'"
+            [variable]="variables['Count']"
+            [inputOptions]='{
+    "min": 10,
+    "max": 255
+}'
+            slot="end"
+          ></monitoring-variable-value>
+        </div>
+      </ion-card-content>
+    </ion-card>
 
-      <ion-col>
-        <ion-card>
-          <ion-item lines="full" class="card-header">
-            <ion-label>LEDStatus</ion-label>
-          </ion-item>
-          <ion-card-content>
-            <div style="margin: auto;">
-              <monitoring-variable-value
-                [lines]="'none'"
-                [variable]="variables['LEDStatus']"
-                [inputOptions]=""
-                slot="end"
-              ></monitoring-variable-value>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-card>
+      <ion-item lines="full" class="card-header">
+        <ion-label>LED</ion-label>
+      </ion-item>
+      <ion-card-content class="ion-no-padding">
+        <ion-icon name="sunny" style="font-size: 5em;"></ion-icon>
+
+        <div>
+          OFF
+
+          <ion-toggle
+            [checked]="LEDStatusIsChecked | async"
+            disabled
+          ></ion-toggle>
+
+          ON
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>

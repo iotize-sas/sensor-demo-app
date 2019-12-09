@@ -1,88 +1,35 @@
 <ion-content *ngIf="data">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-card>
-          <ion-item lines="full" class="card-header">
-            <ion-label>Period</ion-label>
-          </ion-item>
-          <ion-card-content>
-            <ion-item lines="none" style="display: flex;">
-              <div style="margin: auto;">
-                <monitoring-variable-value
-                  [lines]="'none'"
-                  [variable]="variables['Period']"
-                  [inputOptions]=""
-                  slot="end"
-                  [editable]="true"
-                ></monitoring-variable-value>
-              </div>
-              <span class="variable-unit" slot="end">ms</span>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+  <ion-list>
+    <ion-card>
+      <ion-item lines="full" class="card-header">
+        <ion-label>LED mode</ion-label>
+      </ion-item>
+      <ion-card-content class="ion-no-padding">
+        <tap-variable-buttons
+          [buttons]="LEDConfigButtons"
+          [variable]="variables['LEDConfig']"
+        >
+        </tap-variable-buttons>
+      </ion-card-content>
+    </ion-card>
 
-      <ion-col>
-        <ion-card>
-          <ion-item lines="full" class="card-header">
-            <ion-label>LEDConfig</ion-label>
-          </ion-item>
-          <ion-card-content>
-            <div style="margin: auto;">
-              <monitoring-variable-value
-                [lines]="'none'"
-                [variable]="variables['LEDConfig']"
-                [inputOptions]=""
-                slot="end"
-                [editable]="true"
-              ></monitoring-variable-value>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col>
-        <ion-card>
-          <ion-item lines="full" class="card-header">
-            <ion-label>Treshold</ion-label>
-          </ion-item>
-          <ion-card-content>
-            <div style="margin: auto;">
-              <monitoring-variable-value
-                [lines]="'none'"
-                [variable]="variables['Treshold']"
-                [inputOptions]=""
-                slot="end"
-                [editable]="true"
-              ></monitoring-variable-value>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-card>
-          <ion-item lines="full" class="card-header">
-            <ion-label>CountMax</ion-label>
-          </ion-item>
-          <ion-card-content>
-            <div style="margin: auto;">
-              <monitoring-variable-value
-                [lines]="'none'"
-                [variable]="variables['CountMax']"
-                [inputOptions]=""
-                slot="end"
-                [editable]="true"
-              ></monitoring-variable-value>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-card>
+      <ion-item lines="full" class="card-header">
+        <ion-label>LED blink period (ms)</ion-label>
+      </ion-item>
+      <ion-card-content class="ion-no-padding">
+        <tap-variable-range
+          [editable]="true"
+          [variable]="variables['Period']"
+          pin="true"
+          snaps="true"
+          min="0"
+          max="100"
+          step="2"
+        ></tap-variable-range>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
