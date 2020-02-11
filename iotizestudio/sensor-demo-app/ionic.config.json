@@ -1,7 +1,0 @@
-{
-  "name": "iotize",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
