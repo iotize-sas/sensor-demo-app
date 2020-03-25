@@ -52,7 +52,7 @@
                             "length": 1,
                             "type": "FLOAT32",
                             "name": "Voltage_V",
-                            "unit": "V"
+                            "unit": "Volts"
                         },
                         {
                             "address": "0x20000018",
@@ -96,7 +96,7 @@
                     "acls": {
                         "anonymous": {
                             "read": true,
-                            "write": false
+                            "write": true
                         },
                         "tech": {
                             "read": true,
@@ -149,12 +149,12 @@
             },
             "wifi": {
                 "mode": "INFRASTRUCTURE_ONLY",
-                "ssid": "Sensor demo",
-                "wepKey": "ABCD1234"
+                "ssid": "IOTIZE-PRIVATE",
+                "wepKey": "*Iotize_38330_Iotize?"
             },
             "mqttRelay": {
                 "url": "mqtt://user.cloud.iotize.com:1883",
-                "key": "IoTize00410000000D_0000000000��",
+                "key": "%%UID%%",
                 "netKey": "testnetkey"
             },
             "security": {
@@ -165,7 +165,9 @@
                 "resourceFactory": false
             },
             "powerOptimization": "NO",
-            "availableHostProtocols": "ALL",
+            "availableHostProtocols": [
+                "FFFF"
+            ],
             "hostInactivityPeriod": 30,
             "hashIterationCount": 5000,
             "nfcPairingMode": "NO"

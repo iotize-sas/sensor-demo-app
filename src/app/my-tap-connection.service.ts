@@ -1,26 +1,33 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { concat, tap, share } from "rxjs/operators";
 import {
   ProtocolMeta,
   TapConnectionService,
   TagDiscoveredEvent,
   NfcService,
-  tagEventToProtocolMetaNFC,
+  tagToProtocolMetaNFC,
+  RecoverableTapStateEvent,
   CurrentDeviceService,
   TapConnectionOptions
 } from "@iotize/ionic";
 import { of, Observable } from "rxjs";
+import { Platform } from "@ionic/angular";
 import { ToastService, AppNavigationService, LoaderService } from "app-theme";
 import getDebugger from "src/app/logger";
 import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
+import { EncryptionKeys } from "@iotize/device-client.js/device";
+import { FormatHelper } from "@iotize/device-client.js/core";
+
+import { NdefTag } from "@iotize/device-com-nfc.cordova";
+
 const debug = getDebugger("MyTapConnectionService");
 
 @Injectable({
   providedIn: "root"
 })
 export class MyTapConnectionService {
-  _nfcEvent: TagDiscoveredEvent;
+  _ndefTag: NdefTag;
 
   private deviceHomeUrl = "/device";
 
@@ -30,65 +37,97 @@ export class MyTapConnectionService {
     public tapService: CurrentDeviceService,
     public appNav: AppNavigationService,
     public loaderService: LoaderService,
+    public platform: Platform,
+    @Inject("TapConnectionOptions") public connectOptions: TapConnectionOptions,
     public router: Router,
     public nfcService: NfcService
   ) {}
 
-  async listenToNfcTaps(): Promise<void> {
-    debug("listenToNfcTaps");
-    await this.nfcService.setupNdefListener();
-    debug("setupNdefListener OK");
-    await this.nfcService.setupMimeTypeListener(environment.nfcMimeType);
-    debug("setupMimeTypeListener OK");
-    this.nfcService.listen().subscribe((event: TagDiscoveredEvent) => {
-      this.onNfcDiscoveredEvent(event);
-    });
-  }
-
   connectWithLoader(
     meta: ProtocolMeta,
-    options: TapConnectionOptions = {
-      switchProtocol: true,
-      refreshSessionState: true
-    }
+    options: TapConnectionOptions = this.connectOptions
   ): Observable<any> {
-    let obs = this.tapConnectionService.connect(meta, options).pipe(
-      concat(of("Loading application...")),
-      concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000)),
-      tap({
-        error: (err: Error) => {
-          debug("Error while loading", err);
-          this.toastService.error(err);
-        }
-      }),
-      share()
-    );
+    debug("connectWithLoader ", meta, options);
+    let obs = this.tapConnectionService
+      .connect(meta as any, options)
+      .pipe(
+        concat(of("Loading application...")),
+        concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000)),
+        share()
+      );
     this.loaderService
       .addTask({
         message: `Loading device (${meta.type})...`,
         stream: obs
       })
       .catch(err => {
-        debug("Loading error", err);
-        this.toastService.error(err);
+        console.error("Loading error", err);
+        if (err.message) {
+          this.toastService.error({
+            message: err.message
+          });
+        }
       });
     return obs;
   }
 
-  async onNfcDiscoveredEvent(event: TagDiscoveredEvent) {
+  async listenToNfcTaps(): Promise<void> {
+    // Android nfc plugin is able to enable and perform NFC pairing
+    // This is faster as NFC pairing is done directly in the native part
+    // However it does not work well with energy harvesting
+    if (this.platform.is("android")) {
+      this.nfcService.tapDevices().subscribe(event => {
+        if (!event.tag || !event.tap) {
+          debug("Skip invalid Tap event. ", event);
+          return;
+        }
+        debug(`Tap event: `, event);
+        this.onTapDeviceDiscovered(event);
+      });
+      await this.nfcService.setupTapDeviceListener();
+      debug("setupTapDeviceListener OK");
+    } else {
+      this.nfcService.events().subscribe((event: TagDiscoveredEvent) => {
+        this.onNfcDiscoveredEvent(event.tag);
+      });
+      await this.nfcService.setupNdefListener();
+      debug("setupNdefListener OK");
+      await this.nfcService.setupMimeTypeListener(environment.nfcMimeType);
+      debug("setupMimeTypeListener OK");
+    }
+  }
+
+  async onNfcTapDiscoveredEvent(event: any) {
     if (!event.tag) {
-      debug("Ignoring NFC event", event);
+      debug("Ignoring NFC event, no nfc tag given", event);
       return;
     }
-    if (this._nfcEvent) {
+    if (!event.tap) {
+      debug("Ignoring tap event, no Tap given", event);
+      return;
+    }
+
+    let protocolMeta = tagToProtocolMetaNFC(event.tagDiscovered);
+
+    await this.connectWithLoader(protocolMeta, {
+      switchProtocol: true
+    }).toPromise();
+  }
+
+  async connectWithNfcTag(
+    tag: NdefTag,
+    connectOptions: TapConnectionOptions = this.connectOptions
+  ) {
+    if (this._ndefTag) {
       debug("Already loading event");
-      return;
+      throw new Error("Please wait, already loading Tap from NFC");
     }
-    this._nfcEvent = event;
     try {
+      this._ndefTag = tag;
+      let nfcProtocolMeta = tagToProtocolMetaNFC(tag);
       if (this.tapService.hasTap) {
         let currentProtocolMeta = this.tapService.protocolMeta;
-        let isSameTag = await this.tapService.isSameTag(event);
+        let isSameTag = await this.tapService.isSameTag(tag);
         if (isSameTag) {
           debug("Same NFC tag");
           if (currentProtocolMeta.type === "nfc") {
@@ -96,8 +135,7 @@ export class MyTapConnectionService {
             await this.tapService.connect();
           } else {
             debug(`Taping the same device, we switch to NFC `);
-            let meta = tagEventToProtocolMetaNFC(event);
-            await this.tapService.useProtocolFromMeta(meta);
+            await this.tapService.useProtocolFromMeta(nfcProtocolMeta);
           }
           if (!this.router.url.startsWith(this.deviceHomeUrl)) {
             await this.appNav
@@ -106,32 +144,79 @@ export class MyTapConnectionService {
           }
         } else {
           debug("Different NFC tag");
-          await this.tapService.remove();
-          await this.connectWithLoader(tagEventToProtocolMetaNFC(event), {
-            switchProtocol: true
-          }).toPromise();
+          await this.connectWithLoader(
+            nfcProtocolMeta,
+            connectOptions
+          ).toPromise();
         }
       } else {
-        debug("New NFC event", event);
-        await this.connectWithLoader(tagEventToProtocolMetaNFC(event), {
-          switchProtocol: true
-        }).toPromise();
+        debug("New NFC event", tag);
+        await this.connectWithLoader(
+          nfcProtocolMeta,
+          connectOptions
+        ).toPromise();
       }
-      if (this.tapService.protocolMeta.type != "nfc") {
-        await this.toastService.success({
-          message: `You are now connected with ${this.tapService.protocolMeta.type}`
-        });
-      }
+      this._ndefTag = undefined;
     } catch (err) {
-      console.warn("Tap connection service error: ", err);
-      this.toastService
-        .error({
-          message: err.message || `Unknown error while connecting to tap`
-        })
-        .catch((err: Error) => {
-          console.warn(err);
-        });
+      this._ndefTag = undefined;
+      throw err;
     }
-    this._nfcEvent = undefined;
   }
+
+  async onNfcDiscoveredEvent(
+    tag: NdefTag,
+    connectOptions: TapConnectionOptions = this.connectOptions
+  ) {
+    try {
+      await this.connectWithNfcTag(tag, connectOptions);
+    } catch (err) {
+      debug("Tap connection service error: ", err);
+    }
+  }
+
+  private async onTapDeviceDiscovered(event: RecoverableTapStateEvent) {
+    debug("onTapDeviceDiscovered", event);
+    let tapState = event.tap;
+
+    let connectionOptions: TapConnectionOptions = {
+      encryption: {
+        enabled: tapState.encryption ? tapState.encryption.enabled : undefined,
+        keys: parseKeys(
+          tapState.encryption ? tapState.encryption.keys : undefined
+        ),
+        frameCounter: tapState.encryption.frameCounter
+      },
+      nfcPairing: !tapState.nfcPairingDone && this.connectOptions.nfcPairing,
+      refreshSessionState: this.connectOptions.refreshSessionState,
+      switchProtocol: this.connectOptions.switchProtocol
+    };
+
+    try {
+      await this.connectWithNfcTag(event.tag, connectionOptions);
+    } catch (err) {
+      debug("Tap connection service error: ", err);
+    }
+  }
+}
+
+function parseKeys(
+  keys?: EncryptionKeys & {
+    sessionKeyHex?: string;
+    ivEncodeHex?: string;
+    ivDecodeHex?: string;
+  }
+) {
+  if (!keys) {
+    return undefined;
+  }
+  if (keys.sessionKeyHex) {
+    keys.sessionKey = FormatHelper.hexStringToBuffer(keys.sessionKeyHex);
+  }
+  if (keys.ivEncodeHex) {
+    keys.ivEncode = FormatHelper.hexStringToBuffer(keys.ivEncodeHex);
+  }
+  if (keys.ivDecodeHex) {
+    keys.ivDecode = FormatHelper.hexStringToBuffer(keys.ivDecodeHex);
+  }
+  return keys;
 }

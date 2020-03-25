@@ -45,7 +45,7 @@ export class TapConnectSocketTabComponent implements OnInit {
     this.infraDevices = this.wifiScanner.results.pipe(
       map(devices => {
         return devices.filter(device => {
-          debug("Filtering wifi device", device);
+          debug("Filtering Wi-Fi device", device);
           return device.SSID ? device.SSID.match(/_[0-9A-Fa-f]{5}$/) : false;
         });
       })

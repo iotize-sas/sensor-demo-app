@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { DeviceAuthGuard } from "@iotize/ionic";
+import { DeviceAuthGuard } from "@iotize/ionic/auth";
 import { TapSettingsPageComponent } from "./tap-settings-page.component";
 
 const routes: Routes = [

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { TapConfigModule } from "@iotize/ionic";
+import { TapConfigModule } from "@iotize/ionic/config";
 import { AppThemeModule } from "app-theme";
 import { TapSettingsPageRoutingModule } from "./tap-settings-page-routing.module";
 import { TapSettingsPageComponent } from "./tap-settings-page.component";

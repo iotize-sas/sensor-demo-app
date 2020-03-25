@@ -12,10 +12,12 @@ describe("create app snapshots", () => {
     page.navigateToScan();
     await takeScreenshot("scan-page");
   });
+
   it("should take home device info snapshot", async () => {
     page.navigateToDeviceInfo();
     await takeScreenshot("device-info-page");
   });
+
   it("should take home device monitoring page snapshot", async () => {
     page.navigateToMonitoring();
     await takeScreenshot("monitoring");

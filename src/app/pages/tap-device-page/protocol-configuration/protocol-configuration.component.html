@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Target settings
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-navigation-progress-bar></app-navigation-progress-bar>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Serial settings
+      </ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <tap-protocol-configuration-form
+        [fields]="SERIAL_SETTINGS_FIELDS"
+      ></tap-protocol-configuration-form>
+    </ion-list>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <app-task-manager [task]="'apply-serial-settings'" #taskManagerComponent>
+    <app-task-manager-action>
+      <ion-toolbar>
+        <ion-button
+          size="small"
+          (click)="taskManagerComponent.execTask('refresh')"
+          fill="clear"
+          slot="start"
+        >
+          <ion-icon name="refresh"></ion-icon>
+        </ion-button>
+        <ion-button
+          size="small"
+          (click)="discardChanges()"
+          color="danger"
+          fill="clear"
+          slot="start"
+          *ngIf="protocolSettings.hasChanges()"
+        >
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+        <ion-button
+          size="small"
+          (click)="taskManagerComponent.execTask('write')"
+          button-sm
+          slot="end"
+          [disabled]="!protocolSettings.hasChanges()"
+        >
+          <ion-icon name="save"></ion-icon>
+          Configure
+        </ion-button>
+        <ion-button
+          size="small"
+          (click)="taskManagerComponent.execTask('set')"
+          slot="end"
+          [disabled]="!protocolSettings.hasChanges()"
+        >
+          <ion-icon name="save"></ion-icon>
+          Apply
+        </ion-button>
+      </ion-toolbar>
+    </app-task-manager-action>
+    <app-task-manager-delayed>
+      <ion-toolbar>
+        <ion-icon color="warning" name="alert"></ion-icon>
+        <ion-text
+          color="warning"
+          class="ion-text-wrap"
+          *ngIf="taskManagerComponent.taskContainer.meta.error"
+        >
+          {{taskManagerComponent.taskContainer.task.info.title}} is delayed. {{
+          taskManagerComponent.explainDelayReason()}}
+        </ion-text>
+        <ion-button
+          (click)="taskManagerComponent.cancelTask()"
+          slot="end"
+          color="warning"
+          fill="clear"
+        >
+          <ion-icon name="close"></ion-icon>
+          Cancel
+        </ion-button>
+      </ion-toolbar>
+    </app-task-manager-delayed>
+    <app-task-manager-running>
+      <ion-toolbar>
+        <ion-spinner slot="end" name="lines-small"></ion-spinner>
+      </ion-toolbar>
+    </app-task-manager-running>
+  </app-task-manager>
+</ion-footer>

@@ -1,7 +1,6 @@
 import { createWriteStream } from "fs";
 import { browser } from "protractor";
 
-// abstract writing screen shot to a file
 export function writeScreenShot(data: any, filename: string) {
   var stream = createWriteStream(filename);
   stream.write(new Buffer(data, "base64"));

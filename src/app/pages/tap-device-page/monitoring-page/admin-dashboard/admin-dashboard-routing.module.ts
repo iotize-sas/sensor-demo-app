@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AdminDashboardComponent } from "./admin-dashboard.component";
 import { AdminDashboardChildrenRoutes } from "./admin-dashboard-routes";
-import { DeviceAuthGuard } from "@iotize/ionic";
+import { DeviceAuthGuard } from "@iotize/ionic/auth";
 
 const routes: Routes = [
   {

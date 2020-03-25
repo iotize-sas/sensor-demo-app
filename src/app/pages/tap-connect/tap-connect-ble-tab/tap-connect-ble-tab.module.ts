@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { TapConnectBleTabComponent } from "./connect-ble.component";
 import { RouterModule } from "@angular/router";
-import { TapConnectBleModule, TapDeviceAngularModule } from "@iotize/ionic";
+import { TapConnectBleModule } from "@iotize/ionic";
 import { AppThemeModule } from "app-theme";
 
 @NgModule({

@@ -20,38 +20,6 @@ export class TapSettingsPageComponent implements OnInit {
     {
       key: "appName",
       editable: true
-    },
-    {
-      key: "protocolHostInactivityPeriod",
-      editable: true
-    }
-  ];
-  public mqttRelayConfigItems = [
-    {
-      key: "MqttRelayEndpoint",
-      editable: true,
-      title: "Endpoint"
-    },
-    {
-      key: "MqttRelayPassword",
-      editable: true,
-      title: "Password"
-    }
-  ];
-  public cloudConfigItems = [
-    {
-      key: "CloudEndpoint",
-      editable: true,
-      title: "Endpoint"
-    },
-    {
-      key: "CloudKey",
-      editable: true,
-      title: "Password"
-    },
-    {
-      key: "CloudUploadPeriod",
-      editable: true
     }
   ];
   public profile_adminConfigItem = [
@@ -121,58 +89,9 @@ export class TapSettingsPageComponent implements OnInit {
     private toastService: ToastService
   ) {}
 
-  async ngOnInit() {
-    this.tapService
-      .getKeyValue$(TapInfo.availableHostProtocols)
-      .subscribe((protocols: HostProtocol[]) => {
-        this.initHostProtocolsOptions(protocols);
-      });
-  }
+  async ngOnInit() {}
 
   private onError(err: Error) {
     this.toastService.error(err);
-  }
-
-  initHostProtocolsOptions(availableHostProtocols: HostProtocol[]) {
-    this.protocolSections = [];
-    for (let protocol of availableHostProtocols) {
-      let icon: string | undefined = undefined;
-      let items: TapConfigItem[] = [
-        {
-          key: TapInfo.isHostProtocolAuthorized,
-          params: [protocol],
-          editable: true
-        }
-      ];
-      switch (protocol) {
-        case HostProtocol.BLE:
-          // icon = 'bluetooth';
-          items.push({
-            key: TapInfo.bleMacAddress
-          });
-          break;
-        case HostProtocol.WIFI:
-          // icon = 'wifi';
-          items.push(
-            {
-              key: TapInfo.wifiSSID,
-              editable: true
-            },
-            {
-              key: TapInfo.wifiPassword,
-              editable: true
-            }
-          );
-          break;
-        case HostProtocol.NFC:
-          // icon = 'src:assets/svg/nfc.svg';
-          break;
-      }
-      this.protocolSections.push({
-        title: HostProtocol[protocol].toString(),
-        items: items,
-        icon: icon
-      });
-    }
   }
 }

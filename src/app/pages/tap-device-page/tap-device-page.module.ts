@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { TapDevicePageComponent } from "./tap-device-page.component";
 import { TapDevicePageRoutingModule } from "./tap-device-page-routing.module";
-import { TapAuthModule, TaskManagerUiModule } from "@iotize/ionic";
+import { TaskManagerUiModule } from "@iotize/ionic";
+import { TapAuthModule } from "@iotize/ionic/auth";
 import { AppThemeModule } from "app-theme";
 
 @NgModule({

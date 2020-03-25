@@ -14,7 +14,7 @@ import { AppThemeModule } from "app-theme";
         children: [
           {
             path: "",
-            redirectTo: "ble",
+            redirectTo: "mqtt",
             pathMatch: "full"
           },
           {
@@ -31,6 +31,11 @@ import { AppThemeModule } from "app-theme";
             path: "socket",
             loadChildren:
               "./tap-connect-socket-tab/tap-connect-socket-tab.module#TapConnectSocketTabModule"
+          },
+          {
+            path: "mqtt",
+            loadChildren:
+              "./tap-connect-mqtt-tab/tap-connect-mqtt-tab.module#TapConnectMqttTabModule"
           }
         ]
       }

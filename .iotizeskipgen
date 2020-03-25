@@ -3,5 +3,6 @@ README.md
 package.json
 package-lock.json
 .iotizeskipgen
-
+ngsw-config.json
 fastlane/metadata/android/
+.env

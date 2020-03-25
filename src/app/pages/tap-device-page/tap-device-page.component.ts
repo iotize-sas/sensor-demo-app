@@ -4,13 +4,13 @@ import {
   CurrentDeviceService,
   TapInfo,
   LONG_RANGE_PROTOCOL_FILTER,
-  DeviceLoginComponent,
   ProtocolMeta,
   ProtocolFactoryService,
-  ChangePasswordComponent,
   TaskManagerService,
   TaskManager
 } from "@iotize/ionic";
+import { ChangePasswordComponent } from "@iotize/ionic/auth";
+import { DeviceLoginComponent } from "@iotize/ionic/auth";
 import { Router } from "@angular/router";
 import { DEVICE_MENU } from "./tap-device-page.menu";
 import { Observable, Subscription } from "rxjs";

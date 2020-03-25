@@ -1,34 +1,60 @@
 <ion-content *ngIf="data">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
-  <ion-list>
-    <ion-card>
-      <ion-item lines="full" class="card-header">
-        <ion-label>Vcc</ion-label>
-      </ion-item>
-      <ion-card-content class="ion-no-padding">
-        <monitoring-gauge-card
-          [input]="variables['Voltage_V'].monitor().values()"
-          [max]="4"
-          [min]="2"
-          units="V"
-          digitsInfo="1.2-2"
-        >
-        </monitoring-gauge-card>
-      </ion-card-content>
-    </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header" color="dark">
+            <ion-icon name="flash" slot="start"></ion-icon>
+            <ion-label>Vcc</ion-label>
+          </ion-item>
 
-    <ion-card>
-      <ion-item lines="full" class="card-header">
-        <ion-label>Processor temperature</ion-label>
-      </ion-item>
-      <ion-card-content class="ion-no-padding">
-        <monitoring-chart-card
-          [input]="Temperature_CChartData"
-          xaxislabel="Temperature_C"
-          [showLegend]="false"
-        ></monitoring-chart-card>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+          <ion-card-content>
+            <monitoring-gauge-card
+              [input]="variables['Voltage_V'].monitor().values()"
+              [max]="100"
+              [min]="0"
+              [valueFormatting]="Voltage_VValueFormatting"
+              units="Volts"
+              digitsInfo="1.2-2"
+              alias="Vcc"
+              [legend]="false"
+            >
+            </monitoring-gauge-card>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header" color="dark">
+            <ion-icon name="thermometer" slot="start"></ion-icon>
+            <ion-label>Processor temperature</ion-label>
+          </ion-item>
+
+          <ion-card-content>
+            <ion-item lines="none" style="display: flex;">
+              <div style="margin: auto;">
+                <monitoring-variable-value
+                  [lines]="'none'"
+                  [variable]="variables['Temperature_C']"
+                  [inputOptions]='{
+    "min": 0,
+    "max": 100
+}'
+                  [valueStyle]="{'font-size': '3em'}"
+                  [valueFormatting]="Temperature_CValueFormatting"
+                  slot="end"
+                  digitsInfo="1.1-1"
+                >
+                </monitoring-variable-value>
+              </div>
+              <span class="variable-unit" slot="end">°C</span>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
