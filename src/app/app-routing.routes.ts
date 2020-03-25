@@ -7,6 +7,10 @@ export const routes: Routes = [
       "src/app/pages/tap-device-page/tap-device-page.module#TapDevicePageModule"
   },
   {
+    path: "about",
+    loadChildren: "src/app/pages/about/about.module#AboutModule"
+  },
+  {
     path: "connect",
     loadChildren:
       "src/app/pages/tap-connect/tap-connect.module#TapConnectModule"

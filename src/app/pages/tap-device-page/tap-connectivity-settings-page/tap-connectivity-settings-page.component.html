@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Connectivity settings
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="refresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <tap-connection-state-feedback></tap-connection-state-feedback>
+
+  <ng-template #warningProtocol>
+    <app-feedback
+      color="danger"
+      message="You are connected to the Tap with {{ hostProtocolString$ | async }}. You may loose connection when rebooting Tap if you change these settings."
+    ></app-feedback>
+  </ng-template>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name=""></ion-icon>
+        General
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <tap-config-list
+        [items]="generalConfig"
+        [itemRefresh]="true"
+        [globalRefresh]="false"
+      ></tap-config-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="wifiConfigs">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="wifi"></ion-icon>
+        Wifi
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content
+      *ngIf="(isCurrentProtocol(TYPES.HostProtocol.WIFI) | async)"
+    >
+      <ng-container *ngTemplateOutlet="warningProtocol"></ng-container>
+    </ion-card-content>
+    <ion-card-content>
+      <tap-config-list
+        [items]="wifiConfigs"
+        [itemRefresh]="true"
+        [globalRefresh]="false"
+      ></tap-config-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="bluetoothConfig">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="bluetooth"></ion-icon>
+        BLE
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content
+      *ngIf="(isCurrentProtocol(TYPES.HostProtocol.BLE) | async)"
+    >
+      <ng-container *ngTemplateOutlet="warningProtocol"></ng-container>
+    </ion-card-content>
+    <ion-card-content>
+      <tap-config-list
+        [items]="bluetoothConfig"
+        [itemRefresh]="true"
+        [globalRefresh]="false"
+      ></tap-config-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="nfcConfig">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon src="assets/svg/nfc.svg"></ion-icon>
+        NFC
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <tap-config-list
+        [items]="nfcConfig"
+        [itemRefresh]="true"
+        [globalRefresh]="false"
+      ></tap-config-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="mqttConfig">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="cloud"></ion-icon>
+        MQTT
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <tap-config-list
+        [items]="mqttConfig"
+        [itemRefresh]="true"
+        [globalRefresh]="false"
+      ></tap-config-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-segment>
+    <ion-segment-button
+      [disabled]="disableRebootButton$ | async"
+      color="warning"
+      (click)="rebootTap()"
+    >
+      <ion-icon name="power"></ion-icon>
+      <ion-label>Reboot</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>

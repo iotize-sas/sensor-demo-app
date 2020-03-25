@@ -1,0 +1,32 @@
+<ion-content *ngIf="data">
+  <app-navigation-progress-bar></app-navigation-progress-bar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-row class="ion-no-padding">
+          <ion-col class="column-key ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding ion-text-center"
+              ><ion-label class="ion-text-wrap">Treshold</ion-label></ion-item
+            >
+          </ion-col>
+          <ion-col class="column-value ion-no-padding" size-xs="12" size-sm="6">
+            <div style="margin: auto;">
+              <monitoring-variable-value
+                [lines]="'none'"
+                [variable]="variables['Treshold']"
+                [inputOptions]='{
+    "min": 0,
+    "max": 100
+}'
+                [valueStyle]="{'font-size': '2em'}"
+                slot="end"
+              >
+              </monitoring-variable-value>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { TechDashboardComponent } from "./tech-dashboard.component";
 import { TechDashboardChildrenRoutes } from "./tech-dashboard-routes";
-import { DeviceAuthGuard } from "@iotize/ionic";
+import { DeviceAuthGuard } from "@iotize/ionic/auth";
 
 const routes: Routes = [
   {

@@ -39,6 +39,11 @@ fastlane/report.xml
 
 .env
 
+.iotize/*.cloud
+.iotize/*.izsc
+.iotize/*.xml
+.iotize/*.brk
+
 iotizestudio/*.cloud
 iotizestudio/*.izsc
 iotizestudio/*.xml

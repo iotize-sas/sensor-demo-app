@@ -9,6 +9,9 @@ import {
   WebViewComProtocol
 } from "@iotize/device-com-webview.js";
 
+import { MqttRelayProtocolFactory } from "@iotize/device-com-mqtt.js";
+import { IClientOptions, MqttClient, connect } from "mqtt";
+
 import { DeviceScanner } from "@iotize/device-client.js/device/scanner/device-scanner";
 import { WifiComProtocol } from "@iotize/device-com-wifi.cordova";
 import { CordovaSocketProtocol } from "@iotize/device-com-socket.cordova";
@@ -16,6 +19,7 @@ import {
   ProtocolMetaNfc,
   ProtocolMetaWifi,
   ProtocolMetaSocket,
+  ProtocolMetaMqtt,
   ProtocolMetaBle,
   ProtocolMetaWebview
 } from "@iotize/ionic";
@@ -51,7 +55,7 @@ export const PROTOCOL_FACTORY_CONFIG = {
         const url = parseUrl(options.socket.url);
         if (!url.hostname || url.hostname === "0.0.0.0") {
           throw new Error(
-            `Invalid host name "${url.hostname}". Make sure your tap is properly connected to the network`
+            `Invalid host name "${url.hostname}". Make sure your Tap is properly connected to the network`
           );
         }
         debug("Parse url", options.socket.url, url);
@@ -80,6 +84,22 @@ export const PROTOCOL_FACTORY_CONFIG = {
     }
   },
 
+  mqtt: function(meta: ProtocolMetaMqtt) {
+    let protocol = MqttRelayProtocolFactory.create(
+      (brokerUrl?: string | any, options?: IClientOptions): MqttClient => {
+        // Uncommenting this line make app error as library need process global variable
+        // It can be fix with ./polyfill.ts but it will crash monaco editor...
+        return connect(brokerUrl, options);
+        // throw new Error(`Not implemented`)
+      },
+      meta.info.username,
+      meta.info.password,
+      meta.info.netkey || "testnetkey",
+      meta.info.endpoint
+    );
+    return protocol;
+  },
+
   websocket: function(
     meta: ProtocolMetaSocket,
     platform: Platform
@@ -95,7 +115,7 @@ export const PROTOCOL_FACTORY_CONFIG = {
     bleScanner: DeviceScanner<any>
   ): Promise<ComProtocol> {
     if (platform.is("ios")) {
-      debug("Create ble protocol for IOS", meta);
+      debug("Create BLE protocol for IOS", meta);
       if (!meta.info.id) {
         if (meta.info.name) {
           let obs = await bleScanner.results.pipe(

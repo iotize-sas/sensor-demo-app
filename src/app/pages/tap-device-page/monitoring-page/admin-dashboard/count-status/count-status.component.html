@@ -1,42 +1,40 @@
 <ion-content *ngIf="data">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
-  <ion-list>
-    <ion-card>
-      <ion-item lines="full" class="card-header">
-        <ion-label>Counter value</ion-label>
-      </ion-item>
-      <ion-card-content class="ion-no-padding">
-        <div style="margin: auto;">
-          <monitoring-variable-value
-            [lines]="'none'"
-            [variable]="variables['Count']"
-            [inputOptions]='{
-    "min": 10,
-    "max": 255
-}'
-            slot="end"
-            [editable]="true"
-          ></monitoring-variable-value>
-        </div>
-      </ion-card-content>
-    </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <monitoring-gauge-card
+          [input]="variables['Count'].monitor().values()"
+          [max]="100"
+          [min]="0"
+          units=""
+          alias="Counter value"
+          [legend]="true"
+        >
+        </monitoring-gauge-card>
+      </ion-col>
 
-    <ion-card>
-      <ion-item lines="full" class="card-header">
-        <ion-label>LED</ion-label>
-      </ion-item>
-      <ion-card-content class="ion-no-padding">
-        <ion-icon name="sunny" style="font-size: 5em;"></ion-icon>
+      <ion-col>
+        <ion-card>
+          <ion-item lines="full" class="card-header" color="secondary">
+            <ion-icon name="sunny" slot="start"></ion-icon>
+            <ion-label>LED</ion-label>
+          </ion-item>
 
-        <div>
-          OFF
+          <ion-card-content>
+            <tap-variable-buttons
+              [buttons]="LEDStatusButtons"
+              [variable]="variables['LEDStatus']"
+            >
+            </tap-variable-buttons>
+          </ion-card-content>
 
-          <ion-toggle [checked]="LEDStatusIsChecked | async"></ion-toggle>
-
-          ON
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+          <ion-card-content>
+            Show if the led is enabled or not
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

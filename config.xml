@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="9" id="com.iotize.app.sensordemo" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.iotize.app.sensordemo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Sensor demo</name>
   <description>An awesome Ionic/Cordova app to communicate with iotize devices</description>
   <author email="contact@iotize.com" href="http://iotize.com/">IoTize</author>
@@ -13,13 +13,20 @@
   <allow-intent href="geo:*"></allow-intent>
   <preference name="ScrollEnabled" value="false"></preference>
   <preference name="android-minSdkVersion" value="19"></preference>
+  <preference name="android-targetSdkVersion" value="28"></preference>
   <preference name="BackupWebStorage" value="none"></preference>
   <preference name="SplashMaintainAspectRatio" value="true"></preference>
   <preference name="FadeSplashScreenDuration" value="300"></preference>
   <preference name="SplashShowOnlyFirstTime" value="false"></preference>
   <preference name="SplashScreen" value="screen"></preference>
   <preference name="SplashScreenDelay" value="3000"></preference>
+  <preference name="ShowSplashScreenSpinner" value="false"></preference>
+  <preference name="AutoHideSplashScreen" value="false"></preference>
   <preference name="AndroidLaunchMode" value="singleInstance"></preference>
+  <preference name="EnableNFCTapDeviceDiscovery" value="true"></preference>
+  <preference name="NFCTapDeviceMimeType" value="application/com.iotize.app.sensordemo"></preference>
+  <preference name="EnableNFCPairing" value="true"></preference>
+  <preference name="EnableEncryptionWithNFC" value="true"></preference>
   <platform name="android">
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
       <application android:networkSecurityConfig="@xml/network_security_config"></application>
@@ -84,18 +91,6 @@
     <icon height="58" src="resources/ios/icon/icon-small@2x.png" width="58"></icon>
     <icon height="87" src="resources/ios/icon/icon-small@3x.png" width="87"></icon>
     <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024"></icon>
-    <icon height="20" src="resources/ios/icon/icon-20.png" width="20"></icon>
-    <icon height="40" src="resources/ios/icon/icon-20@2x.png" width="40"></icon>
-    <icon height="60" src="resources/ios/icon/icon-20@3x.png" width="60"></icon>
-    <icon height="29" src="resources/ios/icon/icon-29.png" width="29"></icon>
-    <icon height="58" src="resources/ios/icon/icon-29@2x.png" width="58"></icon>
-    <icon height="87" src="resources/ios/icon/icon-29@3x.png" width="87"></icon>
-    <icon height="48" src="resources/ios/icon/icon-24@2x.png" width="48"></icon>
-    <icon height="55" src="resources/ios/icon/icon-27.5@2x.png" width="55"></icon>
-    <icon height="88" src="resources/ios/icon/icon-44@2x.png" width="88"></icon>
-    <icon height="172" src="resources/ios/icon/icon-86@2x.png" width="172"></icon>
-    <icon height="196" src="resources/ios/icon/icon-98@2x.png" width="196"></icon>
-    <icon height="216" src="resources/ios/icon/icon-108@2x.png" width="216"></icon>
     <splash height="1136" src="resources/ios/splash/Default-568h@2x~iphone.png" width="640"></splash>
     <splash height="1334" src="resources/ios/splash/Default-667h.png" width="750"></splash>
     <splash height="2208" src="resources/ios/splash/Default-736h.png" width="1242"></splash>
@@ -109,12 +104,6 @@
     <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640"></splash>
     <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320"></splash>
     <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732"></splash>
-    <splash height="2688" src="resources/ios/splash/Default-2688h~iphone.png" width="1242"></splash>
-    <splash height="1242" src="resources/ios/splash/Default-Landscape-2688h~iphone.png" width="2688"></splash>
-    <splash height="1792" src="resources/ios/splash/Default-1792h~iphone.png" width="828"></splash>
-    <splash height="828" src="resources/ios/splash/Default-Landscape-1792h~iphone.png" width="1792"></splash>
-    <splash height="2436" src="resources/ios/splash/Default-2436h.png" width="1125"></splash>
-    <splash height="1125" src="resources/ios/splash/Default-Landscape-2436h.png" width="2436"></splash>
   </platform>
   <plugin name="cordova-plugin-whitelist" spec="1.3.3"></plugin>
   <plugin name="cordova-plugin-statusbar" spec="2.4.2"></plugin>
@@ -123,9 +112,8 @@
   <plugin name="cordova-plugin-splashscreen" spec="5.0.2"></plugin>
   <plugin name="cordova-plugin-ionic-webview" spec="^3.0.0"></plugin>
   <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5"></plugin>
-  <plugin name="cordova-plugin-iotize-device-com-nfc" spec="@iotize/device-com-nfc.cordova@1.0.0-alpha.13"></plugin>
-  <plugin name="cordova-plugin-iotize-ble" spec="@iotize/cordova-plugin-iotize-ble@1.1.0-alpha.34"></plugin>
-  <plugin name="cordova-plugin-iotize-device-com-socket" spec="@iotize/device-com-socket.cordova@1.0.0-alpha.1"></plugin>
+  <plugin name="cordova-plugin-iotize-device-com-nfc" spec="@iotize/device-com-nfc.cordova@1.1.0"></plugin>
+  <plugin name="cordova-plugin-iotize-ble" spec="@iotize/cordova-plugin-iotize-ble@1.1.0"></plugin>
   <plugin name="cordova-plugin-iotize-device-com-wifi" spec="@iotize/device-com-wifi.cordova@1.0.0-alpha.1"></plugin>
-  <engine name="android" spec="8.0.0"></engine>
+  <plugin name="cordova-plugin-iotize-device-com-socket" spec="@iotize/device-com-socket.cordova@1.0.0-alpha.1"></plugin>
 </widget>

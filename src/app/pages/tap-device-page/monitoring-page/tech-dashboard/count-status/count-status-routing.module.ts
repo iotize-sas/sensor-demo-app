@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CountStatusComponent } from "./count-status.component";
 import { CountStatusChildrenRoutes } from "./count-status-routes";
-import { DeviceAuthGuard } from "@iotize/ionic";
+import { DeviceAuthGuard } from "@iotize/ionic/auth";
 
 const routes: Routes = [
   {

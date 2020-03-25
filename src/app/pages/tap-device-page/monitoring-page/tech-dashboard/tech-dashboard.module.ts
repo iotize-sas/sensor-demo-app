@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { AppThemeModule } from "app-theme";
 import { TechDashboardRoutingModule } from "./tech-dashboard-routing.module";
 import { TechDashboardComponent } from "./tech-dashboard.component";
-import { TapMonitoringModule } from "@iotize/ionic";
+import { TapMonitoringModule } from "@iotize/ionic/monitoring";
 
 @NgModule({
   declarations: [TechDashboardComponent],

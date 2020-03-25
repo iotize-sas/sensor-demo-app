@@ -9,7 +9,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MyProtocolFactoryService } from "./my-protocol-factory.service";
 import { AppThemeModule } from "app-theme";
-import { TapDeviceAngularModule, ProtocolFactoryService } from "@iotize/ionic";
+import { TapDeviceAngularModule } from "@iotize/ionic/default";
+import { ProtocolFactoryService } from "@iotize/ionic";
 import { Dialogs } from "@ionic-native/dialogs/ngx";
 import { environment } from "../environments/environment";
 import { ScannerNotAvailable } from "./scanner-not-available";
@@ -95,6 +96,15 @@ if (environment.debug) {
       provide: ProtocolFactoryService,
       useClass: MyProtocolFactoryService,
       deps: [Platform, TAP_BLE_SCANNER]
+    },
+    {
+      provide: "TapConnectionOptions",
+      useValue: {
+        switchProtocol: true,
+        refreshSessionState: true,
+        nfcPairing: true,
+        nfcEnableEncryption: true
+      }
     }
   ],
   bootstrap: [AppComponent]
