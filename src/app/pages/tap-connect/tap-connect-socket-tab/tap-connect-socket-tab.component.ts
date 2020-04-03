@@ -7,7 +7,7 @@ import {
   CordovaNetworkScanResult,
   CordovaWifiScanResult
 } from "@iotize/device-com-wifi.cordova";
-import { DeviceScanner } from "@iotize/device-client.js/device/scanner/device-scanner";
+import { DeviceScanner } from "@iotize/device-client.js/scanner/api";
 
 import { Observable, combineLatest } from "rxjs";
 import { map, tap, startWith, filter } from "rxjs/operators";

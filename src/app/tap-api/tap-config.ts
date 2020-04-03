@@ -1,12 +1,14 @@
 import {
   PipeConverter,
   ByteSwapConverter,
+  ArrayConverter
+} from "@iotize/device-client.js";
+import {
   NumberConverter,
   StringConverter,
   FloatConverter,
-  BooleanConverter,
-  ArrayConverter
-} from "@iotize/device-client.js/all-converter";
+  BooleanConverter
+} from "@iotize/device-client.js/client/impl";
 
 export const bundles = [
   {

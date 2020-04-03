@@ -1,5 +1,5 @@
 {
-  "name": "sensor-demo-app",
+  "name": "Sensor demo",
   "integrations": {
     "cordova": {}
   },

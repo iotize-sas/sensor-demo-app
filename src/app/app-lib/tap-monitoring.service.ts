@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CurrentDeviceService } from "@iotize/ionic";
 import { SensorDemo } from "tap-api";
-import { Tap } from "@iotize/device-client.js/device";
+import { Tap } from "@iotize/device-client.js";
 
 @Injectable({
   providedIn: "root"

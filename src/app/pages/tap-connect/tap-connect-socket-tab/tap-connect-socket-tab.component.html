@@ -37,11 +37,11 @@
 </ion-content>
 
 <ion-footer>
-  <ion-segment>
-    <ion-segment-button (click)="showScan = true" [checked]="showScan">
+  <ion-segment [value]="showScan ? 'scan' : 'custom'">
+    <ion-segment-button value="scan" (click)="showScan = true">
       <ion-label>Scan</ion-label>
     </ion-segment-button>
-    <ion-segment-button (ionSelect)="showScan = false" [checked]="!showScan">
+    <ion-segment-button value="custom" (ionSelect)="showScan = false">
       <ion-label>Custom</ion-label>
     </ion-segment-button>
   </ion-segment>

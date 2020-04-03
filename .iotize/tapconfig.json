@@ -18,14 +18,14 @@
                     "id": 0,
                     "variables": [
                         {
-                            "address": "0x20000000",
+                            "address": "0x0",
                             "id": 4,
                             "length": 1,
                             "type": "INT32",
                             "name": "Count"
                         },
                         {
-                            "address": "0x20000008",
+                            "address": "0x0",
                             "id": 7,
                             "length": 1,
                             "type": "UINT8",
@@ -39,7 +39,7 @@
                         }
                     },
                     "dataLog": {
-                        "period": 60
+                        "period": 0
                     }
                 },
                 {
@@ -47,7 +47,7 @@
                     "id": 1,
                     "variables": [
                         {
-                            "address": "0x2000001c",
+                            "address": "0x0",
                             "id": 1,
                             "length": 1,
                             "type": "FLOAT32",
@@ -55,7 +55,7 @@
                             "unit": "Volts"
                         },
                         {
-                            "address": "0x20000018",
+                            "address": "0x0",
                             "id": 2,
                             "length": 1,
                             "type": "FLOAT32",
@@ -70,7 +70,7 @@
                         }
                     },
                     "dataLog": {
-                        "period": 61
+                        "period": 0
                     }
                 },
                 {
@@ -78,14 +78,14 @@
                     "id": 2,
                     "variables": [
                         {
-                            "address": "0x20000009",
+                            "address": "0x0",
                             "id": 13,
                             "length": 1,
                             "type": "UINT8",
                             "name": "LEDConfig"
                         },
                         {
-                            "address": "0x2000000c",
+                            "address": "0x0",
                             "id": 0,
                             "length": 1,
                             "type": "INT32",

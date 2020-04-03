@@ -29,7 +29,7 @@
 <items key="appName" />
 </GUI_TapInfoPage>
 <GUI_AboutPage enabled="true" pageTitle="About" showAppVersion="No" developerName="My company" appDescription="About my company" />
-<GUI_TargetProtocolConfPage enabled="true" pageTitle="Target settings" />
+<GUI_TargetProtocolConfPage enabled="false" pageTitle="Target settings" />
 <GUI_TapSupervisionPage enabled="true" pageTitle="Supervision" />
 <GUI_TapConnectivitySettingsPage enabled="true" pageTitle="Connectivity settings" />
 </GUI_pages>

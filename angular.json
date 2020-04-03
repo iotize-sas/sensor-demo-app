@@ -30,8 +30,7 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
-              },
-              "src/manifest.webmanifest"
+              }
             ],
             "styles": [
               {
@@ -67,9 +66,7 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              ]
             },
             "ci": {
               "progress": false
@@ -79,7 +76,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app:build"
+            "browserTarget": "app:build",
+            "port": 4210
           },
           "configurations": {
             "production": {
@@ -115,8 +113,7 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
-              },
-              "src/manifest.webmanifest"
+              }
             ]
           },
           "configurations": {
@@ -155,6 +152,12 @@
               "cordovaBuildTarget": "app:ionic-cordova-build:production",
               "devServerTarget": "app:serve:production"
             }
+          }
+        },
+        "regenerate": {
+          "builder": "@iotize/ionic-toolkit:regenerate",
+          "options": {
+            "projectDir": "."
           }
         }
       }

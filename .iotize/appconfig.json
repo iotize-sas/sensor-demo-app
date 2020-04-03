@@ -1,10 +1,10 @@
 {
     "version": {
-        "generator": "1.0.1"
+        "generator": "1.1.0"
     },
     "app": {
         "id": "com.iotize.app.sensordemo",
-        "version": "v1.0.0",
+        "version": "1.2.0",
         "domain": "https://www.iotize.com",
         "name": "Sensor demo",
         "platforms": {
@@ -29,11 +29,6 @@
                 "title": "About",
                 "icon": "help",
                 "url": "/about"
-            },
-            {
-                "title": "Target settings",
-                "icon": "barcode",
-                "url": "/device/protocol-configuration"
             },
             {
                 "title": "Supervision",
@@ -101,7 +96,7 @@
                         ]
                     },
                     "ProtocolConfigurationPage": {
-                        "enabled": true,
+                        "enabled": false,
                         "type": "ProtocolConfigurationPage",
                         "path": "protocol-configuration",
                         "pageTitle": "Target settings",
