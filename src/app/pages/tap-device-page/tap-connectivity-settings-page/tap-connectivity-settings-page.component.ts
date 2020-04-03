@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
-import {
-  HostProtocol,
-  NetworkMode
-} from "@iotize/device-client.js/device/model";
+import { HostProtocol, NetworkMode } from "@iotize/device-client.js";
 import { ConnectionState } from "@iotize/device-client.js/protocol/api";
 import { CurrentDeviceService, TapConfigItem, TapInfo } from "@iotize/ionic";
 import { ToastService } from "app-theme";

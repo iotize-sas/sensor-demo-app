@@ -16,7 +16,7 @@ import { SensorDemo } from "tap-api";
 import { VariableConfig } from "@iotize/device-client.js/device/target-variable/variable";
 import { Router, NavigationStart } from "@angular/router";
 import { TapMonitoringService } from "app-lib";
-import { Tap } from "@iotize/device-client.js/device";
+import { Tap } from "@iotize/device-client.js";
 
 const DEFAULT_TARGET_CONNECT_TRY_COUNT = 2;
 

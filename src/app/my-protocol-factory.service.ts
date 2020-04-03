@@ -1,4 +1,4 @@
-import { WebSocketProtocol } from "@iotize/device-com-websocket.js/web-socket-protocol";
+import { WebSocketProtocol } from "@iotize/device-com-websocket.js";
 import { NFCComProtocol } from "@iotize/device-com-nfc.cordova";
 
 import { BLEComProtocol } from "@iotize/cordova-plugin-iotize-ble";
@@ -9,10 +9,10 @@ import {
   WebViewComProtocol
 } from "@iotize/device-com-webview.js";
 
-import { MqttRelayProtocolFactory } from "@iotize/device-com-mqtt.js";
+import { MqttRelayProtocolFactory } from "@iotize/device-com-mqtt.js/tap-cloud";
 import { IClientOptions, MqttClient, connect } from "mqtt";
 
-import { DeviceScanner } from "@iotize/device-client.js/device/scanner/device-scanner";
+import { DeviceScanner } from "@iotize/device-client.js/scanner/api";
 import { WifiComProtocol } from "@iotize/device-com-wifi.cordova";
 import { CordovaSocketProtocol } from "@iotize/device-com-socket.cordova";
 import {
@@ -89,7 +89,10 @@ export const PROTOCOL_FACTORY_CONFIG = {
       (brokerUrl?: string | any, options?: IClientOptions): MqttClient => {
         // Uncommenting this line make app error as library need process global variable
         // It can be fix with ./polyfill.ts but it will crash monaco editor...
-        return connect(brokerUrl, options);
+        return connect(
+          brokerUrl,
+          options
+        );
         // throw new Error(`Not implemented`)
       },
       meta.info.username,

@@ -16,8 +16,8 @@ import { ToastService, AppNavigationService, LoaderService } from "app-theme";
 import getDebugger from "src/app/logger";
 import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
-import { EncryptionKeys } from "@iotize/device-client.js/device";
-import { FormatHelper } from "@iotize/device-client.js/core";
+import { EncryptionKeys } from "@iotize/device-client.js";
+import { hexStringToBuffer } from "@iotize/common/byte-converter";
 
 import { NdefTag } from "@iotize/device-com-nfc.cordova";
 
@@ -48,13 +48,11 @@ export class MyTapConnectionService {
     options: TapConnectionOptions = this.connectOptions
   ): Observable<any> {
     debug("connectWithLoader ", meta, options);
-    let obs = this.tapConnectionService
-      .connect(meta as any, options)
-      .pipe(
-        concat(of("Loading application...")),
-        concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000)),
-        share()
-      );
+    let obs = this.tapConnectionService.connect(meta as any, options).pipe(
+      concat(of("Loading application...")),
+      concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000)),
+      share()
+    );
     this.loaderService
       .addTask({
         message: `Loading device (${meta.type})...`,
@@ -210,13 +208,13 @@ function parseKeys(
     return undefined;
   }
   if (keys.sessionKeyHex) {
-    keys.sessionKey = FormatHelper.hexStringToBuffer(keys.sessionKeyHex);
+    keys.sessionKey = hexStringToBuffer(keys.sessionKeyHex);
   }
   if (keys.ivEncodeHex) {
-    keys.ivEncode = FormatHelper.hexStringToBuffer(keys.ivEncodeHex);
+    keys.ivEncode = hexStringToBuffer(keys.ivEncodeHex);
   }
   if (keys.ivDecodeHex) {
-    keys.ivDecode = FormatHelper.hexStringToBuffer(keys.ivDecodeHex);
+    keys.ivDecode = hexStringToBuffer(keys.ivDecodeHex);
   }
   return keys;
 }

@@ -9,8 +9,6 @@ import {
 } from "@iotize/ionic";
 import { ToastService, TaskManagerService, TaskManager } from "app-theme";
 
-const APPLY_SERIAL_SETTINGS_TASK_ID = "apply-serial-settings";
-
 @Component({
   selector: "protocol-configuration",
   templateUrl: "./protocol-configuration.component.html",
@@ -18,6 +16,9 @@ const APPLY_SERIAL_SETTINGS_TASK_ID = "apply-serial-settings";
 })
 export class ProtocolConfigurationComponent implements OnInit {
   isAdmin: Observable<boolean>;
+
+  public APPLY_SERIAL_SETTINGS_TASK_ID = "apply-serial-settings";
+  public applySerialSettingsTask: TaskManager.TaskContainer;
 
   public SERIAL_SETTINGS_FIELDS = SERIAL_SETTINGS_FIELDS;
   public MODBUS_SETTINGS_FIELDS = MODBUS_SETTINGS_FIELDS;
@@ -36,8 +37,8 @@ export class ProtocolConfigurationComponent implements OnInit {
       map(state => state.name === "admin")
     );
 
-    let taskContainer = this.taskManagerService.createTask({
-      id: APPLY_SERIAL_SETTINGS_TASK_ID,
+    this.applySerialSettingsTask = this.taskManagerService.createTask({
+      id: this.APPLY_SERIAL_SETTINGS_TASK_ID,
       info: {
         title: "Serial configuration changes",
         feedback: "Serial configuration applied!"
@@ -73,7 +74,7 @@ export class ProtocolConfigurationComponent implements OnInit {
       }
     });
 
-    taskContainer.events.subscribe(event => {
+    this.applySerialSettingsTask.events.subscribe(event => {
       if (event.type === "ERROR_TASK") {
         if (!event.delayed) {
           this.onError(event.error);

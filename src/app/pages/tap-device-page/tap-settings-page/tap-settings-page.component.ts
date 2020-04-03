@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { CurrentDeviceService, TapInfo, TapConfigItem } from "@iotize/ionic";
 import { ToastService } from "app-theme";
-import { HostProtocol } from "@iotize/device-client.js/device/model";
+import { HostProtocol } from "@iotize/device-client.js";
 
 @Component({
   selector: "tap-settings-page",

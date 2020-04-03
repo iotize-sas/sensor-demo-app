@@ -36,6 +36,4 @@ npm run webapp
 npm run android -- --prod
 ```
 
-
-
 This app has been made by [IoTize](https://iotize.com).

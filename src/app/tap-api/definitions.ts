@@ -1,13 +1,12 @@
-import {
-  Bundle as BundleModel,
-  Bundle
-} from "@iotize/device-client.js/device/target-variable/bundle";
-import { VariableInteraction } from "@iotize/device-client.js/device/target-variable/variable-interaction.interface";
+import { Bundle as BundleModel } from "@iotize/device-client.js";
 import { DataManager as BaseDataManager } from "@iotize/ionic";
 import { bundles as bundlesConfig } from "./tap-config";
-import { Tap } from "@iotize/device-client.js/device";
-import { BundleConfig, VariableConfig } from "@iotize/device-admin.js";
-import { BodyConverter } from "@iotize/device-client.js/device/converter/import-adapter";
+import { Tap, VariableInteraction } from "@iotize/device-client.js";
+import {
+  BundleConfig,
+  VariableConfig
+} from "@iotize/device-client.js/config/schema/v1";
+import { BodyConverter } from "@iotize/device-client.js/client/api";
 
 export type AppBundleConfig = BundleConfig & {
   variables: AppVariableConfig[];
@@ -154,13 +153,10 @@ export namespace SensorDemo {
     SensorDemo.BundleKey
   > {
     static create(tap: Tap): DataManager {
-      return new DataManager(
+      return new DataManager(tap, BaseDataManager.createDataFromSchemaConfig(
         tap,
-        BaseDataManager.createDataFromSchemaConfig(
-          tap,
-          bundlesConfig as any
-        ) as any
-      );
+        bundlesConfig as any
+      ) as any);
     }
   }
 }

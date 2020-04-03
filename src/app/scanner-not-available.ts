@@ -1,7 +1,7 @@
 import {
   DeviceScanner,
   DeviceScannerOptions
-} from "@iotize/device-client.js/device/scanner/device-scanner";
+} from "@iotize/device-client.js/scanner/api";
 import { of, never } from "rxjs";
 
 export class ScannerNotAvailable implements DeviceScanner<any> {

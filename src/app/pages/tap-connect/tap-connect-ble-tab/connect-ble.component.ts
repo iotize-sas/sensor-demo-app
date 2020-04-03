@@ -5,7 +5,7 @@ import { ProtocolSelectedEvent, TAP_BLE_SCANNER } from "@iotize/ionic";
 import { Observable } from "rxjs";
 import { AppNavigationService, ToastService } from "app-theme";
 import { MyTapConnectionService } from "src/app/my-tap-connection.service";
-import { DeviceScanner } from "@iotize/device-client.js/device/scanner/device-scanner";
+import { DeviceScanner } from "@iotize/device-client.js/scanner/api";
 
 @Component({
   selector: "app-connect-ble",

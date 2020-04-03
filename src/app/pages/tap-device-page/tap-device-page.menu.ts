@@ -12,11 +12,6 @@ export var DEVICE_MENU: MenuItem[] = [
     url: "/about"
   },
   {
-    title: "Target settings",
-    icon: "barcode",
-    url: "/device/protocol-configuration"
-  },
-  {
     title: "Supervision",
     icon: "construct",
     url: "/device/settings"
