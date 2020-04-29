@@ -31,17 +31,25 @@
   >
     <ion-icon
       *ngIf="!p.open"
-      [name]="p.icon || 'arrow-dropright'"
+      [name]="p.icon || 'arrow-right-circle'"
       slot="start"
     ></ion-icon>
     <ion-icon
       *ngIf="p.open"
-      [name]="p.icon || 'arrow-dropdown'"
+      [name]="p.icon || 'arrow-forward-circle'"
       slot="start"
     ></ion-icon>
     <ion-label>{{ p.title }}</ion-label>
-    <ion-icon *ngIf="!p.open" [name]="'arrow-dropright'" slot="end"></ion-icon>
-    <ion-icon *ngIf="p.open" [name]="'arrow-dropdown'" slot="end"></ion-icon>
+    <ion-icon
+      *ngIf="!p.open"
+      [name]="'arrow-right-circle'"
+      slot="end"
+    ></ion-icon>
+    <ion-icon
+      *ngIf="p.open"
+      [name]="'arrow-forward-circle'"
+      slot="end"
+    ></ion-icon>
   </ion-item>
 
   <!-- Children List for clicked Item -->

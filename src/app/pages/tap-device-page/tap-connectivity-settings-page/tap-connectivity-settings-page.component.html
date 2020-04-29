@@ -24,7 +24,7 @@
     ></app-feedback>
   </ng-template>
 
-  <ion-card>
+  <ion-card class="tap-connectivity-card-general">
     <ion-card-header>
       <ion-card-title>
         <ion-icon name=""></ion-icon>
@@ -40,7 +40,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="wifiConfigs">
+  <ion-card *ngIf="wifiConfigs" class="tap-connectivity-card-wifi">
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="wifi"></ion-icon>
@@ -61,7 +61,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="bluetoothConfig">
+  <ion-card *ngIf="bluetoothConfig" class="tap-connectivity-card-ble">
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="bluetooth"></ion-icon>
@@ -82,7 +82,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="nfcConfig">
+  <ion-card *ngIf="nfcConfig" class="tap-connectivity-card-nfc">
     <ion-card-header>
       <ion-card-title>
         <ion-icon src="assets/svg/nfc.svg"></ion-icon>
@@ -98,7 +98,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="mqttConfig">
+  <ion-card *ngIf="mqttConfig" class="tap-connectivity-card-mqtt">
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="cloud"></ion-icon>

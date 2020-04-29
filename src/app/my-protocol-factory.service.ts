@@ -89,10 +89,7 @@ export const PROTOCOL_FACTORY_CONFIG = {
       (brokerUrl?: string | any, options?: IClientOptions): MqttClient => {
         // Uncommenting this line make app error as library need process global variable
         // It can be fix with ./polyfill.ts but it will crash monaco editor...
-        return connect(
-          brokerUrl,
-          options
-        );
+        return connect(brokerUrl, options);
         // throw new Error(`Not implemented`)
       },
       meta.info.username,

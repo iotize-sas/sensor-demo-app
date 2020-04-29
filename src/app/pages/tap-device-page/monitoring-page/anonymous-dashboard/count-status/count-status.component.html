@@ -4,15 +4,28 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <monitoring-gauge-card
-          [input]="variables['Count'].monitor().values()"
-          [max]="100"
-          [min]="0"
-          units=""
-          alias="Counter value"
-          [legend]="true"
-        >
-        </monitoring-gauge-card>
+        <ion-card>
+          <ion-item lines="full" class="card-header" color="dark">
+            <ion-icon name="analytics" slot="start"></ion-icon>
+            <ion-label>Counter value</ion-label>
+          </ion-item>
+
+          <ion-card-content>
+            <div style="margin: auto;">
+              <monitoring-variable-value
+                [lines]="'none'"
+                [variable]="variables['Count']"
+                [inputOptions]='{
+    "min": 0,
+    "max": 100
+}'
+                [valueStyle]="{'font-size': '3em'}"
+                slot="end"
+              >
+              </monitoring-variable-value>
+            </div>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
 
       <ion-col>

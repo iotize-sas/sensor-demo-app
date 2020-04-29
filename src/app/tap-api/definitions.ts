@@ -153,10 +153,13 @@ export namespace SensorDemo {
     SensorDemo.BundleKey
   > {
     static create(tap: Tap): DataManager {
-      return new DataManager(tap, BaseDataManager.createDataFromSchemaConfig(
+      return new DataManager(
         tap,
-        bundlesConfig as any
-      ) as any);
+        BaseDataManager.createDataFromSchemaConfig(
+          tap,
+          bundlesConfig as any
+        ) as any
+      );
     }
   }
 }

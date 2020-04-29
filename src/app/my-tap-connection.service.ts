@@ -48,11 +48,13 @@ export class MyTapConnectionService {
     options: TapConnectionOptions = this.connectOptions
   ): Observable<any> {
     debug("connectWithLoader ", meta, options);
-    let obs = this.tapConnectionService.connect(meta as any, options).pipe(
-      concat(of("Loading application...")),
-      concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000)),
-      share()
-    );
+    let obs = this.tapConnectionService
+      .connect(meta as any, options)
+      .pipe(
+        concat(of("Loading application...")),
+        concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000)),
+        share()
+      );
     this.loaderService
       .addTask({
         message: `Loading device (${meta.type})...`,

@@ -16,6 +16,12 @@
           (onProtocolSelected)="onProtocolSelected($event)"
           (onError)="onError($event)"
         ></tap-connect-ble>
+        <div *ngIf="!(isScanning | async)" class="no-tap-found">
+          <ion-icon name="list-outline"></ion-icon>
+          <p>
+            Run scanner to find Tap.
+          </p>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

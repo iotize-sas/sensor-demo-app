@@ -335,16 +335,26 @@
                                             "cols": 2,
                                             "elements": [
                                                 {
-                                                    "editable": false,
-                                                    "type": "VariableGauge",
-                                                    "variable": "Count",
-                                                    "min": 0,
-                                                    "max": 100,
-                                                    "valueFormatting": "",
-                                                    "options": {
-                                                        "alias": "Counter value",
-                                                        "[legend]": true
-                                                    }
+                                                    "type": "CardLayout",
+                                                    "header": {
+                                                        "color": "dark",
+                                                        "icon": "analytics"
+                                                    },
+                                                    "title": "Counter value",
+                                                    "content": [
+                                                        {
+                                                            "editable": false,
+                                                            "type": "VariableText",
+                                                            "variable": "Count",
+                                                            "valueFontSize": "3em",
+                                                            "valueFormatting": "",
+                                                            "inputOptions": {
+                                                                "min": 0,
+                                                                "max": 100
+                                                            }
+                                                        }
+                                                    ],
+                                                    "description": ""
                                                 },
                                                 {
                                                     "type": "CardLayout",
@@ -568,16 +578,26 @@
                                             "cols": 2,
                                             "elements": [
                                                 {
-                                                    "editable": true,
-                                                    "type": "VariableGauge",
-                                                    "variable": "Count",
-                                                    "min": 0,
-                                                    "max": 100,
-                                                    "valueFormatting": "",
-                                                    "options": {
-                                                        "alias": "Counter value",
-                                                        "[legend]": true
-                                                    }
+                                                    "type": "CardLayout",
+                                                    "header": {
+                                                        "color": "dark",
+                                                        "icon": "analytics"
+                                                    },
+                                                    "title": "Counter value",
+                                                    "content": [
+                                                        {
+                                                            "editable": true,
+                                                            "type": "VariableText",
+                                                            "variable": "Count",
+                                                            "valueFontSize": "3em",
+                                                            "valueFormatting": "",
+                                                            "inputOptions": {
+                                                                "min": 0,
+                                                                "max": 100
+                                                            }
+                                                        }
+                                                    ],
+                                                    "description": ""
                                                 },
                                                 {
                                                     "type": "CardLayout",
@@ -801,16 +821,26 @@
                                             "cols": 2,
                                             "elements": [
                                                 {
-                                                    "editable": false,
-                                                    "type": "VariableGauge",
-                                                    "variable": "Count",
-                                                    "min": 0,
-                                                    "max": 100,
-                                                    "valueFormatting": "",
-                                                    "options": {
-                                                        "alias": "Counter value",
-                                                        "[legend]": true
-                                                    }
+                                                    "type": "CardLayout",
+                                                    "header": {
+                                                        "color": "dark",
+                                                        "icon": "analytics"
+                                                    },
+                                                    "title": "Counter value",
+                                                    "content": [
+                                                        {
+                                                            "editable": false,
+                                                            "type": "VariableText",
+                                                            "variable": "Count",
+                                                            "valueFontSize": "3em",
+                                                            "valueFormatting": "",
+                                                            "inputOptions": {
+                                                                "min": 0,
+                                                                "max": 100
+                                                            }
+                                                        }
+                                                    ],
+                                                    "description": ""
                                                 },
                                                 {
                                                     "type": "CardLayout",
@@ -1025,19 +1055,12 @@
                 "projectPath": "pages/about",
                 "items": [
                     {
-                        "title": "Developer",
-                        "value": "My company"
-                    },
-                    {
-                        "title": "About us",
-                        "value": "About my company"
+                        "title": "Version",
+                        "value": "{{ environment.version }}"
                     }
                 ],
                 "pageTitle": "About",
-                "path": "about",
-                "showAppVersion": "No",
-                "developerName": "My company",
-                "appDescription": "About my company"
+                "path": "about"
             },
             "TapConnectionPage": {
                 "type": "TapConnectionPage",
@@ -1150,8 +1173,5 @@
             ]
         },
         "defaultPage": "/connect"
-    },
-    "formMeta": {
-        "showAdvanceSettings": false
     }
 }
