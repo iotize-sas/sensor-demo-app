@@ -1,9 +1,11 @@
-/*
-:host ::ng-deep ion-card {
-    padding-left: 3px;
-    padding-right: 3px;
-    margin-right: 3px;
-    margin-left: 3px;
-    border-radius: 0px;
+.no-tap-found {
+  text-align: center;
+  color: #aaa;
 }
-*/
+.no-tap-found ion-icon {
+  font-size: 5em;
+}
+.no-tap-found p {
+  font-size: 1.3em;
+  font-weight: bold;
+}

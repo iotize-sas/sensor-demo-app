@@ -154,7 +154,7 @@
             },
             "mqttRelay": {
                 "url": "mqtt://user.cloud.iotize.com:1883",
-                "key": "%%UID%%",
+                "password": "%%UID%%",
                 "netKey": "testnetkey"
             },
             "security": {

@@ -9,11 +9,13 @@ import {
 } from "@iotize/device-com-wifi.cordova";
 import { DeviceScanner } from "@iotize/device-client.js/scanner/api";
 
-import { Observable, combineLatest } from "rxjs";
+import { Observable, combineLatest, Subscription } from "rxjs";
 import { map, tap, startWith, filter } from "rxjs/operators";
 import getDebugger from "src/app/logger";
 import { Platform } from "@ionic/angular";
 const debug = getDebugger("TapConnectSocketTabComponent");
+
+type ScanResultType = CordovaNetworkScanResult | CordovaWifiScanResult;
 
 @Component({
   selector: "app-tap-connect-socket-tab",
@@ -26,6 +28,9 @@ export class TapConnectSocketTabComponent implements OnInit {
   infraDevices?: Observable<CordovaWifiScanResult[]>;
   networkDevices?: Observable<CordovaNetworkScanResult[]>;
   allDevices?: Observable<(CordovaNetworkScanResult | CordovaWifiScanResult)[]>;
+  devicesSnapshot: ScanResultType[];
+  deviceSub?: Subscription;
+
   showScan: boolean = false;
   scanning: Observable<boolean>;
 
@@ -37,11 +42,8 @@ export class TapConnectSocketTabComponent implements OnInit {
     public wifiScanner: DeviceScanner<CordovaWifiScanResult>,
     @Inject(TAP_NETWORK_SCANNER)
     public networkScanner: DeviceScanner<CordovaNetworkScanResult>
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.networkDevices = this.networkScanner.results;
-
     this.infraDevices = this.wifiScanner.results.pipe(
       map(devices => {
         return devices.filter(device => {
@@ -51,21 +53,32 @@ export class TapConnectSocketTabComponent implements OnInit {
       })
     );
 
-    this.allDevices = combineLatest(
+    this.allDevices = combineLatest([
       this.networkDevices.pipe(startWith([])),
       this.infraDevices.pipe(startWith([]))
-    ).pipe(
+    ]).pipe(
       map(([networkDevices, wifiDevices]) => {
         return [...networkDevices, ...wifiDevices];
-      }),
-      filter(_item => _item !== undefined),
-      tap(_ => this.changeDetectorRef.detectChanges())
+      })
     );
     this.showScan = this.platform.is("cordova");
     this.scanning = combineLatest(
       this.wifiScanner.scanning,
       this.networkScanner.scanning
     ).pipe(map(([a, b]) => a || b));
+  }
+
+  ngOnInit() {
+    this.deviceSub = this.allDevices?.subscribe(devices => {
+      // console.log('New scanner results', devices);
+      this.devicesSnapshot = devices.filter(d => !!d);
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  ngOnDestroy() {
+    console.log("Destroy sub...");
+    this.deviceSub?.unsubscribe();
   }
 
   async onItemClicked(item: CordovaNetworkScanResult | CordovaWifiScanResult) {
@@ -116,6 +129,7 @@ export class TapConnectSocketTabComponent implements OnInit {
   }
 
   startScan() {
+    this.error = undefined;
     return Promise.all([this.refreshNetwork(), this.refreshWifi()]);
   }
 
@@ -136,5 +150,9 @@ export class TapConnectSocketTabComponent implements OnInit {
 
   refreshWifi() {
     this.wifiScanner.start().catch((err: Error) => this.onError(err));
+  }
+
+  clearList() {
+    this.devicesSnapshot = [];
   }
 }

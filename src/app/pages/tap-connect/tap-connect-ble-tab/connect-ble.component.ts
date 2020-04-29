@@ -47,6 +47,7 @@ export class TapConnectBleTabComponent implements OnInit {
   }
 
   startScan() {
+    this.error = undefined;
     this.scanner.start().catch((err: Error) => this.onError(err));
   }
 

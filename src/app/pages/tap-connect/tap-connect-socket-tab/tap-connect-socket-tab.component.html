@@ -1,5 +1,8 @@
-<ion-content *ngIf="!showScan">
-  <app-feedback-error [error]="error"></app-feedback-error>
+<ion-content>
+  <ion-progress-bar
+    *ngIf="(scanning | async)"
+    type="indeterminate"
+  ></ion-progress-bar>
   <ion-grid class="center-form">
     <ion-row>
       <ion-col>
@@ -9,40 +12,48 @@
         ></tap-connect-socket>
       </ion-col>
     </ion-row>
-    <ion-row></ion-row>
-  </ion-grid>
-</ion-content>
 
-<ion-content *ngIf="showScan">
-  <ion-refresher (ionRefresh)="refreshScan($event)" pullmin="120" slot="fixed">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-progress-bar
-    *ngIf="(scanning | async)"
-    type="indeterminate"
-  ></ion-progress-bar>
-  <app-feedback-error [error]="error"></app-feedback-error>
-  <tap-scanner-wifi-item
-    (onItemClicked)="onItemClicked($event)"
-    [devices]="allDevices | async"
-  ></tap-scanner-wifi-item>
+    <ion-row>
+      <ion-col>
+        <ion-refresher
+          (ionRefresh)="refreshScan($event)"
+          pullmin="120"
+          slot="fixed"
+        >
+          <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+        <app-feedback-error [error]="error"></app-feedback-error>
+        <tap-scanner-wifi-item
+          (onItemClicked)="onItemClicked($event)"
+          [devices]="devicesSnapshot"
+        ></tap-scanner-wifi-item>
+        <div
+          *ngIf="(!devicesSnapshot || devicesSnapshot.length === 0) && !(scanning | async)"
+          class="no-tap-found"
+        >
+          <ion-icon name="list-outline"></ion-icon>
+          <p>
+            Run scanner to find Tap.
+          </p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-fab horizontal="end" slot="fixed" vertical="bottom">
-    <ion-fab-button (click)="startScan()" *ngIf="!(scanning | async)">
+    <ion-fab-button
+      id="BtnStartScan"
+      (click)="startScan()"
+      *ngIf="!(scanning | async)"
+    >
       <ion-icon name="search"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="stopScan()" *ngIf="(scanning | async)">
+    <ion-fab-button
+      id="BtnStopScan"
+      (click)="stopScan()"
+      *ngIf="(scanning | async)"
+    >
       <ion-icon name="pause"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
-
-<ion-footer>
-  <ion-segment [value]="showScan ? 'scan' : 'custom'">
-    <ion-segment-button value="scan" (click)="showScan = true">
-      <ion-label>Scan</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="custom" (ionSelect)="showScan = false">
-      <ion-label>Custom</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-</ion-footer>
