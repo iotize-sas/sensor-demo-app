@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { ProtocolSelectedEvent } from "@iotize/ionic";
+import {
+  ProtocolSelectedEvent,
+  TapConnectMqttComponentFormData
+} from "@iotize/ionic";
 import { MyTapConnectionService } from "src/app/my-tap-connection.service";
 
 @Component({
@@ -10,12 +13,20 @@ import { MyTapConnectionService } from "src/app/my-tap-connection.service";
 export class TapConnectMqttTabComponent implements OnInit {
   public error?: Error;
 
-  constructor(public tapConnectionService: MyTapConnectionService) {}
+  formDefaults: TapConnectMqttComponentFormData;
+
+  constructor(public tapConnectionService: MyTapConnectionService) {
+    this.formDefaults = {
+      endpoint: "wss://user.cloud.iotize.com:9883",
+      serialNumber: "",
+      netKey: "testnetkey",
+      password: ""
+    };
+  }
 
   ngOnInit() {}
 
   async onProtocolSelected(event: ProtocolSelectedEvent) {
-    console.log("onProtocolSelected", event);
     this.tapConnectionService.connectWithLoader(event.meta);
   }
 

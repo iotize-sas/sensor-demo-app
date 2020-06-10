@@ -15,10 +15,13 @@ export class TapInfoPageComponent implements OnInit {
       key: "tapFirmwareVersion"
     },
     {
-      key: "configVersion"
+      key: "appName"
     },
     {
-      key: "appName"
+      key: "CloudEndpoint"
+    },
+    {
+      key: "CloudKey"
     }
   ];
 
