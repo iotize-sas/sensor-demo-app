@@ -3,6 +3,7 @@
     <ion-row>
       <ion-col>
         <tap-connect-mqtt
+          [defaults]="formDefaults"
           (onProtocolSelected)="onProtocolSelected($event)"
           (onError)="onError($event)"
         ></tap-connect-mqtt>
