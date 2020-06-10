@@ -7,6 +7,7 @@
         "application": {
             "name": "Sensor demo",
             "universalLink": "https://www.iotize.com",
+            "version": "1.3.0",
             "android": {
                 "aar": "com.iotize.app.sensordemo"
             }
@@ -18,6 +19,7 @@
                     "id": 0,
                     "variables": [
                         {
+                            "kind": "MEMORY",
                             "address": "0x0",
                             "id": 4,
                             "length": 1,
@@ -25,6 +27,7 @@
                             "name": "Count"
                         },
                         {
+                            "kind": "MEMORY",
                             "address": "0x0",
                             "id": 7,
                             "length": 1,
@@ -47,6 +50,7 @@
                     "id": 1,
                     "variables": [
                         {
+                            "kind": "MEMORY",
                             "address": "0x0",
                             "id": 1,
                             "length": 1,
@@ -55,6 +59,7 @@
                             "unit": "Volts"
                         },
                         {
+                            "kind": "MEMORY",
                             "address": "0x0",
                             "id": 2,
                             "length": 1,
@@ -78,6 +83,7 @@
                     "id": 2,
                     "variables": [
                         {
+                            "kind": "MEMORY",
                             "address": "0x0",
                             "id": 13,
                             "length": 1,
@@ -85,6 +91,7 @@
                             "name": "LEDConfig"
                         },
                         {
+                            "kind": "MEMORY",
                             "address": "0x0",
                             "id": 0,
                             "length": 1,
@@ -165,9 +172,7 @@
                 "resourceFactory": false
             },
             "powerOptimization": "NO",
-            "availableHostProtocols": [
-                "FFFF"
-            ],
+            "availableHostProtocols": [],
             "hostInactivityPeriod": 30,
             "hashIterationCount": 5000,
             "nfcPairingMode": "NO"

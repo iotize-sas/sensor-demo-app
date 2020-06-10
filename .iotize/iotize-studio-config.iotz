@@ -2,7 +2,7 @@
 <IOTizeConfiguration Version="1.2.0" Lock="8">
 <GUI_Environment StoreVarInfo="false" Locked="false" Autoincrement="false" DocVerboseLevel="3" DocLogVerboseLevel="3" DocLogFileName="" AdminPWD="admin" SmartPhoneStoragePath="" />
 <GUI_XAppConfig>
-<GUI_app path=".." />
+<GUI_app path=".." version="0.0.1" />
 <GUI_layout col="2" mode="One page per bundle" />
 <GUI_logo image=".\resources\icon.png" />
 <GUI_splashScreen image=".\resources\splash.png" />
@@ -19,22 +19,23 @@
 <GUI_infosn />
 <GUI_infofwver enabled="true" />
 <GUI_infofwver />
-<GUI_infocfgver enabled="true" />
+<GUI_infocfgver enabled="false" />
 <GUI_infocfgver />
 <GUI_infoappname enabled="true" />
 <GUI_infoappname />
 <items key="serialNumber" />
 <items key="tapFirmwareVersion" />
-<items key="configVersion" />
 <items key="appName" />
+<items key="CloudEndpoint" />
+<items key="CloudKey" />
 </GUI_TapInfoPage>
-<GUI_AboutPage enabled="true" pageTitle="About" />
+<GUI_AboutPage enabled="true" pageTitle="About" showAppVersion="No" developerName="" appDescription="" />
 <GUI_TargetProtocolConfPage enabled="false" pageTitle="Target settings" />
 <GUI_TapSupervisionPage enabled="true" pageTitle="Supervision" />
 <GUI_TapConnectivitySettingsPage enabled="true" pageTitle="Connectivity settings" />
 </GUI_pages>
 </GUI_XAppConfig>
-<IOTizeApp Name="Sensor demo" DevIoTizeSN="IoTize00410000000D" InterfaceLock="8" Scram_Hash_It="5000" GUI_Path="$4/com.iotize.app.sensordemo" GUI_WebSpePath="http://localhost:4210/device?protocol=webview" Path="$6/IoTize00410000000D/index.html" GUI_TargetType="0" TargetProtocol="SWD" GUI_S3Pmode="0" S3Pmode="0" S3PDelay="1" GUI_Modbus_GenerateAddr="yes" TargetProtocolConfDataLen="8" TargetProtocolConfData="0001000a01002580" WebLink="https://www.iotize.com" AAR="com.iotize.app.sensordemo" HostProtocol="FFFF" Firmware="1.0.0" Config="1.0.0" NFCPairingMandatory="No" NFCInterruptionLock="0" NFCLogin="0" LowPowerLevel="0" LowPowerHostTimeout="30">
+<IOTizeApp Name="Sensor demo" DevIoTizeSN="IoTize00410000000D" InterfaceLock="8" Scram_Hash_It="5000" GUI_Path="$4/com.iotize.app.sensordemo" GUI_WebSpePath="http://localhost:4210/device?protocol=webview" Path="$6/IoTize00410000000D/index.html" GUI_TargetType="0" TargetProtocol="SWD" GUI_S3Pmode="0" S3Pmode="0" S3PDelay="1" GUI_Modbus_GenerateAddr="yes" TargetProtocolConfDataLen="8" TargetProtocolConfData="0001000a01002580" WebLink="https://www.iotize.com" AAR="com.iotize.app.sensordemo" HostProtocol="FFFF" Firmware="1.0.0" Config="1.0.0" NFCPairingMandatory="No" NFCInterruptionLock="0" NFCLogin="0" LowPowerLevel="0" LowPowerHostTimeout="30" JVM_Custom_Code="">
 <USB_Aliases Alias0="0001000000" Alias1="0000002000" />
 <LoRa_Info LoRaMode="0" />
 <WIFI_Info Network="Network" ModuleSSID="IOTIZE-PRIVATE" Module_AP_SSID="" Module_AP_WEPKey="" ModuleWEPKey="*Iotize_38330_Iotize?" Cloud_Publish_Topic="" Cloud_Subscribe_Topic="" MQTTRelay_URL="user.cloud.iotize.com" MQTTRelay_Client_ID="IoTize00410000000D" MQTTRelay_Broker_Login="IoTize00410000000D" MQTTRelay_Passwd="IoTize00410000000D_0000000000��" MQTTRelay_Service="1883" Broker_Certificate="" ModuleIPAddress="0.0.0.0" ModuleIPGateway="0.0.0.0" ModuleIPMask="0.0.0.0" Wifi_SSID_Hidden="0" Wifi_WEPKey_Hidden="1" />
@@ -93,7 +94,7 @@
 </IOTizeProfile>
 <IOTizeBundle Id="0" GUI_Name="Count_Status" GUI_Description="" DataLogPeriod="0x0000003C" GUI_MonitoringPeriod="500">
 <IOTizeVariable Id="4" GUI_Name="Count" GUI_PhysicalAddress="0x20000000" Address="0x20000000" Unit="3" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="Counter value">
-<XAppRender GUI_card.description="" GUI_card.header.colorName="dark" GUI_card.header.icon="analytics" GUI_icon="moih" GUI_listChoices="" GUI_max="100" GUI_min="0" GUI_showInCard="Yes" GUI_textOff="Off" GUI_textOn="On" GUI_valueFontSize="3em" GUI_renderType="Text" GUI_content="" GUI_valueFormatting="">
+<XAppRender GUI_listChoices="" GUI_icon="moih" GUI_textOff="Off" GUI_textOn="On" GUI_max="100" GUI_min="0" GUI_valueFontSize="3em" GUI_showInCard="Yes" GUI_card.header.icon="analytics" GUI_card.header.colorName="dark" GUI_card.description="" GUI_renderType="Text" GUI_content="" GUI_valueFormatting="">
 <ValueMapping GUI_bitRange="0" GUI_content="&lt;p&gt;Bit 0 ON&lt;/p&gt;" GUI_value="1" />
 <ValueMapping GUI_bitRange="1" GUI_content="&lt;p&gt;Bit 1 ON &lt;/p&gt;" GUI_value="1" />
 <ValueMapping GUI_bitRange="2" GUI_content="&lt;p&gt; Bit 3 ON &lt;/p&gt;" GUI_value="1" />
@@ -102,7 +103,7 @@
 </XAppRender>
 </IOTizeVariable>
 <IOTizeVariable Id="7" GUI_Name="LEDStatus" GUI_PhysicalAddress="0x20000008" Address="0x20000008" Unit="1" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="LED" GUI_unsigned="1">
-<XAppRender GUI_card.description="Show if the led is enabled or not" GUI_card.header.colorName="secondary" GUI_card.header.icon="sunny" GUI_icon="" GUI_listChoices="0=OFF;1=ON;2=AUTO" GUI_max="200" GUI_min="0" GUI_showInCard="Yes" GUI_textOff="Off" GUI_textOn="On" GUI_valueFontSize="" GUI_renderType="Buttons" GUI_content="" GUI_valueFormatting="" />
+<XAppRender GUI_listChoices="0=OFF;1=ON;2=AUTO" GUI_icon="" GUI_textOff="Off" GUI_textOn="On" GUI_max="200" GUI_min="0" GUI_valueFontSize="" GUI_showInCard="Yes" GUI_card.header.icon="sunny" GUI_card.header.colorName="secondary" GUI_card.description="Show if the led is enabled or not" GUI_renderType="Buttons" GUI_content="" GUI_valueFormatting="" />
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read" />
@@ -110,10 +111,10 @@
 </IOTizeBundle>
 <IOTizeBundle Id="1" GUI_Name="MySensors" GUI_Description="" DataLogPeriod="0x0000003D" GUI_MonitoringPeriod="500">
 <IOTizeVariable Id="1" GUI_Name="Voltage_V" GUI_PhysicalAddress="0x2000001C" Address="0x2000001C" Unit="3" Quantity="1" GUI_Submit="No" GUI_Display="Yes" GUI_Alias="Vcc" GUI_DispUnit="Volts" GUI_float="1" GUI_htmlDigitsFloat="2">
-<XAppRender GUI_card.description="" GUI_card.header.colorName="dark" GUI_card.header.icon="flash" GUI_icon="" GUI_listChoices="" GUI_max="100" GUI_min="0" GUI_showInCard="Yes" GUI_textOff="Off" GUI_textOn="On" GUI_valueFontSize="" GUI_renderType="Gauge" GUI_content="" GUI_valueFormatting="return value * 10;" />
+<XAppRender GUI_listChoices="" GUI_icon="" GUI_textOff="Off" GUI_textOn="On" GUI_max="100" GUI_min="0" GUI_valueFontSize="" GUI_showInCard="Yes" GUI_card.header.icon="flash" GUI_card.header.colorName="dark" GUI_card.description="" GUI_renderType="Gauge" GUI_content="" GUI_valueFormatting="return value * 10;" />
 </IOTizeVariable>
 <IOTizeVariable Id="2" GUI_Name="Temperature_C" GUI_PhysicalAddress="0x20000018" Address="0x20000018" Unit="3" Quantity="1" GUI_Submit="No" GUI_Display="Yes" GUI_Alias="Processor temperature" GUI_DispUnit="°C" GUI_float="1" GUI_htmlDigitsFloat="1">
-<XAppRender GUI_card.description="" GUI_card.header.colorName="dark" GUI_card.header.icon="thermometer" GUI_icon="" GUI_listChoices="" GUI_max="100" GUI_min="0" GUI_showInCard="Yes" GUI_textOff="Off" GUI_textOn="On" GUI_valueFontSize="3em" GUI_renderType="Text" GUI_content="" GUI_valueFormatting="return value;" />
+<XAppRender GUI_listChoices="" GUI_icon="" GUI_textOff="Off" GUI_textOn="On" GUI_max="100" GUI_min="0" GUI_valueFontSize="3em" GUI_showInCard="Yes" GUI_card.header.icon="thermometer" GUI_card.header.colorName="dark" GUI_card.description="" GUI_renderType="Text" GUI_content="" GUI_valueFormatting="return value;" />
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read" />
@@ -122,10 +123,10 @@
 </IOTizeBundle>
 <IOTizeBundle Id="2" GUI_Name="Count_Control" GUI_Description="" DataLogPeriod="0x00000000" GUI_MonitoringPeriod="500">
 <IOTizeVariable Id="13" GUI_Name="LEDConfig" GUI_PhysicalAddress="0x20000009" Address="0x20000009" Unit="1" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="LED mode" GUI_unsigned="1">
-<XAppRender GUI_card.description="" GUI_card.header.colorName="secondary" GUI_card.header.icon="cog" GUI_icon="" GUI_listChoices="0=Off;1=On;2=AUTO" GUI_max="100" GUI_min="0" GUI_showInCard="No" GUI_textOff="Off" GUI_textOn="On" GUI_valueFontSize="" GUI_renderType="Select" GUI_content="" GUI_valueFormatting="" />
+<XAppRender GUI_listChoices="0=Off;1=On;2=AUTO" GUI_icon="" GUI_textOff="Off" GUI_textOn="On" GUI_max="100" GUI_min="0" GUI_valueFontSize="" GUI_showInCard="No" GUI_card.header.icon="cog" GUI_card.header.colorName="secondary" GUI_card.description="" GUI_renderType="Select" GUI_content="" GUI_valueFormatting="" />
 </IOTizeVariable>
 <IOTizeVariable Id="0" GUI_Name="Period" GUI_PhysicalAddress="0x2000000C" Address="0x2000000C" Unit="3" Quantity="1" GUI_Submit="Yes" GUI_Display="Yes" GUI_Alias="LED blink period (ms)" GUI_DispUnit="ms">
-<XAppRender GUI_card.description="LED blinking period in milliseconds" GUI_card.header.colorName="secondary" GUI_card.header.icon="clock" GUI_icon="" GUI_listChoices="" GUI_max="100" GUI_min="0" GUI_showInCard="Yes" GUI_textOff="Off" GUI_textOn="On" GUI_valueFontSize="" GUI_renderType="Slider" GUI_content="" GUI_valueFormatting="" />
+<XAppRender GUI_listChoices="" GUI_icon="" GUI_textOff="Off" GUI_textOn="On" GUI_max="100" GUI_min="0" GUI_valueFontSize="" GUI_showInCard="Yes" GUI_card.header.icon="clock" GUI_card.header.colorName="secondary" GUI_card.description="LED blinking period in milliseconds" GUI_renderType="Slider" GUI_content="" GUI_valueFormatting="" />
 </IOTizeVariable>
 <IOTizeAccessControl>
 <IOTizeACL ProfileName="anonymous" Rights="read,write" />
