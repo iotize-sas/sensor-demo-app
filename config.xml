@@ -121,5 +121,4 @@
     <plugin name="cordova-plugin-iotize-device-com-nfc" spec="@iotize/device-com-nfc.cordova@2.0.0-alpha.2" />
     <plugin name="cordova-plugin-iotize-ble" spec="@iotize/cordova-plugin-iotize-ble@2.0.0-alpha.2" />
     <plugin name="cordova-plugin-iotize-device-com-wifi" spec="@iotize/device-com-wifi.cordova@2.0.0-alpha.2" />
-    <plugin name="cordova-plugin-iotize-device-com-socket" spec="@iotize/device-com-socket.cordova@2.0.0-alpha.3" />
 </widget>
