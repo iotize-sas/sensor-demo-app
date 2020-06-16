@@ -113,7 +113,7 @@ export class TapConnectSocketTabComponent implements OnInit {
       info: {
         ssid: meta.SSID,
         name: meta.SSID,
-        url: "tcp://192.168.1.50:2000",
+        url: "tcp://192.168.4.1:2000",
         password: undefined // TODO check if has password
       }
     });
