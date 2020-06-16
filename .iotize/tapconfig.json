@@ -156,8 +156,8 @@
             },
             "wifi": {
                 "mode": "INFRASTRUCTURE_ONLY",
-                "ssid": "IOTIZE-PRIVATE",
-                "wepKey": "*Iotize_38330_Iotize?"
+                "ssid": "",
+                "wepKey": ""
             },
             "mqttRelay": {
                 "url": "mqtt://user.cloud.iotize.com:1883",
