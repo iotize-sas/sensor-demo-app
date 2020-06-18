@@ -48,7 +48,7 @@ export const PROTOCOL_FACTORY_CONFIG = {
           algorithm: meta.info.algorithm
         },
         socket: {
-          url: meta.info.url || "tcp://192.168.4.1:2000"
+          url: meta.info.url || "tcp://192.168.1.50:2000"
         }
       },
       options => {

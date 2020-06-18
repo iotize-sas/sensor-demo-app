@@ -49,6 +49,7 @@ iotizestudio/*.izsc
 iotizestudio/*.xml
 iotizestudio/MB_conf.h
 iotizestudio/S3P_conf.h
+iotizestudio/GPUCache
 
 # Angular compiler files
 __ngcc_entry_points__.json
