@@ -35,7 +35,7 @@
     "@ionic-native/status-bar": "^5.16.0",
     "@ionic/angular": "^5.0.7",
     "@iotize/common": "1.0.0-alpha.5",
-    "@iotize/cordova-plugin-iotize-ble": "2.0.0-alpha.2",
+    "@iotize/cordova-plugin-iotize-ble": "^2.0.0-alpha.4",
     "@iotize/device-client.js": "1.0.0-alpha.7",
     "@iotize/device-com-mqtt.js": "1.0.0-alpha.8",
     "@iotize/device-com-nfc.cordova": "2.0.0-alpha.2",
@@ -110,9 +110,9 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-iotize-device-com-nfc": {},
-      "cordova-plugin-iotize-ble": {},
       "cordova-plugin-iotize-device-com-wifi": {},
-      "cordova-plugin-iotize-device-com-socket": {}
+      "cordova-plugin-iotize-device-com-socket": {},
+      "cordova-plugin-iotize-ble": {}
     }
   }
 }
