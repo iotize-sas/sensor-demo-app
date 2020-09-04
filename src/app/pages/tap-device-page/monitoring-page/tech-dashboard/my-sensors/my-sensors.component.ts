@@ -46,7 +46,7 @@ export class MySensorsComponent implements OnInit, OnDestroy {
   ) {}
 
   Voltage_VValueFormatting(value: any) {
-    return value * 10;
+    return value;
   }
 
   Temperature_CValueFormatting(value: any) {

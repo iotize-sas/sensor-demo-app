@@ -114,7 +114,8 @@ export class TapConnectSocketTabComponent implements OnInit {
         ssid: meta.SSID,
         name: meta.SSID,
         url: "tcp://192.168.4.1:2000",
-        password: undefined // TODO check if has password
+        algorithm: "WPA",
+        password: undefined
       }
     });
   }
