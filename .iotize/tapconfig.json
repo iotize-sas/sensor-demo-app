@@ -154,7 +154,10 @@
                 "url": "mqtt://user.cloud.iotize.com:1883"
             },
             "wifi": {
-                "mode": "INFRASTRUCTURE_ONLY"
+                "mode": "INFRASTRUCTURE_ONLY",
+                "ip": "0.0.0.0",
+                "ipGateway": "0.0.0.0",
+                "mask": "0.0.0.0"
             },
             "mqttRelay": {
                 "url": "mqtt://user.cloud.iotize.com:1883",

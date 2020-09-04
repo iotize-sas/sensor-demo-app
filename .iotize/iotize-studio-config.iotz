@@ -2,7 +2,7 @@
 <IOTizeConfiguration Version="1.2.0" Lock="8">
 <GUI_Environment StoreVarInfo="false" Locked="false" Autoincrement="false" DocVerboseLevel="3" DocLogVerboseLevel="3" DocLogFileName="" AdminPWD="admin" SmartPhoneStoragePath="" />
 <GUI_XAppConfig>
-<GUI_app path=".." version="1.3.1" />
+<GUI_app path=".." version="1.3.2" />
 <GUI_layout col="2" mode="One page per bundle" />
 <GUI_logo image=".\resources\icon.png" />
 <GUI_splashScreen image=".\resources\splash.png" />

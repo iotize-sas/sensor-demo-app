@@ -84,9 +84,7 @@ export namespace SensorDemo {
   export type VariableByType = DataType.CountStatus &
     DataType.MySensors &
     DataType.CountControl;
-  export type VariableKey = keyof DataType.CountStatus &
-    DataType.MySensors &
-    DataType.CountControl;
+  export type VariableKey = keyof VariableByType;
 
   export type BundleKey = keyof Bundles;
   export type BundleByType = Bundles;
