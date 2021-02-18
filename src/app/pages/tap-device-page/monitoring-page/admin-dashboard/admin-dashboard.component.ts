@@ -3,20 +3,27 @@ import { CurrentDeviceService, TapInfo } from "@iotize/ionic";
 import {
   ConnectionStateChangeEvent,
   ConnectionState
-} from "@iotize/device-client.js/protocol/api";
+} from "@iotize/tap/protocol/api";
 import { Subscription, Observable } from "rxjs";
 import { ToastService } from "app-theme";
 import { map } from "rxjs/operators";
 import { ModalController } from "@ionic/angular";
-import { SubVariableInteraction } from "@iotize/ionic";
 import { TapMonitoringSettingsComponent } from "@iotize/ionic/monitoring";
 import { MonitoringSettingsService } from "@iotize/ionic/monitoring";
-import { VariableInteraction } from "@iotize/device-client.js/device/target-variable/variable-interaction.interface";
-import { SensorDemo } from "tap-api";
-import { VariableConfig } from "@iotize/device-client.js/device/target-variable/variable";
+import { TypedDataManager, VariableView, TapVariable } from "@iotize/tap/data";
+import { SensorDemoDataApi, dataManagerConfig } from "tap-api";
 import { Router, NavigationStart } from "@angular/router";
 import { TapMonitoringService } from "app-lib";
-import { Tap } from "@iotize/device-client.js";
+import { Tap } from "@iotize/tap";
+import {
+  PipeConverter,
+  ByteSwapConverter,
+  ArrayConverter,
+  NumberConverter,
+  StringConverter,
+  FloatConverter,
+  BooleanConverter
+} from "@iotize/tap/client/impl";
 
 const DEFAULT_TARGET_CONNECT_TRY_COUNT = 2;
 
@@ -30,12 +37,24 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   private monitoringSettingsSub: Subscription;
 
-  private _subVariableCache: Record<string, SubVariableInteraction<any>> = {};
+  /**
+   * Variables cache
+   * Will be initialized only once
+   */
+  variables: Partial<{}> = {};
 
   waitForSubmit: boolean = false;
   isMonitorRunning: boolean = false;
-  get data() {
-    return this.monitoringService.data;
+
+  notificationErrors: {
+    error: Error;
+    createdAt: Date;
+  }[] = [];
+
+  dataManager: TypedDataManager<SensorDemoDataApi.Data>;
+
+  get isTapConnected() {
+    return this.tapService.protocolMeta && this.tap.isConnected();
   }
 
   constructor(
@@ -45,12 +64,14 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     public monitoringService: TapMonitoringService,
     private toastService: ToastService,
     private router: Router
-  ) {}
+  ) {
+    this.initVariableCache();
+  }
 
   async ngOnInit() {
-    this.initComponents();
+    this.onNewTapSelected();
     this.tapService.tapChanged.subscribe((newTap: Tap) => {
-      this.initComponents();
+      this.onNewTapSelected();
     });
 
     this.waitForSubmit = !this.tapService.tap.isConnected();
@@ -60,10 +81,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         switch (event.newState) {
           case ConnectionState.CONNECTED:
             this.waitForSubmit = false;
-            if (this.monitoringService.data.isMonitoringRunning) {
+            if (this.isMonitoringRunning) {
               try {
-                await this.connectToTarget();
-                this.monitoringService.data.refresh();
+                await this.dataManager.refreshValues();
               } catch (err) {
                 this.showError(err);
               }
@@ -77,13 +97,39 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
     this.monitoringSettingsSub = this.monitoringSettingsService.settings$.subscribe(
       newSettings => {
-        this.data.setMonitoringPeriod(newSettings.period);
+        this.monitoringService.applyNewSettings(newSettings);
       }
     );
     this.startMonitor();
   }
 
-  public initComponents() {}
+  private onNewTapSelected() {
+    this.initVariableCache();
+    this.initComponents();
+    this.waitForSubmit = !this.tapService.tap.isConnected();
+  }
+
+  private initVariableCache() {
+    this.dataManager = (this.tapService.tap
+      .data as unknown) as TypedDataManager<SensorDemoDataApi.Data>;
+    try {
+    } catch (err) {
+      console.warn(err);
+      this.showError(err);
+    }
+  }
+
+  public initComponents() {
+    this.notificationErrors = [];
+    this.dataManager.events.subscribe(event => {
+      if (event.type === "error") {
+        this.notificationErrors.push({
+          createdAt: new Date(),
+          error: event.error
+        });
+      }
+    });
+  }
 
   ngOnDestroy() {
     this.connectionStateChangeSub.unsubscribe();
@@ -91,36 +137,21 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.monitoringSettingsSub.unsubscribe();
   }
 
-  get variables() {
-    return this.data.variables;
-  }
-
-  subVariable(variable: VariableConfig<any[]>, index: number) {
-    const key = `${variable.identifier()}.${index}`;
-    if (!(key in this._subVariableCache)) {
-      this._subVariableCache[key] = new SubVariableInteraction(variable, index);
-    }
-    return this._subVariableCache[key];
-  }
-
   get tap() {
     return this.tapService.tap;
   }
 
   get isMonitoringRunning() {
-    return this.data && this.data.isMonitoringRunning;
-  }
-
-  stopMonitor() {
-    this.data.stopAll();
+    return this.monitoringService.isRunning;
   }
 
   async startMonitor() {
-    try {
-      await this.connectToTarget();
-      this.data.startAll(this.monitoringSettingsService.settings.period);
-    } catch (err) {
-      this.showError(err);
+    if (this.isTapConnected) {
+      try {
+        this.monitoringService.start();
+      } catch (err) {
+        this.showError(err);
+      }
     }
   }
 
@@ -130,23 +161,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     });
 
     return await modal.present();
-  }
-
-  async connectToTarget(
-    maxTry: number = DEFAULT_TARGET_CONNECT_TRY_COUNT
-  ): Promise<number> {
-    for (let tryNumber = 1; tryNumber <= maxTry; tryNumber++) {
-      try {
-        (await this.tap.service.target.connect()).successful();
-        return tryNumber;
-      } catch (err) {
-        if (tryNumber >= maxTry) {
-          throw new Error(`Device was not able to connect to the target after 
-          ${maxTry} attempt(s). Cause: ${err.message}`);
-        }
-      }
-    }
-    return 0;
   }
 
   async changeDevice() {

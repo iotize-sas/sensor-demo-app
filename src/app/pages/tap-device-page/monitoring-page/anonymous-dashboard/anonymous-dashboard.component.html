@@ -6,20 +6,24 @@
     <ion-title>
       Control dashboard
     </ion-title>
-    <ion-buttons slot="end" *ngIf="data">
-      <ion-button (click)="startMonitor()" *ngIf="!isMonitoringRunning">
+    <ion-buttons slot="end" *ngIf="dataManager">
+      <ion-button
+        (click)="startMonitor()"
+        *ngIf="!isMonitoringRunning"
+        [disabled]="!tapService.protocolMeta"
+      >
         <ion-icon name="play"></ion-icon>
       </ion-button>
-      <ion-button (click)="stopMonitor()" *ngIf="isMonitoringRunning">
+      <ion-button
+        (click)="monitoringService.stop()"
+        *ngIf="isMonitoringRunning"
+      >
         <ion-icon name="pause"></ion-icon>
       </ion-button>
-      <!--<ion-button (click)="openSettings()">
-                <ion-icon name="settings"></ion-icon>
-            </ion-button>-->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="data">
+<ion-content *ngIf="dataManager">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
   <ion-tabs>
@@ -41,9 +45,9 @@
 
 <ion-footer>
   <ion-item
-    *ngIf="tapService.protocolMeta && !isMonitoringRunning"
+    *ngIf="isTapConnected && !isMonitoringRunning"
     lines="none"
-    [color]="'warning'"
+    [color]="'danger'"
   >
     <ion-icon name="alert"></ion-icon>
     <ion-label class="ion-text-wrap">Monitoring is paused</ion-label>
@@ -57,7 +61,7 @@
   <ion-item
     *ngIf="tapService.protocolMeta && waitForSubmit"
     lines="none"
-    [color]="'warning'"
+    [color]="'danger'"
   >
     <ion-icon name="alert"></ion-icon>
     <ion-label class="ion-text-wrap"

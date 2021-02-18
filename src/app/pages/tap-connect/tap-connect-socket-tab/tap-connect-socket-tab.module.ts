@@ -11,6 +11,7 @@ import { TapScannerWifiModule } from "@iotize/ionic";
     AppThemeModule,
     TapConnectSocketModule,
     TapScannerWifiModule,
+
     RouterModule.forChild([
       {
         path: "",

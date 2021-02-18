@@ -1,4 +1,4 @@
-<ion-content *ngIf="data">
+<ion-content *ngIf="dataManager">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
   <ion-grid>
@@ -14,7 +14,7 @@
             <div style="margin: auto;">
               <monitoring-variable-value
                 [lines]="'none'"
-                [variable]="variables['Count']"
+                [variable]="variables['count']"
                 [inputOptions]='{
     "min": 0,
     "max": 100
@@ -37,8 +37,8 @@
 
           <ion-card-content>
             <tap-variable-buttons
-              [buttons]="LEDStatusButtons"
-              [variable]="variables['LEDStatus']"
+              [buttons]="lEDStatusButtons"
+              [variable]="variables['lEDStatus']"
             >
             </tap-variable-buttons>
           </ion-card-content>

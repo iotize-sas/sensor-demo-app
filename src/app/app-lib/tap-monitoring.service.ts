@@ -1,29 +1,48 @@
+import "@iotize/tap/ext/data";
+
 import { Injectable } from "@angular/core";
+import { ConnectionState } from "@iotize/tap/protocol/api";
 import { CurrentDeviceService } from "@iotize/ionic";
-import { SensorDemo } from "tap-api";
-import { Tap } from "@iotize/device-client.js";
+import { MonitoringSettings } from "@iotize/ionic/monitoring";
+import { MonitorEngine } from "@iotize/tap/data";
 
 @Injectable({
   providedIn: "root"
 })
 export class TapMonitoringService {
-  public data: SensorDemo.DataManager;
+  public settings: MonitoringSettings = {
+    period: 1000
+  };
 
-  constructor(tapService: CurrentDeviceService) {
-    this.data = SensorDemo.DataManager.create(tapService.tap);
-
-    tapService.tapChanged.subscribe((newTap: Tap) => {
-      console.info("Tap changed!");
-      if (this.data) {
-        this.data.stopAll();
+  constructor(public tapService: CurrentDeviceService) {
+    this.tapService.connectionState.subscribe(event => {
+      if (event.newState !== ConnectionState.CONNECTED && this.isRunning) {
+        this.stop();
       }
-      this.data = SensorDemo.DataManager.create(newTap);
+    });
+  }
+
+  get isRunning() {
+    return (
+      this.tapService.tap.data.monitoring.state === MonitorEngine.State.START
+    );
+  }
+
+  public applyNewSettings(newSettings: MonitoringSettings) {
+    this.settings = newSettings;
+    if (this.isRunning) {
+      this.stop();
+      this.start();
+    }
+  }
+
+  public start() {
+    this.tapService.tap.data.monitoring.start({
+      period: this.settings.period
     });
   }
 
   public stop() {
-    if (this.data) {
-      this.data.stopAll();
-    }
+    this.tapService.tap.data.monitoring.stop();
   }
 }

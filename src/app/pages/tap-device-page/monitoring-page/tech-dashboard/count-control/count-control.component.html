@@ -1,4 +1,4 @@
-<ion-content *ngIf="data">
+<ion-content *ngIf="dataManager">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
   <ion-grid>
@@ -14,7 +14,7 @@
             <div style="margin: auto;">
               <monitoring-variable-value
                 [lines]="'none'"
-                [variable]="variables['LEDConfig']"
+                [variable]="variables['lEDConfig']"
                 [inputOptions]='{
     "type": "select",
     "options": [
@@ -52,7 +52,7 @@
           <ion-card-content>
             <tap-variable-range
               [editable]="true"
-              [variable]="variables['Period']"
+              [variable]="variables['period']"
               pin="true"
               snaps="true"
               min="0"

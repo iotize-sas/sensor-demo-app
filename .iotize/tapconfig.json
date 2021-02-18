@@ -1,15 +1,10 @@
 {
-    "meta": {
-        "version": "1.0.0"
-    },
     "config": {
-        "version": "1.2.0",
+        "version": "2.1.0",
         "application": {
             "name": "Sensor demo",
             "universalLink": "https://www.iotize.com",
-            "android": {
-                "aar": "com.iotize.app.sensordemo"
-            }
+            "uri": "$4/com.iotize.app.sensordemo"
         },
         "data": {
             "bundles": [
@@ -18,20 +13,24 @@
                     "id": 0,
                     "variables": [
                         {
-                            "kind": "MEMORY",
+                            "domain": "TARGET",
                             "address": "0x0",
                             "id": 4,
                             "length": 1,
-                            "type": "INT32",
-                            "name": "Count"
+                            "dataType": "INT32",
+                            "meta": {
+                                "name": "Count"
+                            }
                         },
                         {
-                            "kind": "MEMORY",
+                            "domain": "TARGET",
                             "address": "0x0",
                             "id": 7,
                             "length": 1,
-                            "type": "UINT8",
-                            "name": "LEDStatus"
+                            "dataType": "UINT8",
+                            "meta": {
+                                "name": "LEDStatus"
+                            }
                         }
                     ],
                     "acls": {
@@ -49,22 +48,26 @@
                     "id": 1,
                     "variables": [
                         {
-                            "kind": "MEMORY",
+                            "domain": "TARGET",
                             "address": "0x0",
                             "id": 1,
                             "length": 1,
-                            "type": "FLOAT32",
-                            "name": "Voltage_V",
-                            "unit": "Volts"
+                            "dataType": "FLOAT32",
+                            "meta": {
+                                "name": "Voltage_V",
+                                "unit": "Volts"
+                            }
                         },
                         {
-                            "kind": "MEMORY",
+                            "domain": "TARGET",
                             "address": "0x0",
                             "id": 2,
                             "length": 1,
-                            "type": "FLOAT32",
-                            "name": "Temperature_C",
-                            "unit": "°C"
+                            "dataType": "FLOAT32",
+                            "meta": {
+                                "name": "Temperature_C",
+                                "unit": "°C"
+                            }
                         }
                     ],
                     "acls": {
@@ -82,21 +85,25 @@
                     "id": 2,
                     "variables": [
                         {
-                            "kind": "MEMORY",
+                            "domain": "TARGET",
                             "address": "0x0",
                             "id": 13,
                             "length": 1,
-                            "type": "UINT8",
-                            "name": "LEDConfig"
+                            "dataType": "UINT8",
+                            "meta": {
+                                "name": "LEDConfig"
+                            }
                         },
                         {
-                            "kind": "MEMORY",
+                            "domain": "TARGET",
                             "address": "0x0",
                             "id": 0,
                             "length": 1,
-                            "type": "INT32",
-                            "name": "Period",
-                            "unit": "ms"
+                            "dataType": "INT32",
+                            "meta": {
+                                "name": "Period",
+                                "unit": "ms"
+                            }
                         }
                     ],
                     "acls": {
@@ -134,74 +141,73 @@
                         {
                             "username": "user",
                             "id": 2,
-                            "lifeTime": 0,
-                            "key": "0x0AE319E890E13D3EB4085F8AA88927FC"
+                            "key": "0x0AE319E890E13D3EB4085F8AA88927FC",
+                            "lifeTime": 0
                         },
                         {
                             "username": "Paul",
                             "id": 3,
-                            "lifeTime": 0,
-                            "key": "0xA2F11651F981F7FD486CB255C2794895"
+                            "key": "0xA2F11651F981F7FD486CB255C2794895",
+                            "lifeTime": 0
                         }
                     ]
                 }
             ]
         },
+        "cloud": {
+            "dataLog": {
+                "mqttPublishTopic": "",
+                "mqttSubscribeTopic": "",
+                "uploadPeriod": 60000
+            }
+        },
+        "wireless": {
+            "options": {
+                "inactivityTimeout": 30
+            },
+            "protocols": {
+                "wifi": {
+                    "mode": "NETWORK",
+                    "ssid": "",
+                    "key": "",
+                    "mask": "0.0.0.0",
+                    "ipGateway": "0.0.0.0",
+                    "ip": "0.0.0.0",
+                    "keyVisibility": "HIDDEN",
+                    "ssidVisibility": "VISIBLE"
+                },
+                "mqtt": {},
+                "ble": {
+                    "pairing": false
+                },
+                "lora": {},
+                "nfc": {
+                    "autoLogProfileId": 0,
+                    "connectionPriority": "NFC_NON_PRIORITY",
+                    "pairingMode": "NO"
+                }
+            }
+        },
         "tap": {
-            "cloud": {
-                "password": "IoTzPr004100000000_0000000000",
-                "uploadPeriod": 60000,
-                "url": "mqtt://user.cloud.iotize.com:1883"
-            },
-            "wifi": {
-                "mode": "INFRASTRUCTURE_ONLY",
-                "ip": "0.0.0.0",
-                "ipGateway": "0.0.0.0",
-                "mask": "0.0.0.0"
-            },
-            "mqttRelay": {
-                "url": "mqtt://user.cloud.iotize.com:1883",
-                "password": "%%UID%%",
-                "netKey": "testnetkey"
-            },
             "security": {
                 "scramActivated": false,
                 "hashPassword": true,
-                "factoryReset": false,
-                "resourceLogUid": false,
-                "resourceFactory": false
+                "disableHardwareFactoryReset": false,
+                "disableLoginWithUID": false,
+                "disableResourceFactoryReset": false
             },
             "powerOptimization": "NO",
-            "availableHostProtocols": [],
-            "hostInactivityPeriod": 30,
-            "hashIterationCount": 5000,
-            "nfcPairingMode": "NO"
+            "scram": {
+                "hashIteration": 5000
+            },
+            "certificate": {}
         },
         "target": {
-            "firmwareVersion": "1.0.0",
-            "protocol": "SWD",
-            "modbus": {
-                "offsetFirstRegister": false,
-                "slave": 1
+            "type": "MCU",
+            "protocol": {
+                "type": "SWD"
             },
-            "serial": {
-                "baudRate": 9600,
-                "dataBits": 8,
-                "delimiter": "NONE",
-                "parity": "NONE",
-                "stopBits": "ONE",
-                "physicalPort": "NONE",
-                "hardwareFlowControl": "NONE",
-                "timeout": 10
-            },
-            "LEDs": {
-                "enabled": false,
-                "identification": false
-            },
-            "usb": {
-                "aliases": []
-            },
-            "type": "MCU"
+            "firmwareVersion": "1.0.0"
         }
     }
 }

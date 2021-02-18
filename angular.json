@@ -153,12 +153,6 @@
               "devServerTarget": "app:serve:production"
             }
           }
-        },
-        "regenerate": {
-          "builder": "@iotize/ionic-toolkit:regenerate",
-          "options": {
-            "projectDir": "."
-          }
         }
       }
     },

@@ -10,6 +10,7 @@ import { AppThemeModule } from "app-theme";
   imports: [
     AppThemeModule,
     TapConnectMqttModule,
+
     RouterModule.forChild([
       {
         path: "",

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from "@angular/core";
-import { concat, tap, share } from "rxjs/operators";
+import { concat, tap, share, switchMap } from "rxjs/operators";
 import {
   ProtocolMeta,
   TapConnectionService,
@@ -16,7 +16,7 @@ import { ToastService, AppNavigationService, LoaderService } from "app-theme";
 import getDebugger from "src/app/logger";
 import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
-import { EncryptionKeys } from "@iotize/device-client.js";
+import { EncryptionKeys } from "@iotize/tap/auth";
 import { hexStringToBuffer } from "@iotize/common/byte-converter";
 
 import { NdefTag } from "@iotize/device-com-nfc.cordova";
@@ -37,6 +37,7 @@ export class MyTapConnectionService {
     public tapService: CurrentDeviceService,
     public appNav: AppNavigationService,
     public loaderService: LoaderService,
+
     public platform: Platform,
     @Inject("TapConnectionOptions") public connectOptions: TapConnectionOptions,
     public router: Router,
@@ -48,13 +49,12 @@ export class MyTapConnectionService {
     options: TapConnectionOptions = this.connectOptions
   ): Observable<any> {
     debug("connectWithLoader ", meta, options);
-    let obs = this.tapConnectionService
-      .connect(meta as any, options)
-      .pipe(
-        concat(of("Loading application...")),
-        concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000)),
-        share()
-      );
+    let obs = this.tapConnectionService.connect(meta as any, options).pipe(
+      share(),
+      concat(of("Loading application...")),
+
+      concat(this.appNav.waitForNavigationEnd(this.deviceHomeUrl, 10000))
+    );
     this.loaderService
       .addTask({
         message: `Loading device (${meta.type})...`,
@@ -180,11 +180,10 @@ export class MyTapConnectionService {
 
     let connectionOptions: TapConnectionOptions = {
       encryption: {
-        enabled: tapState.encryption ? tapState.encryption.enabled : undefined,
-        keys: parseKeys(
-          tapState.encryption ? tapState.encryption.keys : undefined
-        ),
-        frameCounter: tapState.encryption.frameCounter
+        encryption: tapState.encryption?.encryption || false,
+        keys: parseKeys(tapState.encryption?.keys),
+        frameCounter: tapState.encryption.frameCounter,
+        initializationVectorResetPeriod: 100
       },
       nfcPairing: !tapState.nfcPairingDone && this.connectOptions.nfcPairing,
       refreshSessionState: this.connectOptions.refreshSessionState,

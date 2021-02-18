@@ -115,8 +115,8 @@
     <plugin name="cordova-plugin-splashscreen" spec="^6.0.0" />
     <plugin name="cordova-plugin-ionic-webview" spec="^5.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <plugin name="cordova-plugin-iotize-device-com-nfc" spec="@iotize/device-com-nfc.cordova@2.0.0-alpha.2" />
-    <plugin name="cordova-plugin-iotize-ble" spec="@iotize/cordova-plugin-iotize-ble@2.0.0-alpha.5" />
-    <plugin name="cordova-plugin-iotize-device-com-wifi" spec="@iotize/device-com-wifi.cordova@2.0.0-alpha.2" />
-    <plugin name="cordova-plugin-iotize-device-com-socket" spec="@iotize/device-com-socket.cordova@2.0.0-alpha.3" />
+    <plugin name="cordova-plugin-iotize-device-com-nfc" spec="@iotize/device-com-nfc.cordova@3.0.0-alpha.1" />
+    <plugin name="cordova-plugin-iotize-ble" spec="@iotize/device-com-ble.cordova@3.0.0-alpha.1" />
+    <plugin name="cordova-plugin-iotize-device-com-wifi" spec="@iotize/device-com-wifi.cordova@3.0.0-alpha.1" />
+    <plugin name="cordova-plugin-iotize-device-com-socket" spec="@iotize/device-com-socket.cordova@3.0.0-alpha.1" />
 </widget>

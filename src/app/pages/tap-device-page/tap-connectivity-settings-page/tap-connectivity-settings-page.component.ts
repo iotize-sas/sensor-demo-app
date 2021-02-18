@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
-import { HostProtocol, NetworkMode } from "@iotize/device-client.js";
-import { ConnectionState } from "@iotize/device-client.js/protocol/api";
+import { HostProtocol } from "@iotize/tap";
+import { WifiMode } from "@iotize/tap/service/impl/wifi";
+import { ConnectionState } from "@iotize/tap/protocol/api";
 import { CurrentDeviceService, TapConfigItem, TapInfo } from "@iotize/ionic";
 import { ToastService } from "app-theme";
 import { Observable, Subscription } from "rxjs";
@@ -19,7 +20,7 @@ export class TapConnectivitySettingsPageComponent implements OnInit, OnDestroy {
 
   public wifiConfigs?: TapConfigItem[];
 
-  public bluetoothConfig?: TapConfigItem[];
+  public bleConfig?: TapConfigItem[];
 
   public nfcConfig?: TapConfigItem[];
 
@@ -80,34 +81,19 @@ export class TapConnectivitySettingsPageComponent implements OnInit, OnDestroy {
               editable: true
             },
             {
+              key: TapInfo.WifiMode,
+              editable: true
+            },
+            {
               key: TapInfo.WifiHostname
             },
             {
-              key: TapInfo.wifiSSID,
+              key: TapInfo.WifiSSID,
               editable: true
             },
             {
-              key: TapInfo.wifiPassword,
+              key: TapInfo.WifiKey,
               editable: true
-            },
-            {
-              key: TapInfo.networkMode,
-              editable: true,
-              input: {
-                type: "select",
-                options: [
-                  {
-                    icon: "git-network",
-                    key: NetworkMode.INFRASTRUCTURE_ONLY,
-                    text: "Network"
-                  },
-                  {
-                    icon: "people",
-                    key: NetworkMode.PEER_TO_PEER,
-                    text: "Access point"
-                  }
-                ]
-              }
             },
             {
               key: TapInfo.NetworkInfraIp,
@@ -117,7 +103,7 @@ export class TapConnectivitySettingsPageComponent implements OnInit, OnDestroy {
         }
 
         if (availableProtocols.indexOf(HostProtocol.BLE) >= 0) {
-          this.bluetoothConfig = [
+          this.bleConfig = [
             {
               key: TapInfo.isHostProtocolAuthorized,
               params: [HostProtocol.BLE],
@@ -151,27 +137,33 @@ export class TapConnectivitySettingsPageComponent implements OnInit, OnDestroy {
 
         if (true) {
           this.mqttConfig = [
-            // {
-            //   key: TapInfo.isHostProtocolAuthorized,
-            //   params: [
-            //     HostProtocol.NFC
-            //   ],
-            //   editable: true
-            // }
             {
-              key: TapInfo.MqttRelayEndpoint,
+              key: TapInfo.isHostProtocolAuthorized,
+              params: [HostProtocol.MQTT],
               editable: true
             },
             {
-              key: TapInfo.MqttRelayClientId,
+              key: TapInfo.MqttBrokerHostname,
               editable: true
             },
             {
-              key: TapInfo.MqttRelayUsername,
+              key: TapInfo.MqttBrokerPort,
               editable: true
             },
             {
-              key: TapInfo.MqttRelayPassword,
+              key: TapInfo.MqttClientId,
+              editable: true
+            },
+            {
+              key: TapInfo.MqttUsername,
+              editable: true
+            },
+            {
+              key: TapInfo.MqttPassword,
+              editable: true
+            },
+            {
+              key: TapInfo.MqttRelayNetKey,
               editable: true
             }
           ];

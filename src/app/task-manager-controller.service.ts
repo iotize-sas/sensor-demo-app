@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CurrentDeviceService } from "@iotize/ionic";
-import { ConnectionState } from "@iotize/device-client.js/protocol/api";
+import { ConnectionState } from "@iotize/tap/protocol/api";
 import { Subscription } from "rxjs";
 import { TaskManagerService } from "app-theme";
 

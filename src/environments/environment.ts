@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   appName: "Sensor demo [DEV]",
   version: `${version}-dev`,
-  debug: "*",
+  debug: false,
   nfcMimeType: "application/com.iotize.app.sensordemo"
 };
 

@@ -17,7 +17,7 @@ import { Observable, Subscription } from "rxjs";
 import {
   ConnectionStateChangeEvent,
   ConnectionState
-} from "@iotize/device-client.js/protocol/api";
+} from "@iotize/tap/protocol/api";
 import { Dialogs } from "@ionic-native/dialogs/ngx";
 import { environment } from "src/environments/environment";
 import { MenuItem, ToastService, AppNavigationService } from "app-theme";
@@ -175,7 +175,7 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
   }
 
   clickProfileName() {
-    if (this.tap.currentSessionState.name !== "anonymous") {
+    if (this.tap.auth.sessionStateSnapshot.name !== "anonymous") {
       this.changePassword();
     }
   }

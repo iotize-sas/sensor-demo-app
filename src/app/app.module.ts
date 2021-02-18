@@ -16,7 +16,7 @@ import { environment } from "../environments/environment";
 import { ScannerNotAvailable } from "./scanner-not-available";
 
 import { TapScannerBleModule, TAP_BLE_SCANNER } from "@iotize/ionic";
-import { BLEScanner } from "@iotize/cordova-plugin-iotize-ble";
+import { BLEScanner } from "@iotize/device-com-ble.cordova";
 import { WebBluetoothScanner } from "@iotize/device-com-web-bluetooth.js";
 
 import { TapScannerNfcModule } from "@iotize/ionic";

@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content>
-  <tap-connection-state-feedback></tap-connection-state-feedback>
+  <tap-connection-state-feedback [card]="false"></tap-connection-state-feedback>
 
   <ng-template #warningProtocol>
     <app-feedback
@@ -61,7 +61,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="bluetoothConfig" class="tap-connectivity-card-ble">
+  <ion-card *ngIf="bleConfig" class="tap-connectivity-card-ble">
     <ion-card-header>
       <ion-card-title>
         <ion-icon name="bluetooth"></ion-icon>
@@ -75,7 +75,7 @@
     </ion-card-content>
     <ion-card-content>
       <tap-config-list
-        [items]="bluetoothConfig"
+        [items]="bleConfig"
         [itemRefresh]="true"
         [globalRefresh]="false"
       ></tap-config-list>

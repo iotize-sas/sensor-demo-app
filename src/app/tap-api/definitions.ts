@@ -1,163 +1,56 @@
-import { Bundle as BundleModel } from "@iotize/device-client.js";
-import { DataManager as BaseDataManager } from "@iotize/ionic";
-import { bundles as bundlesConfig } from "./tap-config";
-import { Tap, VariableInteraction } from "@iotize/device-client.js";
-import {
-  BundleConfig,
-  VariableConfig
-} from "@iotize/device-client.js/config/schema/v1";
-import { BodyConverter } from "@iotize/device-client.js/client/api";
-
-export type AppBundleConfig = BundleConfig & {
-  variables: AppVariableConfig[];
-};
-
-export type AppVariableConfig = VariableConfig & {
-  converter?: BodyConverter<any>;
-};
-
-export namespace SensorDemo {
-  interface Bundles {
+export namespace SensorDemoDataApi {
+  export namespace Bundle {
     /**
-     * Bundle  Count_Status
-     * Id: 0
+     * Bundle id: 0
      */
-    countStatus: DataType.CountStatus;
-
-    /**
-     * Bundle  MySensors
-     * Id: 1
-     */
-    mySensors: DataType.MySensors;
-
-    /**
-     * Bundle  Count_Control
-     * Id: 2
-     */
-    countControl: DataType.CountControl;
-  }
-
-  export namespace DataType {
     export interface CountStatus {
       /**
-       * Variable  Count
-       * Id: 4
+       * Variable id: 4
        */
-      Count: number; // INT32;
+      count: number;
 
       /**
-       * Variable  LEDStatus
-       * Id: 7
+       * Variable id: 7
        */
-      LEDStatus: number; // UINT8;
+      lEDStatus: number;
     }
 
+    /**
+     * Bundle id: 1
+     */
     export interface MySensors {
       /**
-       * Variable  Voltage_V
-       * Id: 1
+       * Variable id: 1
        */
-      Voltage_V: number; // FLOAT32;
+      voltage_V: number;
 
       /**
-       * Variable  Temperature_C
-       * Id: 2
+       * Variable id: 2
        */
-      Temperature_C: number; // FLOAT32;
+      temperature_C: number;
     }
 
+    /**
+     * Bundle id: 2
+     */
     export interface CountControl {
       /**
-       * Variable  LEDConfig
-       * Id: 13
+       * Variable id: 13
        */
-      LEDConfig: number; // UINT8;
+      lEDConfig: number;
 
       /**
-       * Variable  Period
-       * Id: 0
+       * Variable id: 0
        */
-      Period: number; // INT32;
+      period: number;
     }
-  }
-
-  export type VariableByType = DataType.CountStatus &
-    DataType.MySensors &
-    DataType.CountControl;
-  export type VariableKey = keyof VariableByType;
-
-  export type BundleKey = keyof Bundles;
-  export type BundleByType = Bundles;
-
-  export interface Variables {
-    /**
-     * Variable  Count
-     * Id: 4
-     */
-    Count: number; // INT32;
-
-    /**
-     * Variable  LEDStatus
-     * Id: 7
-     */
-    LEDStatus: number; // UINT8;
-
-    /**
-     * Variable  Voltage_V
-     * Id: 1
-     */
-    Voltage_V: number; // FLOAT32;
-
-    /**
-     * Variable  Temperature_C
-     * Id: 2
-     */
-    Temperature_C: number; // FLOAT32;
-
-    /**
-     * Variable  LEDConfig
-     * Id: 13
-     */
-    LEDConfig: number; // UINT8;
-
-    /**
-     * Variable  Period
-     * Id: 0
-     */
-    Period: number; // INT32;
-  }
-
-  export interface Bundle {
-    countStatus: BundleModel<SensorDemo.DataType.CountStatus>;
-
-    mySensors: BundleModel<SensorDemo.DataType.MySensors>;
-
-    countControl: BundleModel<SensorDemo.DataType.CountControl>;
   }
 
   export interface Data {
-    bundles: Bundle;
-    Bundle<T extends BundleKey>(key: T): BundleModel<BundleByType[BundleKey]>;
-    variables: Variables;
-    variable<T extends VariableKey>(
-      key: T
-    ): VariableInteraction<VariableByType[T]>;
-  }
+    count_Status: Bundle.CountStatus;
 
-  export class DataManager extends BaseDataManager<
-    SensorDemo.VariableByType,
-    SensorDemo.VariableKey,
-    SensorDemo.BundleByType,
-    SensorDemo.BundleKey
-  > {
-    static create(tap: Tap): DataManager {
-      return new DataManager(
-        tap,
-        BaseDataManager.createDataFromSchemaConfig(
-          tap,
-          bundlesConfig as any
-        ) as any
-      );
-    }
+    mySensors: Bundle.MySensors;
+
+    count_Control: Bundle.CountControl;
   }
 }

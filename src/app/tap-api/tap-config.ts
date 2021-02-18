@@ -1,79 +1,60 @@
 import {
   PipeConverter,
   ByteSwapConverter,
-  ArrayConverter
-} from "@iotize/device-client.js";
-import {
+  ArrayConverter,
   NumberConverter,
   StringConverter,
   FloatConverter,
   BooleanConverter
-} from "@iotize/device-client.js/client/impl";
+} from "@iotize/tap/client/impl";
+import { TapDataManagerConfig } from "@iotize/tap/data";
+import { SensorDemoDataApi } from "./definitions";
 
-export const bundles = [
-  {
-    id: 0,
-    name: "Count_Status",
-    variables: [
-      {
-        id: 4,
-        length: 1,
-        type: "INT32",
-        name: "Count",
-        converter: NumberConverter.int32Instance()
-      },
+export const dataManagerConfig: TapDataManagerConfig<SensorDemoDataApi.Data> = {
+  bundles: {
+    count_Status: {
+      id: 0, // Count_Status
+      variables: {
+        count: {
+          id: 4,
+          converter: NumberConverter.int32()
+        },
 
-      {
-        id: 7,
-        length: 1,
-        type: "UINT8",
-        name: "LEDStatus",
-        converter: NumberConverter.uint8Instance()
+        lEDStatus: {
+          id: 7,
+          converter: NumberConverter.uint8()
+        }
       }
-    ]
-  },
+    },
 
-  {
-    id: 1,
-    name: "MySensors",
-    variables: [
-      {
-        id: 1,
-        length: 1,
-        type: "FLOAT32",
-        name: "Voltage_V",
-        converter: FloatConverter.instance32()
-      },
+    mySensors: {
+      id: 1, // MySensors
+      variables: {
+        voltage_V: {
+          id: 1,
+          converter: FloatConverter.instance32()
+        },
 
-      {
-        id: 2,
-        length: 1,
-        type: "FLOAT32",
-        name: "Temperature_C",
-        converter: FloatConverter.instance32()
+        temperature_C: {
+          id: 2,
+          converter: FloatConverter.instance32()
+        }
       }
-    ]
-  },
+    },
 
-  {
-    id: 2,
-    name: "Count_Control",
-    variables: [
-      {
-        id: 13,
-        length: 1,
-        type: "UINT8",
-        name: "LEDConfig",
-        converter: NumberConverter.uint8Instance()
-      },
+    count_Control: {
+      id: 2, // Count_Control
+      variables: {
+        lEDConfig: {
+          id: 13,
+          converter: NumberConverter.uint8()
+        },
 
-      {
-        id: 0,
-        length: 1,
-        type: "INT32",
-        name: "Period",
-        converter: NumberConverter.int32Instance()
+        period: {
+          id: 0,
+          converter: NumberConverter.int32()
+        }
       }
-    ]
+    }
   }
-];
+};

@@ -1,7 +1,7 @@
 import { WebSocketProtocol } from "@iotize/device-com-websocket.js";
 import { NFCComProtocol } from "@iotize/device-com-nfc.cordova";
 
-import { BLEComProtocol } from "@iotize/cordova-plugin-iotize-ble";
+import { BLEComProtocol } from "@iotize/device-com-ble.cordova";
 import { WebBluetoothProtocol } from "@iotize/device-com-web-bluetooth.js";
 
 import {
@@ -9,10 +9,10 @@ import {
   WebViewComProtocol
 } from "@iotize/device-com-webview.js";
 
-import { MqttRelayProtocolFactory } from "@iotize/device-com-mqtt.js/tap-cloud";
+import { createClientMQTTRelayProtocol } from "@iotize/device-com-mqtt.js/tap-cloud";
 import { IClientOptions, MqttClient, connect } from "mqtt";
 
-import { DeviceScanner } from "@iotize/device-client.js/scanner/api";
+import { DeviceScanner } from "@iotize/tap/scanner/api";
 import { WifiComProtocol } from "@iotize/device-com-wifi.cordova";
 import { CordovaSocketProtocol } from "@iotize/device-com-socket.cordova";
 import {
@@ -24,7 +24,7 @@ import {
   ProtocolMetaWebview
 } from "@iotize/ionic";
 import { ProtocolFactoryService, ProtocolMeta } from "@iotize/ionic";
-import { ComProtocol } from "@iotize/device-client.js/protocol/api";
+import { ComProtocol } from "@iotize/tap/protocol/api";
 import { filter, timeout, finalize, first, map } from "rxjs/operators";
 import { Platform } from "@ionic/angular";
 import getDebugger from "./logger";
@@ -85,18 +85,21 @@ export const PROTOCOL_FACTORY_CONFIG = {
   },
 
   mqtt: function(meta: ProtocolMetaMqtt) {
-    let protocol = MqttRelayProtocolFactory.create(
-      (brokerUrl?: string | any, options?: IClientOptions): MqttClient => {
-        // Uncommenting this line make app error as library need process global variable
-        // It can be fix with ./polyfill.ts but it will crash monaco editor...
+    const protocol = createClientMQTTRelayProtocol({
+      connect: (
+        brokerUrl?: string | any,
+        options?: IClientOptions
+      ): MqttClient => {
         return connect(brokerUrl, options);
-        // throw new Error(`Not implemented`)
       },
-      meta.info.username,
-      meta.info.password,
-      meta.info.netkey || "testnetkey",
-      meta.info.endpoint
-    );
+      serialNumber: meta.info.serialNumber,
+      netkey: meta.info.netkey || "testnetkey",
+      broker: {
+        username: meta.info.username,
+        password: meta.info.password,
+        url: meta.info.endpoint
+      }
+    });
     return protocol;
   },
 

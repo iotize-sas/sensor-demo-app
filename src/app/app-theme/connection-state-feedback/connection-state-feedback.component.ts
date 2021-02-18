@@ -3,7 +3,7 @@ import { CurrentDeviceService } from "@iotize/ionic";
 import {
   ConnectionStateChangeEvent,
   ConnectionState
-} from "@iotize/device-client.js/protocol/api";
+} from "@iotize/tap/protocol/api";
 import { Subscription } from "rxjs";
 
 @Component({

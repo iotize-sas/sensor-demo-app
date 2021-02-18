@@ -10,6 +10,7 @@ import { NavController } from "@ionic/angular";
 import { MyTapConnectionService } from "./my-tap-connection.service";
 import { environment } from "src/environments/environment";
 import { TaskManagerControllerService } from "./task-manager-controller.service";
+import { dataManagerConfig } from "tap-api";
 
 @Component({
   selector: "app-root",
@@ -46,6 +47,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         .catch(err => {
           console.warn("NFC initialization failed", err);
         });
+    });
+
+    this.tapService.tapChanged.subscribe(newTap => {
+      if (newTap) {
+        newTap.data.registerBundles(dataManagerConfig.bundles);
+      }
     });
   }
 

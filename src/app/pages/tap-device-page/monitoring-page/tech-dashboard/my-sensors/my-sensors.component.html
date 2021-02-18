@@ -1,4 +1,4 @@
-<ion-content *ngIf="data">
+<ion-content *ngIf="dataManager">
   <app-navigation-progress-bar></app-navigation-progress-bar>
 
   <ion-grid>
@@ -11,17 +11,17 @@
           </ion-item>
 
           <ion-card-content>
-            <monitoring-gauge-card
-              [input]="variables['Voltage_V'].monitor().values()"
+            <tap-variable-gauge
+              [variable]="variables['voltage_V']"
               [max]="4"
               [min]="0"
-              [valueFormatting]="Voltage_VValueFormatting"
+              [valueFormatting]="voltage_VValueFormatting"
               units="Volts"
               digitsInfo="1.2-2"
               alias="Vcc"
               [legend]="false"
             >
-            </monitoring-gauge-card>
+            </tap-variable-gauge>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -38,13 +38,13 @@
               <div style="margin: auto;">
                 <monitoring-variable-value
                   [lines]="'none'"
-                  [variable]="variables['Temperature_C']"
+                  [variable]="variables['temperature_C']"
                   [inputOptions]='{
     "min": 0,
     "max": 100
 }'
                   [valueStyle]="{'font-size': '3em'}"
-                  [valueFormatting]="Temperature_CValueFormatting"
+                  [valueFormatting]="temperature_CValueFormatting"
                   slot="end"
                   digitsInfo="1.1-1"
                 >
