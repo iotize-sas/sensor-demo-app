@@ -1,0 +1,1617 @@
+{
+    "version": {
+        "generator": "3.0.0-alpha.9"
+    },
+    "app": {
+        "id": "com.mycompany.mysensordemo",
+        "version": "0.0.1",
+        "domain": "https://www.iotize.com",
+        "name": "Sensor demo",
+        "platforms": {
+            "android": {
+                "enabled": true
+            },
+            "browser": {
+                "enabled": true,
+                "PWA": true
+            },
+            "ios": {
+                "enabled": true
+            }
+        },
+        "menu": {
+            "deviceMenu": {
+                "items": [
+                    {
+                        "icon": "information-circle",
+                        "title": "Device info",
+                        "url": "/device/info"
+                    },
+                    {
+                        "icon": "construct",
+                        "title": "Supervision",
+                        "url": "/device/settings"
+                    },
+                    {
+                        "icon": "cog",
+                        "title": "Connectivity settings",
+                        "url": "/device/connectivity"
+                    },
+                    {
+                        "icon": "analytics",
+                        "title": "Monitoring",
+                        "url": "/device/monitoring"
+                    }
+                ]
+            },
+            "homeMenu": {
+                "items": [
+                    {
+                        "icon": "help",
+                        "title": "About",
+                        "url": "/about"
+                    },
+                    {
+                        "icon": "wifi",
+                        "title": "Connection",
+                        "url": "/connect"
+                    }
+                ]
+            }
+        },
+        "pages": [
+            {
+                "type": "TapDevicePage",
+                "children": [
+                    {
+                        "type": "TapInfoPage",
+                        "meta": {
+                            "enabled": true
+                        },
+                        "router": {
+                            "path": "info"
+                        },
+                        "settings": {
+                            "pageTitle": "Device info",
+                            "items": [
+                                {
+                                    "key": "serialNumber"
+                                },
+                                {
+                                    "key": "tapFirmwareVersion"
+                                },
+                                {
+                                    "key": "configVersion"
+                                },
+                                {
+                                    "key": "appName"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "ProtocolConfigurationPage",
+                        "router": {
+                            "path": "protocol-configuration"
+                        },
+                        "settings": {
+                            "pageTitle": "Target settings"
+                        },
+                        "meta": {
+                            "enabled": false
+                        }
+                    },
+                    {
+                        "type": "TapConfigPage",
+                        "meta": {
+                            "enabled": true
+                        },
+                        "settings": {
+                            "pageTitle": "Supervision",
+                            "authorizedProfiles": [
+                                "admin",
+                                "supervisor"
+                            ]
+                        },
+                        "router": {
+                            "path": "settings"
+                        },
+                        "content": [
+                            {
+                                "type": "GridLayout",
+                                "cols": 1,
+                                "elements": [
+                                    {
+                                        "type": "CardLayout",
+                                        "title": "General",
+                                        "icon": "help",
+                                        "content": [
+                                            {
+                                                "type": "TapConfigList",
+                                                "variableName": "interfaceTapConfigItems",
+                                                "items": [
+                                                    {
+                                                        "key": "appName",
+                                                        "editable": true
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "RawNode",
+                                        "content": "<h3><ion-icon name=\"profile\"></ion-icon>Users</h3>"
+                                    },
+                                    {
+                                        "icon": "person",
+                                        "type": "CardLayout",
+                                        "title": "#65535 admin",
+                                        "content": [
+                                            {
+                                                "type": "TapConfigList",
+                                                "variableName": "profile_adminConfigItem",
+                                                "items": [
+                                                    {
+                                                        "key": "ProfileLifeTime",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "65535"
+                                                        ]
+                                                    },
+                                                    {
+                                                        "key": "profilePassword",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "65535"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "icon": "person",
+                                        "type": "CardLayout",
+                                        "title": "#65534 supervisor",
+                                        "content": [
+                                            {
+                                                "type": "TapConfigList",
+                                                "variableName": "profile_supervisorConfigItem",
+                                                "items": [
+                                                    {
+                                                        "key": "ProfileLifeTime",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "65534"
+                                                        ]
+                                                    },
+                                                    {
+                                                        "key": "profilePassword",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "65534"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "icon": "person",
+                                        "type": "CardLayout",
+                                        "title": "#1 tech",
+                                        "content": [
+                                            {
+                                                "type": "TapConfigList",
+                                                "variableName": "profile_techConfigItem",
+                                                "items": [
+                                                    {
+                                                        "key": "ProfileLifeTime",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "1"
+                                                        ]
+                                                    },
+                                                    {
+                                                        "key": "profilePassword",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "1"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "RawNode",
+                                        "content": "<h3><ion-icon name=\"analytics\"></ion-icon>Data</h3>"
+                                    },
+                                    {
+                                        "type": "CardLayout",
+                                        "title": "#0 Count_Status",
+                                        "content": [
+                                            {
+                                                "type": "TapConfigList",
+                                                "variableName": "bundle_Count_StatusConfigItem",
+                                                "items": [
+                                                    {
+                                                        "key": "BundleDatalogPeriod",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "0"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "CardLayout",
+                                        "title": "#1 Sensors",
+                                        "content": [
+                                            {
+                                                "type": "TapConfigList",
+                                                "variableName": "bundle_SensorsConfigItem",
+                                                "items": [
+                                                    {
+                                                        "key": "BundleDatalogPeriod",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "1"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "CardLayout",
+                                        "title": "#2 Count_Control",
+                                        "content": [
+                                            {
+                                                "type": "TapConfigList",
+                                                "variableName": "bundle_Count_ControlConfigItem",
+                                                "items": [
+                                                    {
+                                                        "key": "BundleDatalogPeriod",
+                                                        "editable": true,
+                                                        "params": [
+                                                            "2"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "TapConnectivitySettingsPage",
+                        "router": {
+                            "path": "connectivity"
+                        },
+                        "settings": {
+                            "pageTitle": "Connectivity settings"
+                        },
+                        "meta": {
+                            "enabled": true
+                        }
+                    },
+                    {
+                        "type": "TapLoginPage",
+                        "meta": {
+                            "enabled": true
+                        },
+                        "settings": {
+                            "pageTitle": "Tap login"
+                        },
+                        "router": {
+                            "path": "login"
+                        }
+                    },
+                    {
+                        "type": "MonitoringPage",
+                        "meta": {
+                            "enabled": true
+                        },
+                        "settings": {
+                            "pageTitle": "Monitoring"
+                        },
+                        "router": {
+                            "path": "monitoring"
+                        },
+                        "children": [
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "meta": {
+                                    "enabled": true,
+                                    "name": "AnonymousDashboard"
+                                },
+                                "settings": {
+                                    "pageTitle": "Public dashboard",
+                                    "profileName": "anonymous",
+                                    "targetConnectRequired": true,
+                                    "tickers": [
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Status",
+                                            "period": 500
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Sensors",
+                                            "period": 300
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Control",
+                                            "period": 2000
+                                        }
+                                    ],
+                                    "variables": [
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 4,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Count"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 7,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDStatus"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 1,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Voltage_V",
+                                                "unit": "V"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 2,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Temperature_C",
+                                                "unit": "C"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 0,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Period"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 13,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDConfig"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "router": {
+                                    "path": "anonymous"
+                                },
+                                "content": [
+                                    {
+                                        "type": "GridLayout",
+                                        "cols": 2,
+                                        "elements": [
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Count</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "count",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDStatus</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDStatus",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Vcc</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "voltage_V",
+                                                        "editable": false,
+                                                        "unit": "V",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Temp</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "temperature_C",
+                                                        "editable": false,
+                                                        "unit": "C",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Period</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "period",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDConfig</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDConfig",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "meta": {
+                                    "enabled": true,
+                                    "name": "SupervisorDashboard"
+                                },
+                                "settings": {
+                                    "pageTitle": "Supervisor dashboard",
+                                    "profileName": "supervisor",
+                                    "targetConnectRequired": true,
+                                    "tickers": [
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Status",
+                                            "period": 500
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Sensors",
+                                            "period": 300
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Control",
+                                            "period": 2000
+                                        }
+                                    ],
+                                    "variables": [
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 4,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Count"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 7,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDStatus"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 1,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Voltage_V",
+                                                "unit": "V"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 2,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Temperature_C",
+                                                "unit": "C"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 0,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Period"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 13,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDConfig"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "router": {
+                                    "path": "supervisor"
+                                },
+                                "content": [
+                                    {
+                                        "type": "GridLayout",
+                                        "cols": 2,
+                                        "elements": [
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Count</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "count",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDStatus</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDStatus",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Vcc</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "voltage_V",
+                                                        "editable": false,
+                                                        "unit": "V",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Temp</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "temperature_C",
+                                                        "editable": false,
+                                                        "unit": "C",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Period</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "period",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDConfig</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDConfig",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "meta": {
+                                    "enabled": true,
+                                    "name": "TechDashboard"
+                                },
+                                "settings": {
+                                    "pageTitle": "Tech dashboard",
+                                    "profileName": "tech",
+                                    "targetConnectRequired": true,
+                                    "tickers": [
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Status",
+                                            "period": 500
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Sensors",
+                                            "period": 300
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Control",
+                                            "period": 2000
+                                        }
+                                    ],
+                                    "variables": [
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 4,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Count"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 7,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDStatus"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 1,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Voltage_V",
+                                                "unit": "V"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 2,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Temperature_C",
+                                                "unit": "C"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 0,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Period"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 13,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDConfig"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "router": {
+                                    "path": "tech"
+                                },
+                                "content": [
+                                    {
+                                        "type": "GridLayout",
+                                        "cols": 2,
+                                        "elements": [
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Count</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "count",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDStatus</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDStatus",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Vcc</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "voltage_V",
+                                                        "editable": false,
+                                                        "unit": "V",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Temp</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "temperature_C",
+                                                        "editable": false,
+                                                        "unit": "C",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Period</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "period",
+                                                        "editable": true,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDConfig</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDConfig",
+                                                        "editable": true,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "MonitoringDashboardPage",
+                                "meta": {
+                                    "enabled": true,
+                                    "name": "AdminDashboard"
+                                },
+                                "settings": {
+                                    "pageTitle": "Admin dashboard",
+                                    "profileName": "admin",
+                                    "targetConnectRequired": true,
+                                    "tickers": [
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Status",
+                                            "period": 500
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Sensors",
+                                            "period": 300
+                                        },
+                                        {
+                                            "type": "bundle",
+                                            "bundle": "Count_Control",
+                                            "period": 2000
+                                        }
+                                    ],
+                                    "variables": [
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 4,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Count"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 7,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDStatus"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 1,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Voltage_V",
+                                                "unit": "V"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 2,
+                                            "length": 1,
+                                            "dataType": "FLOAT32",
+                                            "meta": {
+                                                "name": "Temperature_C",
+                                                "unit": "C"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 0,
+                                            "length": 1,
+                                            "dataType": "INT32",
+                                            "meta": {
+                                                "name": "Period"
+                                            }
+                                        },
+                                        {
+                                            "domain": "TARGET",
+                                            "address": "0x0",
+                                            "id": 13,
+                                            "length": 1,
+                                            "dataType": "UINT8",
+                                            "meta": {
+                                                "name": "LEDConfig"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "router": {
+                                    "path": "admin"
+                                },
+                                "content": [
+                                    {
+                                        "type": "GridLayout",
+                                        "cols": 2,
+                                        "elements": [
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Count</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "count",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDStatus</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDStatus",
+                                                        "editable": false,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Vcc</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "voltage_V",
+                                                        "editable": false,
+                                                        "unit": "V",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Temp</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "temperature_C",
+                                                        "editable": false,
+                                                        "unit": "C",
+                                                        "digitsInfo": "1.3-3",
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">Period</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "period",
+                                                        "editable": true,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "KeyValueLayout",
+                                                "key": {
+                                                    "content": [
+                                                        {
+                                                            "type": "Text",
+                                                            "content": "<ion-item lines=\"none\" class=\"ion-no-padding ion-text-center\"><ion-label class=\"ion-text-wrap\">LEDConfig</ion-label></ion-item>"
+                                                        }
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "content": {
+                                                        "type": "TapVariableWidgetText",
+                                                        "variable": "lEDConfig",
+                                                        "editable": true,
+                                                        "valueFontSize": "2em",
+                                                        "valueFormatting": ""
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "settings": {
+                    "pageTitle": "Device"
+                },
+                "router": {
+                    "path": "device",
+                    "defaultPage": "monitoring"
+                },
+                "meta": {
+                    "enabled": true
+                }
+            },
+            {
+                "type": "AboutPage",
+                "meta": {
+                    "enabled": true
+                },
+                "router": {
+                    "path": "about"
+                },
+                "settings": {
+                    "pageTitle": "About",
+                    "items": [
+                        {
+                            "title": "Version",
+                            "value": "{{ environment.version }}"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "TapConnectionPage",
+                "meta": {
+                    "enabled": true
+                },
+                "router": {
+                    "path": "connect"
+                },
+                "settings": {
+                    "pageTitle": "Connection",
+                    "protocols": {
+                        "ble": {
+                            "enabled": true
+                        },
+                        "nfc": {
+                            "enabled": true,
+                            "energyHarvesting": false
+                        },
+                        "socket": {
+                            "enabled": true,
+                            "rememberLastDevices": true
+                        },
+                        "mqtt": {
+                            "enabled": true,
+                            "rememberLastDevices": true
+                        }
+                    }
+                }
+            },
+            {
+                "type": "NotFoundPage",
+                "meta": {
+                    "enabled": true
+                },
+                "settings": {
+                    "pageTitle": "Not found"
+                },
+                "router": {
+                    "path": "**"
+                }
+            }
+        ],
+        "theme": {
+            "colors": {
+                "primary": {
+                    "value": "0x3880ff",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x4c8dff"
+                },
+                "secondary": {
+                    "value": "0x0cd1e8",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x24d6ea"
+                },
+                "tertiary": {
+                    "value": "0x7044ff",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x7e57ff"
+                },
+                "success": {
+                    "value": "0x10dc60",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x28e070"
+                },
+                "warning": {
+                    "value": "0xffce00",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xffd31a"
+                },
+                "danger": {
+                    "value": "0xf04141",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xf25454"
+                },
+                "dark": {
+                    "value": "0x222428",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0x383a3e"
+                },
+                "medium": {
+                    "value": "0x989aa2",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xa2a4ab"
+                },
+                "light": {
+                    "value": "0xf4f5f8",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xf5f6f9"
+                },
+                "monitoring-background": {
+                    "value": "0xeeeeee",
+                    "contrast": "0xffffff",
+                    "shade": "0xffffff",
+                    "tint": "0xf0f0f0"
+                }
+            },
+            "logo": {
+                "image": ""
+            },
+            "splashScreen": {
+                "image": ""
+            }
+        }
+    },
+    "devices": {
+        "sensor-demo": {
+            "type": "TapDeviceConfig",
+            "key": "sensor-demo",
+            "config": {
+                "version": "2.7.0",
+                "application": {
+                    "name": "Sensor demo",
+                    "universalLink": "https://www.iotize.com",
+                    "uri": "$4/com.mycompany.mysensordemo"
+                },
+                "data": {
+                    "bundles": [
+                        {
+                            "name": "Count_Status",
+                            "id": 0,
+                            "variables": [
+                                {
+                                    "domain": "TARGET",
+                                    "address": "0x0",
+                                    "id": 4,
+                                    "length": 1,
+                                    "dataType": "INT32",
+                                    "meta": {
+                                        "name": "Count"
+                                    }
+                                },
+                                {
+                                    "domain": "TARGET",
+                                    "address": "0x0",
+                                    "id": 7,
+                                    "length": 1,
+                                    "dataType": "UINT8",
+                                    "meta": {
+                                        "name": "LEDStatus"
+                                    }
+                                }
+                            ],
+                            "acls": {
+                                "anonymous": {
+                                    "read": true,
+                                    "write": false
+                                }
+                            },
+                            "dataLog": {
+                                "period": 0
+                            }
+                        },
+                        {
+                            "name": "Sensors",
+                            "id": 1,
+                            "variables": [
+                                {
+                                    "domain": "TARGET",
+                                    "address": "0x0",
+                                    "id": 1,
+                                    "length": 1,
+                                    "dataType": "FLOAT32",
+                                    "meta": {
+                                        "name": "Voltage_V",
+                                        "unit": "V"
+                                    }
+                                },
+                                {
+                                    "domain": "TARGET",
+                                    "address": "0x0",
+                                    "id": 2,
+                                    "length": 1,
+                                    "dataType": "FLOAT32",
+                                    "meta": {
+                                        "name": "Temperature_C",
+                                        "unit": "C"
+                                    }
+                                }
+                            ],
+                            "acls": {
+                                "anonymous": {
+                                    "read": true,
+                                    "write": false
+                                }
+                            },
+                            "dataLog": {
+                                "period": 0
+                            }
+                        },
+                        {
+                            "name": "Count_Control",
+                            "id": 2,
+                            "variables": [
+                                {
+                                    "domain": "TARGET",
+                                    "address": "0x0",
+                                    "id": 0,
+                                    "length": 1,
+                                    "dataType": "INT32",
+                                    "meta": {
+                                        "name": "Period"
+                                    }
+                                },
+                                {
+                                    "domain": "TARGET",
+                                    "address": "0x0",
+                                    "id": 13,
+                                    "length": 1,
+                                    "dataType": "UINT8",
+                                    "meta": {
+                                        "name": "LEDConfig"
+                                    }
+                                }
+                            ],
+                            "acls": {
+                                "anonymous": {
+                                    "read": true,
+                                    "write": false
+                                },
+                                "tech": {
+                                    "read": true,
+                                    "write": true
+                                }
+                            },
+                            "dataLog": {
+                                "period": 0
+                            }
+                        }
+                    ],
+                    "profiles": [
+                        {
+                            "username": "admin",
+                            "lifeTime": 30,
+                            "key": "0x416BCCFE89B536D341E674EB60767DDC7E8FBE570021E943B1702F767519A70771F7506D"
+                        },
+                        {
+                            "username": "supervisor",
+                            "lifeTime": 3000,
+                            "key": "0x5C95126751D662627364714BA933D40F0949D3D54FFDDBF43653C562D0C6BFB15DFD89F0"
+                        },
+                        {
+                            "username": "tech",
+                            "id": 1,
+                            "lifeTime": 300,
+                            "key": "0x28AC9AB26E197238871E5C406171C73854C641D436EC19B7134DC267D3640544232B2A7F",
+                            "users": [
+                                {
+                                    "username": "user",
+                                    "id": 2,
+                                    "key": "0x586F22CE3937BBDD426EE0EFDD49EC30380EAE0093865F3EDE3C06C1047280205DF0F37D",
+                                    "lifeTime": 0
+                                },
+                                {
+                                    "username": "Paul",
+                                    "id": 3,
+                                    "key": "0xA005C61D2FEE30867643F46DAB41737CE3CFF2131FABFBDB3A6A870A3599A2928D0B3441",
+                                    "lifeTime": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "cloud": {
+                    "dataLog": {
+                        "mqttPublishTopic": "",
+                        "mqttSubscribeTopic": "",
+                        "uploadPeriod": 60000
+                    }
+                },
+                "wireless": {
+                    "options": {
+                        "inactivityTimeout": 30
+                    },
+                    "protocols": {
+                        "wifi": {
+                            "mode": "PEER_TO_PEER",
+                            "ssid": "",
+                            "key": "",
+                            "keyVisibility": "HIDDEN",
+                            "ssidVisibility": "VISIBLE"
+                        },
+                        "mqtt": {},
+                        "ble": {
+                            "pairing": false
+                        },
+                        "lora": {},
+                        "nfc": {
+                            "autoLogProfileId": 0,
+                            "connectionPriority": "NFC_NON_PRIORITY",
+                            "pairingMode": "NO"
+                        }
+                    }
+                },
+                "tap": {
+                    "security": {
+                        "scramActivated": true,
+                        "hashPassword": true,
+                        "disableHardwareFactoryReset": false,
+                        "disableLoginWithUID": false,
+                        "disableResourceFactoryReset": false
+                    },
+                    "powerOptimization": "NO",
+                    "scram": {
+                        "hashIteration": 5000
+                    },
+                    "certificate": {}
+                },
+                "target": {
+                    "type": "MCU",
+                    "protocol": {
+                        "type": "SWD"
+                    },
+                    "firmwareVersion": "1.0.0"
+                }
+            },
+            "converters": {
+                "Count": [
+                    "int32"
+                ],
+                "LEDStatus": [
+                    "uint8"
+                ],
+                "Voltage_V": [
+                    "float32"
+                ],
+                "Temperature_C": [
+                    "float32"
+                ],
+                "Period": [
+                    "int32"
+                ],
+                "LEDConfig": [
+                    "uint8"
+                ]
+            }
+        }
+    }
+}

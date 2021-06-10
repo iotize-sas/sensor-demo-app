@@ -7,9 +7,4 @@ describe("create app snapshots", () => {
   beforeEach(() => {
     page = new AppPage();
   });
-
-  it("should take home page snapshot", async () => {
-    page.navigateToScan();
-    await takeScreenshot("scan-page");
-  });
 });

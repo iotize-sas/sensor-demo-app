@@ -8,6 +8,10 @@ import { ConnectionStateFeedbackComponent } from "./connection-state-feedback/co
 import { NavigationProgressBarComponent } from "./navigation-progress-bar/navigation-progress-bar.component";
 import { SideMenuComponent } from "./side-menu/side-menu.component";
 import { RouterModule } from "@angular/router";
+import { TapControlMenuComponent } from "./tap-control-menu/tap-control-menu.component";
+import { TaskManagerUiModule } from "@iotize/ionic";
+import { TapAuthModule } from "@iotize/ionic/auth";
+import { NotificationsComponent } from "./notifications/notifications.component";
 
 @NgModule({
   declarations: [
@@ -16,7 +20,9 @@ import { RouterModule } from "@angular/router";
     ProgressBarStepComponent,
     ConnectionStateFeedbackComponent,
     NavigationProgressBarComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    TapControlMenuComponent,
+    NotificationsComponent
   ],
   exports: [
     CommonModule,
@@ -26,9 +32,18 @@ import { RouterModule } from "@angular/router";
     ProgressBarStepComponent,
     ConnectionStateFeedbackComponent,
     NavigationProgressBarComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    TapControlMenuComponent,
+    NotificationsComponent
   ],
   providers: [],
-  imports: [CommonModule, IonicModule, RouterModule]
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterModule,
+    TaskManagerUiModule,
+    TapAuthModule
+  ],
+  entryComponents: [NotificationsComponent]
 })
 export class AppThemeModule {}

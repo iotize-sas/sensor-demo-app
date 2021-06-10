@@ -1,19 +1,57 @@
-import { DeviceAuthGuard } from "@iotize/ionic/auth";
+import { Route } from "@angular/router";
+import { MonitoringPageGuard } from "app-lib";
 
-export const monitoringRoutes = [
+export const monitoringRoutes: Route[] = [
   {
     path: "anonymous",
-    loadChildren:
-      "src/app/pages/tap-device-page/monitoring-page/anonymous-dashboard/anonymous-dashboard.module#AnonymousDashboardModule"
+    loadChildren: () =>
+      import(`./anonymous-dashboard/anonymous-dashboard.module`).then(
+        m => m.AnonymousDashboardModule
+      ),
+    runGuardsAndResolvers: "always",
+    canActivate: [MonitoringPageGuard],
+    data: {
+      username: ["anonymous"]
+    }
   },
   {
-    path: "admin",
-    loadChildren:
-      "src/app/pages/tap-device-page/monitoring-page/admin-dashboard/admin-dashboard.module#AdminDashboardModule"
+    path: "supervisor",
+    loadChildren: () =>
+      import(`./supervisor-dashboard/supervisor-dashboard.module`).then(
+        m => m.SupervisorDashboardModule
+      ),
+    runGuardsAndResolvers: "always",
+    canActivate: [MonitoringPageGuard],
+    data: {
+      username: ["supervisor"]
+    }
   },
   {
     path: "tech",
-    loadChildren:
-      "src/app/pages/tap-device-page/monitoring-page/tech-dashboard/tech-dashboard.module#TechDashboardModule"
+    loadChildren: () =>
+      import(`./tech-dashboard/tech-dashboard.module`).then(
+        m => m.TechDashboardModule
+      ),
+    runGuardsAndResolvers: "always",
+    canActivate: [MonitoringPageGuard],
+    data: {
+      username: ["tech"]
+    }
+  },
+  {
+    path: "admin",
+    loadChildren: () =>
+      import(`./admin-dashboard/admin-dashboard.module`).then(
+        m => m.AdminDashboardModule
+      ),
+    runGuardsAndResolvers: "always",
+    canActivate: [MonitoringPageGuard],
+    data: {
+      username: ["admin"]
+    }
+  },
+  {
+    path: "**",
+    redirectTo: "anonymous"
   }
 ];

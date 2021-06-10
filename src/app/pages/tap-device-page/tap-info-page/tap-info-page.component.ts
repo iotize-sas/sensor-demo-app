@@ -7,24 +7,6 @@ import { CurrentDeviceService, TapInfo } from "@iotize/ionic";
   styleUrls: ["./tap-info-page.component.scss"]
 })
 export class TapInfoPageComponent implements OnInit {
-  public items = [
-    {
-      key: "serialNumber"
-    },
-    {
-      key: "tapFirmwareVersion"
-    },
-    {
-      key: "appName"
-    },
-    {
-      key: "CloudEndpoint"
-    },
-    {
-      key: "CloudKey"
-    }
-  ];
-
   public get tap() {
     return this.tapService.tap;
   }

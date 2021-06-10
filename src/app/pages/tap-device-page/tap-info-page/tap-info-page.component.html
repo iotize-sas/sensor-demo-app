@@ -10,5 +10,8 @@
 </ion-header>
 <ion-content>
   <app-navigation-progress-bar></app-navigation-progress-bar>
-  <tap-config-list [items]="items" lines="full"></tap-config-list>
+  <tap-config-list
+    [items]="[{'key': 'serialNumber'}, {'key': 'tapFirmwareVersion'}, {'key': 'configVersion'}, {'key': 'appName'}]"
+    lines="full"
+  ></tap-config-list>
 </ion-content>

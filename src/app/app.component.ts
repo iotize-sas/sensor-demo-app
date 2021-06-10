@@ -1,5 +1,6 @@
+import "@iotize/tap/ext/data";
 import { Component, AfterViewInit, OnInit, OnDestroy } from "@angular/core";
-import { Platform } from "@ionic/angular";
+import { MenuController, Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { Subscription } from "rxjs";
@@ -8,9 +9,11 @@ import { ToastService, AppNavigationService } from "app-theme";
 import { Dialogs } from "@ionic-native/dialogs/ngx";
 import { NavController } from "@ionic/angular";
 import { MyTapConnectionService } from "./my-tap-connection.service";
-import { environment } from "src/environments/environment";
 import { TaskManagerControllerService } from "./task-manager-controller.service";
+import { environment } from "src/environments/environment";
+
 import { dataManagerConfig } from "tap-api";
+import { DEVICE_MENU, HOME_MENU } from "./app.menu";
 
 @Component({
   selector: "app-root",
@@ -19,6 +22,10 @@ import { dataManagerConfig } from "tap-api";
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   nfcSubscription: Subscription;
   backButtonSubscription: Subscription;
+
+  public homeMenu = HOME_MENU;
+  public deviceMenu = DEVICE_MENU;
+  public appTitle = environment.appName;
 
   constructor(
     private platform: Platform,
@@ -30,7 +37,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialogs: Dialogs,
     private navController: NavController,
     public appNavigationService: AppNavigationService,
-    private taskManagerControllerService: TaskManagerControllerService
+    private taskManagerControllerService: TaskManagerControllerService,
+    private menu: MenuController
   ) {
     this.initializeApp();
   }
@@ -49,8 +57,15 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     });
 
+    this.tapService.tapRemoved.subscribe(_ => {
+      this.menu.enable(false, "deviceMenu");
+      this.menu.enable(true, "homeMenu");
+    });
     this.tapService.tapChanged.subscribe(newTap => {
       if (newTap) {
+        this.menu.enable(true, "deviceMenu");
+        this.menu.enable(false, "homeMenu");
+
         newTap.data.registerBundles(dataManagerConfig.bundles);
       }
     });
@@ -86,8 +101,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(
       9999,
       () => {
-        console.log(`Back button on `, window.location);
         if (window.location.pathname.startsWith("/device/monitoring")) {
+          // TODO remove hard link reference
           this.dialogs
             .confirm("Are sure you want to quit?", "Quit app", [
               "Quit",
@@ -107,7 +122,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
               this.onError(err);
             });
         } else {
-          console.log(`Default back button behavior`);
           this.navController.back();
         }
       }

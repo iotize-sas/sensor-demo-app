@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { CurrentDeviceService } from "@iotize/ionic";
-import { Router, NavigationStart } from "@angular/router";
+import { NavController } from "@ionic/angular";
+import { Router, ActivatedRoute } from "@angular/router";
 import { monitoringRoutes } from "./monitoring-page-routes";
 import { Subscription } from "rxjs";
 import { TapMonitoringService } from "app-lib";
@@ -10,44 +11,45 @@ import { TapMonitoringService } from "app-lib";
   templateUrl: "monitoring-page.component.html"
 })
 export class MonitoringPageComponent implements OnInit, OnDestroy {
-  private sessionStateSub: Subscription;
-  private routeSub: Subscription;
+  private sessionStateSub?: Subscription;
 
   constructor(
     public tapService: CurrentDeviceService,
     public monitoringService: TapMonitoringService,
-    public router: Router
+    public router: Router,
+    private navController: NavController,
+    public activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    const componentRoutePath = "/device/monitoring";
     this.sessionStateSub = this.tapService.sessionState.subscribe(
       sessionState => {
-        if (this.router.url.startsWith("/device/monitoring")) {
+        if (this.router.url.startsWith(componentRoutePath)) {
           let profileRoute = monitoringRoutes.find(
             route => route.path === sessionState.name
           );
           if (profileRoute) {
-            let url = `/device/monitoring/${sessionState.name}`;
-            this.router.navigateByUrl(url);
+            this.navController
+              .navigateRoot(componentRoutePath + "/" + profileRoute.path)
+              // .navigate([profileRoute.path], {
+              //   relativeTo: this.activatedRoute
+              // })
+              .then(result => {
+                if (!result) {
+                  console.warn(
+                    "Fail to navigate to user profile ",
+                    profileRoute.path
+                  );
+                }
+              });
           }
         }
       }
     );
-    this.routeSub = this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        if (!event.url.startsWith("/device/monitoring")) {
-          this.stopMonitor();
-        }
-      }
-    });
   }
 
   ngOnDestroy(): void {
-    this.sessionStateSub.unsubscribe();
-    this.routeSub.unsubscribe();
-  }
-
-  private stopMonitor() {
-    this.monitoringService.stop();
+    this.sessionStateSub?.unsubscribe();
   }
 }

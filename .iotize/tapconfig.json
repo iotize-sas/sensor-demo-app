@@ -1,10 +1,10 @@
 {
     "config": {
-        "version": "2.1.0",
+        "version": "2.7.0",
         "application": {
             "name": "Sensor demo",
             "universalLink": "https://www.iotize.com",
-            "uri": "$4/com.iotize.app.sensordemo"
+            "uri": "$4/com.mycompany.mysensordemo"
         },
         "data": {
             "bundles": [
@@ -44,7 +44,7 @@
                     }
                 },
                 {
-                    "name": "MySensors",
+                    "name": "Sensors",
                     "id": 1,
                     "variables": [
                         {
@@ -55,7 +55,7 @@
                             "dataType": "FLOAT32",
                             "meta": {
                                 "name": "Voltage_V",
-                                "unit": "Volts"
+                                "unit": "V"
                             }
                         },
                         {
@@ -66,7 +66,7 @@
                             "dataType": "FLOAT32",
                             "meta": {
                                 "name": "Temperature_C",
-                                "unit": "°C"
+                                "unit": "C"
                             }
                         }
                     ],
@@ -87,29 +87,28 @@
                         {
                             "domain": "TARGET",
                             "address": "0x0",
+                            "id": 0,
+                            "length": 1,
+                            "dataType": "INT32",
+                            "meta": {
+                                "name": "Period"
+                            }
+                        },
+                        {
+                            "domain": "TARGET",
+                            "address": "0x0",
                             "id": 13,
                             "length": 1,
                             "dataType": "UINT8",
                             "meta": {
                                 "name": "LEDConfig"
                             }
-                        },
-                        {
-                            "domain": "TARGET",
-                            "address": "0x0",
-                            "id": 0,
-                            "length": 1,
-                            "dataType": "INT32",
-                            "meta": {
-                                "name": "Period",
-                                "unit": "ms"
-                            }
                         }
                     ],
                     "acls": {
                         "anonymous": {
                             "read": true,
-                            "write": true
+                            "write": false
                         },
                         "tech": {
                             "read": true,
@@ -125,29 +124,29 @@
                 {
                     "username": "admin",
                     "lifeTime": 30,
-                    "key": "0x0155AFFC023AFF6882F56A4E0D9C5466"
+                    "key": "0x416BCCFE89B536D341E674EB60767DDC7E8FBE570021E943B1702F767519A70771F7506D"
                 },
                 {
                     "username": "supervisor",
                     "lifeTime": 3000,
-                    "key": "0x99C243D5F82EB712C281D5FFE7D12097"
+                    "key": "0x5C95126751D662627364714BA933D40F0949D3D54FFDDBF43653C562D0C6BFB15DFD89F0"
                 },
                 {
                     "username": "tech",
                     "id": 1,
                     "lifeTime": 300,
-                    "key": "0xF3F5EFEEE89D2181DAAFAC0B363B9343",
+                    "key": "0x28AC9AB26E197238871E5C406171C73854C641D436EC19B7134DC267D3640544232B2A7F",
                     "users": [
                         {
                             "username": "user",
                             "id": 2,
-                            "key": "0x0AE319E890E13D3EB4085F8AA88927FC",
+                            "key": "0x586F22CE3937BBDD426EE0EFDD49EC30380EAE0093865F3EDE3C06C1047280205DF0F37D",
                             "lifeTime": 0
                         },
                         {
                             "username": "Paul",
                             "id": 3,
-                            "key": "0xA2F11651F981F7FD486CB255C2794895",
+                            "key": "0xA005C61D2FEE30867643F46DAB41737CE3CFF2131FABFBDB3A6A870A3599A2928D0B3441",
                             "lifeTime": 0
                         }
                     ]
@@ -167,12 +166,9 @@
             },
             "protocols": {
                 "wifi": {
-                    "mode": "NETWORK",
+                    "mode": "PEER_TO_PEER",
                     "ssid": "",
                     "key": "",
-                    "mask": "0.0.0.0",
-                    "ipGateway": "0.0.0.0",
-                    "ip": "0.0.0.0",
                     "keyVisibility": "HIDDEN",
                     "ssidVisibility": "VISIBLE"
                 },
@@ -190,7 +186,7 @@
         },
         "tap": {
             "security": {
-                "scramActivated": false,
+                "scramActivated": true,
                 "hashPassword": true,
                 "disableHardwareFactoryReset": false,
                 "disableLoginWithUID": false,

@@ -25,9 +25,17 @@ import {
 } from "@iotize/ionic";
 import { ProtocolFactoryService, ProtocolMeta } from "@iotize/ionic";
 import { ComProtocol } from "@iotize/tap/protocol/api";
-import { filter, timeout, finalize, first, map } from "rxjs/operators";
+import {
+  filter,
+  timeout,
+  finalize,
+  first,
+  map,
+  catchError
+} from "rxjs/operators";
 import { Platform } from "@ionic/angular";
 import getDebugger from "./logger";
+import { throwError, TimeoutError } from "rxjs";
 const debug = getDebugger("MyProtocolFactoryService");
 
 export const PROTOCOL_FACTORY_CONFIG = {
@@ -121,19 +129,33 @@ export const PROTOCOL_FACTORY_CONFIG = {
       debug("Create BLE protocol for IOS", meta);
       if (!meta.info.id) {
         if (meta.info.name) {
-          let obs = await bleScanner.results.pipe(
-            filter(
-              entries =>
-                entries.find(entry => entry.name == meta.info.name) !==
-                undefined
-            ),
-            first(),
-            map(entries => entries.find(entry => entry.name == meta.info.name)),
-            timeout(10000), // TODO argument
-            finalize(() => bleScanner.stop())
-          );
+          const scanResultPromise = bleScanner.results
+            .pipe(
+              filter(
+                entries =>
+                  entries.find(entry => entry.name == meta.info.name) !==
+                  undefined
+              ),
+              first(),
+              map(entries =>
+                entries.find(entry => entry.name == meta.info.name)
+              ),
+              timeout(10000), // TODO argument
+              catchError(err => {
+                if (err instanceof TimeoutError) {
+                  return throwError(
+                    new Error(
+                      `Cannot find BLE tap "${meta.info.name}" from scan.`
+                    )
+                  );
+                }
+                return throwError(err);
+              }),
+              finalize(() => bleScanner.stop())
+            )
+            .toPromise();
           bleScanner.start();
-          let deviceInfo = await obs.toPromise();
+          let deviceInfo = await scanResultPromise;
           meta.info.id = deviceInfo.address;
         } else {
           throw new Error(

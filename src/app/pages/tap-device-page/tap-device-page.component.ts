@@ -12,7 +12,6 @@ import {
 import { ChangePasswordComponent } from "@iotize/ionic/auth";
 import { DeviceLoginComponent } from "@iotize/ionic/auth";
 import { Router } from "@angular/router";
-import { DEVICE_MENU } from "./tap-device-page.menu";
 import { Observable, Subscription } from "rxjs";
 import {
   ConnectionStateChangeEvent,
@@ -31,7 +30,6 @@ const debug = getDebugger("TapDevicePageComponent");
   styleUrls: ["./tap-device-page.component.scss"]
 })
 export class TapDevicePageComponent implements OnInit, OnDestroy {
-  public pages: MenuItem[] = DEVICE_MENU;
   public appTitle = environment.appName;
 
   public appName: Observable<string>;
@@ -181,7 +179,6 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
   }
 
   async login() {
-    console.log("Show login model");
     const modal = await this.modalController.create({
       component: DeviceLoginComponent
     });
@@ -193,7 +190,6 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
   }
 
   async changePassword() {
-    console.log("Show change password modal");
     const modal = await this.modalController.create({
       component: ChangePasswordComponent,
       componentProps: {
@@ -225,7 +221,6 @@ export class TapDevicePageComponent implements OnInit, OnDestroy {
   selectProtocolChange(
     event: CustomEvent<{ value: ProtocolMeta | undefined }>
   ) {
-    console.log("selectProtocolChange", event);
     if (event.detail.value) {
       this.tapService.useProtocolFromMeta(event.detail.value).catch(err => {
         this.onError(err);

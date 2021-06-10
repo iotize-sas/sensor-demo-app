@@ -1,0 +1,21 @@
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="error">
+      <ion-col>
+        <app-feedback-error [error]="error"></app-feedback-error>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <tap-scanner-nfc
+          (onProtocolSelected)="onProtocolSelected($event)"
+        ></tap-scanner-nfc>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="ios">
+    <ion-fab-button (click)="startScan()">
+      <ion-icon name="search"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

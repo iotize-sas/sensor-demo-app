@@ -1,8 +1,9 @@
-<div *ngFor="let p of pages">
+<div *ngFor="let p of items">
   <!-- Standard Menu Item -->
   <ion-menu-toggle *ngIf="p.url">
     <ion-item
-      [routerLink]="p.url"
+      button
+      (click)="navigate(p.url)"
       lines="none"
       routerdirection="root"
       routerlinkactive="active"
@@ -57,7 +58,8 @@
     <ion-menu-toggle>
       <ion-item
         *ngFor="let sub of p.children"
-        [routerLink]="sub.url"
+        (click)="navigate(sub.url)"
+        button
         class="sub-item"
         routerdirection="root"
         routerlinkactive="active"

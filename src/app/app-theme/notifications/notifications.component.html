@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="modalController.dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ _notifications.length }} Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let notification of _notifications">
+      <ion-icon
+        slot="start"
+        [color]="notification.color"
+        [name]="notification.icon"
+      ></ion-icon>
+      <p>
+        {{ notification.message }}<br />
+        <span class="small">
+          <ion-icon name="time"></ion-icon>&nbsp;{{ notification.createdAt |
+          date: 'short' }}
+        </span>
+      </p>
+    </ion-item>
+  </ion-list>
+</ion-content>

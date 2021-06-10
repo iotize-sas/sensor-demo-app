@@ -1,3 +1,48 @@
 <ion-app>
-  <ion-router-outlet main></ion-router-outlet>
+  <ion-menu
+    contentId="menu-content"
+    menuId="deviceMenu"
+    swipeGesture
+    type="reveal"
+  >
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-item color="primary" lines="none">
+          <img
+            slot="start"
+            src="/assets/icons/logo-48x48.png"
+            style="width: 32px; height: 32px;"
+          />
+          <ion-title>{{appTitle}}</ion-title>
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <app-side-menu menuId="device"></app-side-menu>
+    </ion-content>
+    <app-tap-control-menu></app-tap-control-menu>
+  </ion-menu>
+  <ion-menu
+    contentId="menu-content"
+    menuId="homeMenu"
+    swipeGesture
+    type="reveal"
+  >
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-item color="primary" lines="none">
+          <img
+            slot="start"
+            src="/assets/icons/logo-48x48.png"
+            style="width: 32px; height: 32px;"
+          />
+          <ion-title>{{appTitle}}</ion-title>
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <app-side-menu menuId="home"></app-side-menu>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
 </ion-app>

@@ -2,18 +2,25 @@ import { Routes } from "@angular/router";
 
 export const routes: Routes = [
   {
-    path: "device",
-    loadChildren:
-      "src/app/pages/tap-device-page/tap-device-page.module#TapDevicePageModule"
-  },
-  {
     path: "about",
-    loadChildren: "src/app/pages/about/about.module#AboutModule"
+    loadChildren: () =>
+      import(`./pages/about-page/about-page.module`).then(
+        m => m.AboutPageModule
+      )
   },
   {
     path: "connect",
-    loadChildren:
-      "src/app/pages/tap-connect/tap-connect.module#TapConnectModule"
+    loadChildren: () =>
+      import(`./pages/tap-connection-page/tap-connection-page.module`).then(
+        m => m.TapConnectionPageModule
+      )
+  },
+  {
+    path: "device",
+    loadChildren: () =>
+      import(`./pages/tap-device-page/tap-device-page.module`).then(
+        m => m.TapDevicePageModule
+      )
   },
   {
     pathMatch: "full",
@@ -22,6 +29,9 @@ export const routes: Routes = [
   },
   {
     path: "**",
-    loadChildren: "src/app/pages/not-found/not-found.module#NotFoundModule"
+    loadChildren: () =>
+      import(`./pages/not-found-page/not-found-page.module`).then(
+        m => m.NotFoundPageModule
+      )
   }
 ];

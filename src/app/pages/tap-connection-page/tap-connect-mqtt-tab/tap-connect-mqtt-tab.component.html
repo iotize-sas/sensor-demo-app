@@ -1,0 +1,18 @@
+<ion-content>
+  <tap-connection-store-list
+    [connectionTypes]="['mqtt']"
+    (selected)="onStoredTapSelected($event)"
+  ></tap-connection-store-list>
+
+  <ion-grid class="center-form">
+    <ion-row>
+      <ion-col>
+        <tap-connect-mqtt
+          [defaults]="formDefaults"
+          (onProtocolSelected)="onProtocolSelected($event)"
+          (onError)="onError($event)"
+        ></tap-connect-mqtt>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

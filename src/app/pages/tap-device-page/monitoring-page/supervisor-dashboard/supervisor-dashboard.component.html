@@ -1,0 +1,217 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Supervisor dashboard
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="dataManager">
+      <ion-button
+        fill="clear"
+        expand="block"
+        color="danger"
+        *ngIf="notificationErrors.length > 0"
+        (click)="openNotificationErrors()"
+      >
+        <ion-icon name="alert-circle"></ion-icon>
+      </ion-button>
+      <ion-button
+        (click)="startMonitor()"
+        *ngIf="!isMonitorRunning"
+        [disabled]="!tapService.protocolMeta"
+      >
+        <ion-icon name="play"></ion-icon>
+      </ion-button>
+      <ion-button (click)="stopMonitor()" *ngIf="isMonitorRunning">
+        <ion-icon name="pause"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="dataManager">
+  <app-navigation-progress-bar></app-navigation-progress-bar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="designer-code-container">
+        <ion-row class="ion-no-padding">
+          <ion-col class="column-key ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding ion-text-center"
+              ><ion-label class="ion-text-wrap">Count</ion-label></ion-item
+            >
+          </ion-col>
+          <ion-col class="column-value ion-no-padding" size-xs="12" size-sm="6">
+            <div style="margin: auto;">
+              <tap-variable-text
+                [lines]="'none'"
+                [variable]="variables['count']"
+                [valueStyle]="{'font-size': '2em'}"
+                slot="end"
+                [editable]="false"
+              >
+              </tap-variable-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col class="designer-code-container">
+        <ion-row class="ion-no-padding">
+          <ion-col class="column-key ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding ion-text-center"
+              ><ion-label class="ion-text-wrap">LEDStatus</ion-label></ion-item
+            >
+          </ion-col>
+          <ion-col class="column-value ion-no-padding" size-xs="12" size-sm="6">
+            <div style="margin: auto;">
+              <tap-variable-text
+                [lines]="'none'"
+                [variable]="variables['lEDStatus']"
+                [valueStyle]="{'font-size': '2em'}"
+                slot="end"
+                [editable]="false"
+              >
+              </tap-variable-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="designer-code-container">
+        <ion-row class="ion-no-padding">
+          <ion-col class="column-key ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding ion-text-center"
+              ><ion-label class="ion-text-wrap">Vcc</ion-label></ion-item
+            >
+          </ion-col>
+          <ion-col class="column-value ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" style="display: flex;">
+              <div style="margin: auto;">
+                <tap-variable-text
+                  [lines]="'none'"
+                  [variable]="variables['voltage_V']"
+                  [valueStyle]="{'font-size': '2em'}"
+                  slot="end"
+                  [editable]="false"
+                >
+                </tap-variable-text>
+              </div>
+              <span class="variable-unit" slot="end">V</span>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col class="designer-code-container">
+        <ion-row class="ion-no-padding">
+          <ion-col class="column-key ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding ion-text-center"
+              ><ion-label class="ion-text-wrap">Temp</ion-label></ion-item
+            >
+          </ion-col>
+          <ion-col class="column-value ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" style="display: flex;">
+              <div style="margin: auto;">
+                <tap-variable-text
+                  [lines]="'none'"
+                  [variable]="variables['temperature_C']"
+                  [valueStyle]="{'font-size': '2em'}"
+                  slot="end"
+                  [editable]="false"
+                >
+                </tap-variable-text>
+              </div>
+              <span class="variable-unit" slot="end">C</span>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="designer-code-container">
+        <ion-row class="ion-no-padding">
+          <ion-col class="column-key ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding ion-text-center"
+              ><ion-label class="ion-text-wrap">Period</ion-label></ion-item
+            >
+          </ion-col>
+          <ion-col class="column-value ion-no-padding" size-xs="12" size-sm="6">
+            <div style="margin: auto;">
+              <tap-variable-text
+                [lines]="'none'"
+                [variable]="variables['period']"
+                [valueStyle]="{'font-size': '2em'}"
+                slot="end"
+                [editable]="false"
+              >
+              </tap-variable-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col class="designer-code-container">
+        <ion-row class="ion-no-padding">
+          <ion-col class="column-key ion-no-padding" size-xs="12" size-sm="6">
+            <ion-item lines="none" class="ion-no-padding ion-text-center"
+              ><ion-label class="ion-text-wrap">LEDConfig</ion-label></ion-item
+            >
+          </ion-col>
+          <ion-col class="column-value ion-no-padding" size-xs="12" size-sm="6">
+            <div style="margin: auto;">
+              <tap-variable-text
+                [lines]="'none'"
+                [variable]="variables['lEDConfig']"
+                [valueStyle]="{'font-size': '2em'}"
+                slot="end"
+                [editable]="false"
+              >
+              </tap-variable-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-item
+    *ngIf="isTapConnected && !isMonitorRunning"
+    lines="none"
+    [color]="'danger'"
+  >
+    <ion-icon name="alert"></ion-icon>
+    <ion-label class="ion-text-wrap">Monitoring is paused</ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="startMonitor()">
+        <ion-icon name="play"></ion-icon> Start
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <ion-item
+    *ngIf="tapService.protocolMeta && waitForSubmit"
+    lines="none"
+    [color]="'danger'"
+  >
+    <ion-icon name="alert"></ion-icon>
+    <ion-label class="ion-text-wrap"
+      >Device is not connected. Changes will be sent when device is
+      connected.</ion-label
+    >
+  </ion-item>
+  <ion-item *ngIf="!tapService.protocolMeta" lines="none" [color]="'danger'">
+    <ion-icon name="alert"></ion-icon>
+    <ion-label class="ion-text-wrap">No device selected</ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeDevice()">
+        <ion-icon name="wifi"></ion-icon> Select
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-footer>

@@ -33,7 +33,12 @@
     </ion-card-header>
     <ion-card-content>
       <tap-config-list
-        [items]="generalConfig"
+        [items]="[
+			{
+			  key: TapInfo.protocolHostInactivityPeriod,
+			  editable: true
+			}
+		  ]"
         [itemRefresh]="true"
         [globalRefresh]="false"
       ></tap-config-list>

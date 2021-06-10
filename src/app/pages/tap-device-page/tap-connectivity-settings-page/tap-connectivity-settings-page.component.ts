@@ -1,3 +1,5 @@
+import { _TAP_SERVICE_EXTENSION_DEVICE_ } from "@iotize/tap/service/impl/device";
+
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { HostProtocol } from "@iotize/tap";
@@ -14,9 +16,13 @@ import { map } from "rxjs/operators";
   styleUrls: ["./tap-connectivity-settings-page.component.scss"]
 })
 export class TapConnectivitySettingsPageComponent implements OnInit, OnDestroy {
+  private loadedTapServiceExtensions = [_TAP_SERVICE_EXTENSION_DEVICE_];
+
   public TYPES = {
     HostProtocol
   };
+
+  public TapInfo = TapInfo;
 
   public wifiConfigs?: TapConfigItem[];
 
@@ -25,13 +31,6 @@ export class TapConnectivitySettingsPageComponent implements OnInit, OnDestroy {
   public nfcConfig?: TapConfigItem[];
 
   public mqttConfig?: TapConfigItem[];
-
-  generalConfig = [
-    {
-      key: TapInfo.protocolHostInactivityPeriod,
-      editable: true
-    }
-  ];
 
   private disposable: Subscription[] = [];
 

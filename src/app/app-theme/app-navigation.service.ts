@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import {
   Router,
   NavigationStart,
@@ -36,7 +36,7 @@ export class AppNavigationService {
     return this._loading$;
   }
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public zone: NgZone) {
     this._events = this.router.events;
     this._events.subscribe((event: RouterEvent) => {
       this._event = event;
@@ -44,13 +44,14 @@ export class AppNavigationService {
       if (event instanceof NavigationStart) {
         debug("Application is loading...");
         this._loading$.next(true);
-      } else if (event instanceof NavigationEnd) {
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
         debug("Application load end..");
         this._loading$.next(false);
-      } else if (event instanceof NavigationError) {
-      } else if (event instanceof NavigationCancel) {
       }
-      // RoutesRecognized
     });
   }
 
@@ -80,7 +81,7 @@ export class AppNavigationService {
   waitForNavigationEnd(url: string, timeoutMs: number): Observable<any> {
     return defer(() => {
       debug("Navigating to ", url);
-      return this.router.navigateByUrl(url);
+      return this.zone.run(() => this.router.navigateByUrl(url));
     }).pipe(timeout(timeoutMs));
   }
 }

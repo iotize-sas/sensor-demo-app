@@ -18,7 +18,7 @@ export namespace SensorDemoDataApi {
     /**
      * Bundle id: 1
      */
-    export interface MySensors {
+    export interface Sensors {
       /**
        * Variable id: 1
        */
@@ -35,21 +35,21 @@ export namespace SensorDemoDataApi {
      */
     export interface CountControl {
       /**
-       * Variable id: 13
-       */
-      lEDConfig: number;
-
-      /**
        * Variable id: 0
        */
       period: number;
+
+      /**
+       * Variable id: 13
+       */
+      lEDConfig: number;
     }
   }
 
   export interface Data {
     count_Status: Bundle.CountStatus;
 
-    mySensors: Bundle.MySensors;
+    sensors: Bundle.Sensors;
 
     count_Control: Bundle.CountControl;
   }

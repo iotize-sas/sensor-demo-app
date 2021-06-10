@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button defaultHref="/"></ion-back-button> -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-item color="primary" lines="none">
+      <img
+        slot="start"
+        src="/assets/icons/logo-48x48.png"
+        style="width: 32px; height: 32px;"
+      />
+      <ion-title>Connection</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="ble">
+        <ion-label>Bluetooth</ion-label>
+        <ion-icon name="bluetooth"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="mqtt">
+        <ion-label>MQTT</ion-label>
+        <ion-icon name="cloud"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="socket">
+        <ion-label>Socket/Wifi</ion-label>
+        <ion-icon name="wifi"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="nfc">
+        <ion-label>NFC</ion-label>
+        <ion-icon src="assets/svg/nfc.svg"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

@@ -23,6 +23,9 @@ export class TapMonitoringService {
   }
 
   get isRunning() {
+    if (!this.tapService.hasTap) {
+      return false;
+    }
     return (
       this.tapService.tap.data.monitoring.state === MonitorEngine.State.START
     );
@@ -37,12 +40,18 @@ export class TapMonitoringService {
   }
 
   public start() {
+    if (!this.tapService.hasTap) {
+      return;
+    }
     this.tapService.tap.data.monitoring.start({
       period: this.settings.period
     });
   }
 
   public stop() {
+    if (!this.tapService.hasTap) {
+      return;
+    }
     this.tapService.tap.data.monitoring.stop();
   }
 }

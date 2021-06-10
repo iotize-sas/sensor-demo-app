@@ -27,8 +27,8 @@ export const dataManagerConfig: TapDataManagerConfig<SensorDemoDataApi.Data> = {
       }
     },
 
-    mySensors: {
-      id: 1, // MySensors
+    sensors: {
+      id: 1, // Sensors
       variables: {
         voltage_V: {
           id: 1,
@@ -45,14 +45,14 @@ export const dataManagerConfig: TapDataManagerConfig<SensorDemoDataApi.Data> = {
     count_Control: {
       id: 2, // Count_Control
       variables: {
-        lEDConfig: {
-          id: 13,
-          converter: NumberConverter.uint8()
-        },
-
         period: {
           id: 0,
           converter: NumberConverter.int32()
+        },
+
+        lEDConfig: {
+          id: 13,
+          converter: NumberConverter.uint8()
         }
       }
     }

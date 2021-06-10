@@ -10,7 +10,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MyProtocolFactoryService } from "./my-protocol-factory.service";
 import { AppThemeModule } from "app-theme";
 import { TapDeviceAngularModule } from "@iotize/ionic/default";
-import { ProtocolFactoryService } from "@iotize/ionic";
+import {
+  ProtocolFactoryService,
+  TAP_CONNECTION_OPTIONS_PROVIDER
+} from "@iotize/ionic";
 import { Dialogs } from "@ionic-native/dialogs/ngx";
 import { environment } from "../environments/environment";
 import { ScannerNotAvailable } from "./scanner-not-available";
@@ -26,6 +29,9 @@ import {
   WifiScanner,
   ZeroConfScannerCordova
 } from "@iotize/device-com-wifi.cordova";
+
+import { DEVICE_MENU_PROVIDER, HOME_MENU_PROVIDER } from "app-theme";
+import { HOME_MENU, DEVICE_MENU } from "./app.menu";
 
 if (environment.debug) {
   require("debug").enable(environment.debug);
@@ -96,13 +102,22 @@ if (environment.debug) {
       deps: [Platform, TAP_BLE_SCANNER]
     },
     {
-      provide: "TapConnectionOptions",
+      provide: TAP_CONNECTION_OPTIONS_PROVIDER,
       useValue: {
         switchProtocol: true,
         refreshSessionState: true,
         nfcPairing: true,
-        nfcEnableEncryption: true
+        nfcEnableEncryption: true,
+        returnUrl: "/device"
       }
+    },
+    {
+      provide: HOME_MENU_PROVIDER,
+      useValue: HOME_MENU
+    },
+    {
+      provide: DEVICE_MENU_PROVIDER,
+      useValue: DEVICE_MENU
     }
   ],
   bootstrap: [AppComponent]
